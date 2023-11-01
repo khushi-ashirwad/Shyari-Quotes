@@ -4,14 +4,14 @@ import { Grid, Paper, Typography, Button,Box } from '@mui/material';
 
 
 const items = [
-  { heading: 'Box 1', content: 'Content for Box 1' },
-  { heading: 'Box 2', content: 'Content for Box 2' },
-  { heading: 'Box 3', content: 'Content for Box 3' },
-  { heading: 'Box 4', content: 'Content for Box 4' },
-  { heading: 'Box 5', content: 'Content for Box 5' },
-  { heading: 'Box 6', content: 'Content for Box 6' },
-  { heading: 'Box 7', content: 'Content for Box 6' },
-  { heading: 'Box 8', content: 'Content for Box 6' },
+  { heading: '20', content: ' shayari category ' },
+  { heading: '69', content: ' premium quotes ' },
+  { heading: '9', content: ' shayari category ' },
+  { heading: '1233', content: 'category ' },
+  { heading: '543', content: ' shayari category ' },
+  { heading: '123', content: 'shayari’s ' },
+  { heading: '45', content: ' image ios' },
+  { heading: '78', content: ' shayari category ' },
 
 
 ];
@@ -27,19 +27,22 @@ const buttonStyle = {
 
 const Dashboard = () => {
   return (
-    <Box>
+    <Box sx={{ maxHeight: "50rem",
+     overflowY:"scroll",
+  
+    padding: "2rem 5rem",}}>
 <Typography
         sx={{
           fontSize: "2rem",
           fontWeight: "500",
-          padding: "6rem 1rem 3rem"
+          padding: "5rem 1rem 3rem"
         }}
       >
         DASHBOARD
       </Typography>   
-       <Grid container spacing={2} >
+       <Grid container spacing={4} >
       {items.map((item, index) => (
-        <Grid item xs={10} md={3} key={index} >
+        <Grid item xs={16} md={3} sm={16} key={index} >
           <Box elevation={4}  className='dashboardbox'>
             <Typography variant="h5" component="h1" gutterBottom>
               {item.heading}

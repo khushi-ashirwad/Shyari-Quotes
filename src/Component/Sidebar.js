@@ -8,6 +8,7 @@ import {
     FaShoppingBag,
     FaThList
 }from "react-icons/fa";
+import {AiOutlineAppstore} from "react-icons/ai"
 import {RiMenu2Line} from "react-icons/ri"
 import { NavLink } from 'react-router-dom';
 import logo_img from "../images/Group 49110.png"
@@ -35,7 +36,7 @@ const Sidebar = ({children}) => {
         {
             path:"/comment",
             name:"Comment",
-            icon:<FaCommentAlt/>
+            icon:<AiOutlineAppstore/>
         },
         {
             path:"/product",
@@ -70,6 +71,7 @@ const Sidebar = ({children}) => {
     ]
     return (
         <>
+        <Box sx={{height: "100vh"}}>
            <Box sx={{ width: isOpen ? "250px" : "50px" }} className="sidebar">
             <Box className="top_section">
                 <img src={logo_img} style={{ display: isOpen ? "block" : "none" }} className="logo" alt="Logo"></img>
@@ -96,7 +98,7 @@ const Sidebar = ({children}) => {
                 </IconButton>
             </Box>
         </Box>
-           
+           </Box>
            <main>{children}</main>
            </>
     );
