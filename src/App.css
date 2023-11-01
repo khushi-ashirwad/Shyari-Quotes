@@ -1,4 +1,24 @@
-.container {
+:root {
+  font-family: 'Urbanist';
+}
+body {
+  margin: 0;
+  width: 100%;
+  font-family: 'Urbanist'sans-serif;
+}
+a{
+  text-decoration: none;
+  color: #000;
+}
+li{
+  list-style: none;
+}
+.app {
   display: flex;
+  position: relative;
 }
 
+.content {
+  height: 100%;
+  width: 100%;
+}
