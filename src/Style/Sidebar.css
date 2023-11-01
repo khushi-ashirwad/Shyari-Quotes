@@ -5,33 +5,41 @@
 .sidebar {
   background: var(--main-bg-color);
   color: #fff;
-  transition: width 0.3s ease;
   overflow-y: auto;
   height: 100vh;
+  padding-left: 0.2rem;
+
 }
-.sidebar .logo {
-  text-align: center;
-  font-size: 24px;
-  margin: 3rem;
+.sidebar-menu.active {
+  background: var(--light-bg-color);
+  border-radius: 4px;
+  color:#723997;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-left: 0.2rem;
+  display: flex;
+
 }
 .sidebar-menu {
   display: flex;
   align-items: center;
-  padding: 20px;
+  padding: 15px;
   color: #fff;
+  font-size: 1rem;
+  font-weight: 400;
   text-decoration: none;
   transition: background-color 0.3s ease;
+   
 }
-.sidebar-menu:hover {
-  background: var(--light-bg-color);
-  border-radius: 4px;
-  width: 174px;
-}
+
 .bars {
-  margin-top: 3rem;
+  padding: 3rem 0 0 0;
   font-size: 1.5rem;
   color: #fff;
 }
+ .icon{
+  font-size: 22px;
+} 
 /* dasborad start */
 .dashboardbox {
   text-align: center;
@@ -42,3 +50,11 @@
   border-radius: 0.5rem;
 }
 /* dasborad end */
+
+.full-screen {
+  height: 100%;
+  width: 100%;
+  max-Height: 55rem;
+  overflow-Y: scroll;
+}
+
