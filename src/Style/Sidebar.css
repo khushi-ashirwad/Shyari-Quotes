@@ -14,7 +14,7 @@
   font-size: 24px;
   margin: 3rem;
 }
-.link {
+.sidebar-menu {
   display: flex;
   align-items: center;
   padding: 20px;
@@ -22,7 +22,7 @@
   text-decoration: none;
   transition: background-color 0.3s ease;
 }
-.link:hover {
+.sidebar-menu:hover {
   background: var(--light-bg-color);
   border-radius: 4px;
   width: 174px;

@@ -79,7 +79,7 @@ const Sidebar = ({children}) => {
             <Grid container direction="column" spacing={0}>
                 {menuItem.map((item, index) => (
                     <Grid item key={index}>
-                        <NavLink to={item.path} className="link" activeClassName="active">
+                        <NavLink to={item.path} className="sidebar-menu" activeClassName="active">
                             <Grid container alignItems="center" spacing={2}>
                                 <Grid item className="icon">
                                     {item.icon}
