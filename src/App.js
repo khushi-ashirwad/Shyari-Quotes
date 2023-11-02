@@ -1,16 +1,16 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
-import Sidebar from './Global/Sidebar';
-import Dashboard from './Global/Dashboard';
-import Category from './Quote/Quotescategory';
-import Quotes from './Quote/Quotes';
-import Todayquotes from './Quote/Todayquotes';
-import Shayari from './Shayari/Shayari';
-import TodayShayari from './Shayari/TodayShayari';
-import Shayaricategory from './Shayari/Shayaricategory';
-import Image from "./Image/Image"
-import Imagecategory from "./Image/Imagecategory"
+import Sidebar from './component/Global/Sidebar';
+import Dashboard from './component/Global/Dashboard';
+import Category from './component/Quote/Quotescategory';
+import Quotes from './component/Quote/Quotes';
+import Todayquotes from './component/Quote/Todayquotes';
+import Shayari from './component/Shayari/Shayari';
+import TodayShayari from './component/Shayari/TodayShayari';
+import Shayaricategory from './component/Shayari/Shayaricategory';
+import Image from "./component/Imagecategory/Image"
+import Imagecategory from "./component/Imagecategory/Imagecategory"
 
 
 
