@@ -12,8 +12,6 @@ import Shayaricategory from './component/Shayari/Shayaricategory';
 import Image from "./component/Imagecategory/Image"
 import Imagecategory from "./component/Imagecategory/Imagecategory"
 
-
-
 function App() {
   return (
  <>
