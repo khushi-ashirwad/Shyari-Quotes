@@ -92,7 +92,7 @@ const Sidebar = ({ children }) => {
             <Box>
                 <Box sx={{ width: isOpen ? "250px" : "85px" }} className="sidebar">
                     <Box className="top_section">
-                        <img src={logo_img} style={{ width: isOpen ? "80px" : "50px", padding: isOpen ? "3rem" : "3rem 1rem " }}></img>
+                        <img src={logo_img} style={{ width: isOpen ? "80px" : "50px", padding: isOpen ? "3rem" : "3rem 1rem " }} alt='logo'></img>
                     </Box>
                     <Grid container direction="column" spacing={0}>
                         {menuItem.map((item, index) => (
