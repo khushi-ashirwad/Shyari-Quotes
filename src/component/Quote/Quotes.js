@@ -11,6 +11,7 @@ import {
   Typography,
   Box,
 } from '@mui/material';
+import TitleHeader from "../Global/TitleHeader";
 import {RiDeleteBin6Line} from 'react-icons/ri';
 import {FiEdit} from 'react-icons/fi';
 import { quotesdata } from '../../data/Quotes';
@@ -78,16 +79,10 @@ const Quotes = ({ data }) => {
         width: '140rem',
       }}
     >
-      <Typography
-        sx={{
-          fontSize: '2rem',
-          fontWeight: '500',
-          marginBottom: '2rem',
-        }}
-      >
-        Manage Quotes
-      </Typography>
+        <Box sx={{ padding: "2rem 1rem 3rem" }}>
+      <TitleHeader title="Manage Quotes Category" />
       <QuotesTable data={quotesdata} />
+    </Box>
     </Box>
   );
 };

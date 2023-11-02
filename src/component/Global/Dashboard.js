@@ -1,5 +1,6 @@
 import React from 'react';
 import { Grid, Typography, Box } from '@mui/material';
+import TitleHeader from './TitleHeader';
 
 const items = [
   { heading: '20', content: ' shayari category ' },
@@ -24,18 +25,10 @@ const Dashboard = () => {
   return (
     <Box sx={{
       maxHeight: "50rem",
-      overflowY: "scroll",
-      padding: "2rem 5rem",
+      overflowY: "auto",
+      padding: "5rem 1rem 3rem",
     }}>
-      <Typography
-        sx={{
-          fontSize: "2rem",
-          fontWeight: "500",
-          padding: "5rem 1rem 3rem"
-        }}
-      >
-        DASHBOARD
-      </Typography>
+      <TitleHeader title="Dashboard"/>
       <Grid container spacing={4} >
         {items.map((item, index) => (
           <Grid item xs={16} md={3} sm={16} key={index} >
