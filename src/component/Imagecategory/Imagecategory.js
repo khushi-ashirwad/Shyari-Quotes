@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography, Box } from '@mui/material';
+import { Box } from '@mui/material';
 import TitleHeader from '../Global/TitleHeader';
 
 const Imagecategory = () => {

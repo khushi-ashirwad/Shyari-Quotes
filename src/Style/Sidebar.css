@@ -63,4 +63,9 @@
   max-Height: 48rem;
   overflow-Y: scroll;
 }
+label{
+  font-size: 1rem;
+  padding-bottom: 0.5rem;
+  font-weight: 600;
+}
 
