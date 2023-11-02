@@ -9,14 +9,14 @@ import {
   TableHead,
   TableRow,
   Paper,
-  Link,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { IconButton } from "@mui/material";
 import { categorydata } from "../../data/QuoteCategory";
-import TitleHeader from "../Global/TitleHeader";
+import TitleHeader from "../Global/TitleHeader"
+import "../../Style/Sidebar.css"
 
 const Category = () => {
   const tableCellStyle = {
@@ -67,53 +67,45 @@ const Category = () => {
                   <TableCell style={tableCellStyle}>
                     {item.isSensitive ? "Yes" : "No"}
                   </TableCell>
-                  <TableCell style={tableCellStyle}>
-                    {item.buttons.map((button, btnIndex) => (
-                      <Box key={btnIndex} style={{ marginBottom: "5px" }}>
-                        {button.text === "Button 1" && (
-                          <IconButton
-                            href={button.action}
-                            style={{
-                              background: "#AD1D45",
-                              borderRadius: "3rem",
-                              color: "#fff",
-                              padding: "0.5rem 2.5rem",
-                            }}
-                          >
-                            <DeleteIcon />
-                            <Typography>Delete</Typography>
-                          </IconButton>
-                        )}
-                        {button.text === "Button 2" && (
-                          <IconButton
-                            href={button.action}
-                            style={{
-                              background: "#6643B5",
-                              borderRadius: "3rem",
-                              color: "#fff",
-                              padding: "0.5rem 3rem",
-                            }}
-                          >
-                            <EditIcon />
-                            <Typography>Edit</Typography>
-                          </IconButton>
-                        )}
-                        {button.text === "Button 3" && (
-                          <IconButton
-                            href={button.action}
-                            style={{
-                              background: "#005792",
-                              borderRadius: "8rem",
-                              color: "#fff",
-                              padding: "0.5rem 2.3rem",
-                            }}
-                          >
-                            <VisibilityOffIcon />
-                            <Typography>Disable</Typography>
-                          </IconButton>
-                        )}
-                      </Box>
-                    ))}
+                  <TableCell sx={{border:"2px solid black",width:"6rem",padding:"2rem 3rem"}}  >
+                    <Box sx={{
+                      flexDirection: "column",display:"flex",width:"8rem",justifyContent:"center"
+                    }} >
+                      <IconButton
+                        style={{
+                          background: "#AD1D45",
+                          borderRadius: "3rem",
+                          color: "#fff",
+                          marginBottom:"0.5rem"
+                          
+                        }}
+                      >
+                        <DeleteIcon />
+                        <Typography>Delete</Typography>
+                      </IconButton>
+                      <IconButton
+                        style={{
+                          background: "#6643B5",
+                          borderRadius: "3rem",
+                          color: "#fff",
+                          marginBottom:"0.5rem"
+
+                        }}
+                      >
+                        <EditIcon />
+                        <Typography>Edit</Typography>
+                      </IconButton>
+                      <IconButton
+                        style={{
+                          background: "#005792",
+                          borderRadius: "8rem",
+                          color: "#fff",
+                        }}
+                      >
+                        <VisibilityOffIcon />
+                        <Typography>Disable</Typography>
+                      </IconButton>
+                    </Box>
                   </TableCell>
                 </TableRow>
               ))}
