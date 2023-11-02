@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
+import {  Route, Routes } from 'react-router-dom';
 import Sidebar from './component/Global/Sidebar';
 import Dashboard from './component/Global/Dashboard';
 import Category from './component/Quote/Quotescategory';
@@ -11,8 +11,6 @@ import TodayShayari from './component/Shayari/TodayShayari';
 import Shayaricategory from './component/Shayari/Shayaricategory';
 import Image from "./component/Imagecategory/Image"
 import Imagecategory from "./component/Imagecategory/Imagecategory"
-
-
 
 function App() {
   return (
