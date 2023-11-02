@@ -35,7 +35,7 @@ const QuotesTable = ({ data }) => {
         <CalendarMonthTwoToneIcon sx={{ fontSize: "2rem" }} />
         <Typography sx={{ fontSize: "1.3rem", paddingLeft: "1rem" }}>All Quotes</Typography>
       </TableHead>
-      <Table>
+      <Table style={{ minWidth: "500px" }}>
         <TableHead sx={{ backgroundColor: "#F8F2FF" }}>
           <TableRow>
             <TableCell style={tableCellStyle}>Quote</TableCell>
@@ -51,7 +51,7 @@ const QuotesTable = ({ data }) => {
             >
               <TableCell style={tableCellStyle}>{quoteData.quote}</TableCell>
               <TableCell style={tableCellStyle}>{quoteData.category}</TableCell>
-              <TableCell style={tableCellStyle}>
+              <TableCell style={tableCellStyle} >
                 <IconButton aria-label="edit" color="primary">
                   <FiEdit />
                 </IconButton>
@@ -72,17 +72,24 @@ const Quotes = ({ data }) => {
   return (
     <Box
       sx={{
+        display: 'flex',
+        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: '8px',
-        margin: '2rem 3rem',
-        width: '140rem',
+        margin: '2rem',
+        width: '100%',
       }}
     >
-        <Box sx={{ padding: "2rem 1rem 3rem" }}>
-      <TitleHeader title="Manage Quotes Category" />
-      <QuotesTable data={quotesdata} />
-    </Box>
+      <Box
+        sx={{
+          width: '100%',
+          padding: '2rem 1rem 3rem',
+        }}
+      >
+        <TitleHeader title="Manage Quotes Category" />
+        <QuotesTable data={quotesdata} />
+      </Box>
     </Box>
   );
 };
