@@ -8,8 +8,8 @@ import { GiClapperboard } from "react-icons/gi"
 import { BsChatQuote } from "react-icons/bs"
 import { RiMenu2Line, RiBarChartGroupedFill, RiLogoutCircleRLine } from "react-icons/ri"
 import { NavLink } from 'react-router-dom';
-import logo_img from "../images/Group 49110.png"
-import "../Style/Sidebar.css"
+import logo_img from "../../images/Group 49110.png"
+import "../../Style/Sidebar.css"
 import { Box, Grid, IconButton } from '@mui/material';
 const Sidebar = ({ children }) => {
     const [isOpen, setIsOpen] = useState(false);

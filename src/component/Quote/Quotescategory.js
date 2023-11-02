@@ -15,7 +15,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { IconButton } from '@mui/material';
-import { categorydata } from '../data/Category';
+import { categorydata } from '../../data/QuoteCategory';
 
 const Category = () => {
     const tableCellStyle = {
