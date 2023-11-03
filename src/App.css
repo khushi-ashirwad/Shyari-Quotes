@@ -1,10 +1,10 @@
 :root {
-  font-family: 'Urbanist';
+  font-family: 'Poppins', sans-serif;
 }
 body {
   margin: 0;
   width: 100%;
-  font-family: 'Urbanist'sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 a{
   text-decoration: none;
