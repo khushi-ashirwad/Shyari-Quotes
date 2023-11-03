@@ -67,16 +67,16 @@ const Sidebar = ({ children }) => {
             path: "/Manage Ads",
             name: "Manage Ads",
             icon: <GiClapperboard />,
-            // subMenu: [
-            //     {
-            //         path: "/Manage Ads/Campaigns",
-            //         name: "Campaigns",
-            //     },
-            //     {
-            //         path: "/Manage Ads/Analytics",
-            //         name: "Analytics",
-            //     },
-            // ],
+            subMenu: [
+                {
+                    path: "/Manage Ads/ios",
+                    name: "ios",
+                },
+                {
+                    path: "/Manage Ads/android ",
+                    name: "android ",
+                },
+            ],
         },
     ]
     return (

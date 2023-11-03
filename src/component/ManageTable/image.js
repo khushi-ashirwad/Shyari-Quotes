@@ -6,10 +6,11 @@ import EditIcon from "@mui/icons-material/Edit";
 const Imagemanage = ({categorydata}) => {
     const tableCellStyle = {
         border: "2px solid #000",
-        padding: "2rem 7rem",
+        padding: "1.5rem 3rem",
         textAlign: "center",
         fontSize: "1rem",
         fontWeight: "500",
+        width:"55rem",
       };
   return (
    <>
@@ -21,7 +22,7 @@ const Imagemanage = ({categorydata}) => {
       >
         <TableContainer
           component={Paper}
-          sx={{ overflowY: "scroll", width: "100%" }}
+          sx={{ overflowX: "auto", width: "100%" }}
         >
           <Table style={{ minWidth: "500px" }}>
             <TableHead>
