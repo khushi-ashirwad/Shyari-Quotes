@@ -78,21 +78,13 @@ const Sidebar = ({ children }) => {
                 },
             ],
         },
-      
-       
-      
-     
-     
-       
-      
-     
     ]
     return (
         <>
             <Box>
                 <Box sx={{ width: isOpen ? "250px" : "85px" }} className="sidebar">
                     <Box className="top_section">
-                        <img src={logo_img} style={{ width: isOpen ? "80px" : "50px", padding: isOpen ? "3rem" : "3rem 1rem " }} alt='logo'></img>
+                        <img src={logo_img} style={{ width: isOpen ? "180px" : "80px", padding: isOpen ? "2rem" : "2rem 1rem " }} alt='logo'></img>
                     </Box>
                     <Grid container direction="column" spacing={0}>
                         {menuItem.map((item, index) => (
@@ -106,17 +98,24 @@ const Sidebar = ({ children }) => {
                                         <Grid item className="icon">
                                             {item.icon}
                                         </Grid>
-                                        <Grid item component={Box} style={{ display: isOpen ? "block" : "none" }} >
+                                        <Grid item component={Box} sx={{ display: isOpen ? "block" : "none" }} >
                                             {item.name}
                                         </Grid>
+                                        {item.subMenu && (
+                                            <ul>
+                                                {item.subMenu.map((value,index)=>(
+                                                    <li>{value.name}</li>
+                                                ))}
+                                            </ul>
+                                        )}
                                     </Grid>
                                 </NavLink>
                             </Grid>
                         ))}
                     </Grid>
-                    <Box style={{ marginLeft: isOpen ? "10px" : "10px" }} >
+                    <Box style={{ marginLeft: isOpen ? "8px" : "8px" }} >
                         <IconButton onClick={toggle} size="large">
-                            <RiMenu2Line className="bars" />
+                            <RiMenu2Line  style={{color:"#fff"}}/>
                         </IconButton>
                     </Box>
                 </Box>
