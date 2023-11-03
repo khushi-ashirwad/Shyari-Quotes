@@ -67,15 +67,15 @@ const Quotes = () => {
          <br/>
          <textarea value="" style={{width:"100%",border:"1px solid #7E7E7E",}}/>
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer style={{alignItems:"center",justifyContent:"center",display:"flex"}}>
           <Button
-            style={{ backgroundColor: "#A30D11", border: "none" }}
+            style={{ backgroundColor: "#A30D11", border: "none",padding:"0.5rem 2rem" }}
             onClick={handleClose}
           >
             Close
           </Button>
           <Button
-            style={{ backgroundColor: "#59167C", border: "none" }}
+            style={{ backgroundColor: "#59167C", border: "none",padding:"0.5rem 2rem" }}
             onClick={handleClose}
           >
             Save

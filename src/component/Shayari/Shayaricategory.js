@@ -58,15 +58,15 @@ const {show,handleClose,handleShow} = useContext(BasicContext)
          <br/>
          <input type="file" style={{width:"100%",border:"1px solid #7E7E7E",padding:"0.2rem",background:"#EDEFF5"}}/>
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer style={{alignItems:"center",justifyContent:"center",display:"flex"}}>
           <Button
-            style={{ backgroundColor: "#A30D11", border: "none" }}
+            style={{ backgroundColor: "#A30D11", border: "none",padding:"0.5rem 2rem" }}
             onClick={handleClose}
           >
             Close
           </Button>
           <Button
-            style={{ backgroundColor: "#59167C", border: "none" }}
+            style={{ backgroundColor: "#59167C", border: "none",padding:"0.5rem 2rem" }}
             onClick={handleClose}
           >
             Save
