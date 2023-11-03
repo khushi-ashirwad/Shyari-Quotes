@@ -1,18 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Typography } from "@mui/material";
 import TitleHeader from "../Global/TitleHeader";
-import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/system";
 import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAutosize";
 
 const Todayquotes = () => {
-  const [inputValue, setInputValue] = React.useState("");
-  const [textareaValue, setTextareaValue] = React.useState("");
+  const [inputValue, setInputValue] = useState('');
 
-  const handleInputChange = (event) => {
-    setInputValue(event.target.value);
-  };
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  }; const [textareaValue, setTextareaValue] = React.useState("");
 
   const handleTextareaChange = (event) => {
     setTextareaValue(event.target.value);
@@ -20,7 +18,6 @@ const Todayquotes = () => {
 
   const handleSubmit = () => {
     console.log("Input Value:", inputValue);
-    console.log("Textarea Value:", textareaValue);
   };
 
   const Textarea = styled(BaseTextareaAutosize)(
@@ -30,7 +27,7 @@ const Todayquotes = () => {
     font-size: 0.875rem;
     font-weight: 400;
     line-height: 1.5;
-    padding: 8px 12px;
+    padding: 0.8rem 1.2rem;
   `
   );
   return (
@@ -40,20 +37,22 @@ const Todayquotes = () => {
 
         <Box sx={{ margin: "2rem" }}>
           <Typography variant="h6">Developers </Typography>
-          <TextField
-            sx={{ marginBottom: "2rem", backgroundColor: "#EDEFF5" }}
-            label="Developers name"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            value={inputValue}
+          <input type="text" value={inputValue} 
+          placeholder=" Developers name"
+            style={{
+              marginBottom: "2rem",
+              backgroundColor: "#EDEFF5",
+              padding:"1rem",
+              border: "1px solid black",
+              width: "70rem",
+              height: "4rem"
+            }}
             onChange={handleInputChange}
           />
           <Typography variant="h6" sx={{ marginBottom: "1rem" }}>
             Enter Your Quotes
           </Typography>
           <Textarea
-            aria-label="minimum height"
             minRows={18}
             placeholder=""
             value={textareaValue}
@@ -67,7 +66,7 @@ const Todayquotes = () => {
           style={{ backgroundColor: "#59167C" }}
           onClick={handleSubmit}
         >
-          Submit
+          Save Quotes
         </Button>
       </Box>
       <Box sx={{ flex: 1, padding: "11rem 1rem" }}>
@@ -75,8 +74,7 @@ const Todayquotes = () => {
           sx={{
             backgroundColor: "#fff",
             padding: "1rem 1rem",
-            width: "20rem",
-            height: "1.5rem",
+            width: "22rem",
             border: "1px solid #000",
             borderBottom: "none",
           }}
@@ -94,7 +92,7 @@ const Todayquotes = () => {
           }}
         >
           <Typography sx={{ margin: "1.5rem" }}>
-            प्रभु खोजने से नहीं मिलते…उसमें “खो – जाने” से मिलते है…!
+            <p>{textareaValue}</p>
           </Typography>
         </Box>
       </Box>

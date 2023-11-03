@@ -8,7 +8,7 @@ const TitleHeader = ({title}) => {
         sx={{
           fontSize: "1.5rem",
           paddingBottom:"2rem",
-          fontWeight:700
+          fontWeight:500
         }}
       >
         {title}

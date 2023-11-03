@@ -12,6 +12,7 @@ import Shayaricategory from "./component/Shayari/Shayaricategory";
 import Image from "./component/Imagecategory/Image";
 import Imagecategory from "./component/Imagecategory/Imagecategory";
 import Basicprovider from "./context/BasicProvider";
+import Manageads from "./component/ManageAds/ManageAds"
 
 function App() {
   return (
@@ -29,6 +30,8 @@ function App() {
             <Route path="/Shayari Category" element={<Shayaricategory />} />
             <Route path="/Image" element={<Image />} />
             <Route path="/Image Category" element={<Imagecategory />} />
+            <Route path="/Manage Ads" element={<Manageads/>} />
+
           </Routes>
         </Basicprovider>
       </div>
