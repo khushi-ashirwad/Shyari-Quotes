@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { Box, Typography } from "@mui/material";
 import TitleHeader from "../Global/TitleHeader";
 import Button from "@mui/material/Button";
-import { styled } from "@mui/system";
-import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAutosize";
 
 
 const TodayShayari = () => {
@@ -21,16 +19,7 @@ const TodayShayari = () => {
     console.log("Input Value:", inputValue);
   };
 
-  const Textarea = styled(BaseTextareaAutosize)(
-    ({ theme }) => `
-    width: 70rem;
-    font-family: IBM Plex Sans, sans-serif;
-    font-size: 0.875rem;
-    font-weight: 400;
-    line-height: 1.5;
-    padding: 0.8rem 1.2rem;
-  `
-  );
+
   return (
     <>
       <Box sx={{ padding: "5rem 1rem 3rem" }}>
@@ -53,11 +42,11 @@ const TodayShayari = () => {
           <Typography variant="h6" sx={{ marginBottom: "1rem" }}>
             Enter Your Shayari
           </Typography>
-          <Textarea
-            minRows={18}
-            placeholder=""
-            value={textareaValue}
-            onChange={handleTextareaChange}
+          <textarea  style={{padding:"2rem"}}
+          rows="14" 
+          cols="142"
+          value={textareaValue}
+          onChange={handleTextareaChange}
           />
         </Box>
         <Button
@@ -93,7 +82,7 @@ const TodayShayari = () => {
           }}
         >
           <Typography sx={{ margin: "1.5rem" }}>
-            <p>{textareaValue}</p>
+          <p style={{wordWrap:"break-word"}}>{textareaValue}</p>
           </Typography>
         </Box>
       </Box>
