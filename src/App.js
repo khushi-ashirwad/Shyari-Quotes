@@ -21,7 +21,7 @@ function App() {
         <Basicprovider>
           <Sidebar/>
           <Routes>
-            <Route path="/" element={<Dashboard />} />
+            <Route path="/Dashboard" element={<Dashboard />} />
             <Route path="/Quotes" element={<Quotes />} />
             <Route path="/Today Quotes" element={<Todayquotes />} />
             <Route path="/Category" element={<Category />} />
@@ -31,7 +31,6 @@ function App() {
             <Route path="/Image" element={<Image />} />
             <Route path="/Image Category" element={<Imagecategory />} />
             <Route path="/Manage Ads" element={<Manageads/>} />
-
           </Routes>
         </Basicprovider>
       </div>
