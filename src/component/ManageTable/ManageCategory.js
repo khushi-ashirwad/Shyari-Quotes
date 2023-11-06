@@ -30,7 +30,6 @@ const ManageCategory = ({ categorydata }) => {
                 <TableCell style={tableCellStyle}>Name</TableCell>
                 <TableCell style={tableCellStyle}>Description</TableCell>
                 <TableCell style={tableCellStyle}>Image</TableCell>
-                <TableCell style={tableCellStyle}>IsSensitive</TableCell>
                 <TableCell style={tableCellStyle}>Buttons</TableCell>
               </TableRow>
             </TableHead>
@@ -48,9 +47,7 @@ const ManageCategory = ({ categorydata }) => {
                       style={{ width: "100px", height: "100px" }}
                     />
                   </TableCell>
-                  <TableCell style={tableCellStyle}>
-                    {item.isSensitive ? "Yes" : "No"}
-                  </TableCell>
+                  
                   <TableCell
                     sx={{
                       border: "2px solid black",
