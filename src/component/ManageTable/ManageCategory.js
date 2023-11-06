@@ -1,20 +1,20 @@
 import React from 'react'
-import { Table,TableCell,TableContainer,TableRow,Typography,TableHead,Box,IconButton, Paper,TableBody} from '@mui/material'
+import { Table, TableCell, TableContainer, TableRow, Typography, TableHead, Box, IconButton, Paper, TableBody } from '@mui/material'
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
-const ManageCategory = ({categorydata}) => {
-    const tableCellStyle = {
-        border: "2px solid #000",
-        padding: "1rem",
-        textAlign: "center",
-        fontSize: "1rem",
-        fontWeight: "500",
-      };
+const ManageCategory = ({ categorydata }) => {
+  const tableCellStyle = {
+    border: "2px solid #000",
+    padding: "1rem",
+    textAlign: "center",
+    fontSize: "1rem",
+    fontWeight: "500",
+  };
   return (
-   <>
-    <Box
+    <>
+      <Box
         sx={{
           display: "flex",
           alignItems: "center",
@@ -105,8 +105,8 @@ const ManageCategory = ({categorydata}) => {
             </TableBody>
           </Table>
         </TableContainer>
-      </Box>  
-   </>
+      </Box>
+    </>
   )
 }
 

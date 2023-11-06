@@ -11,9 +11,12 @@ import { NavLink } from 'react-router-dom';
 import logo_img from "../../images/Group 49110.png"
 import "../../Style/Sidebar.css"
 import { Box, Grid, IconButton } from '@mui/material';
+
 const Sidebar = ({ children }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [activeMenuItem, setActiveMenuItem] = useState("/");
+    const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
+
 
     const toggle = () => setIsOpen(!isOpen);
     const menuItem = [
