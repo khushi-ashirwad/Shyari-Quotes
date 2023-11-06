@@ -12,7 +12,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { NavLink } from 'react-router-dom';
 import logo_img from '../../images/Group 49110.png';
 import '../../Style/Sidebar.css';
-import { Box, Grid, IconButton } from '@mui/material';
+import { Box, Grid, IconButton,Link } from '@mui/material';
 import AndroidIcon from '@mui/icons-material/Android';
 import DevicesIcon from '@mui/icons-material/Devices';
 const Sidebar = ({ children }) => {
@@ -24,11 +24,6 @@ const Sidebar = ({ children }) => {
     const toggle = () => setIsOpen(!isOpen);
 
     const menuItem = [
-        {
-            path: "/Dashboard",
-            name: "Dashboard",
-            icon: <RiBarChartGroupedFill />,
-        },
         {
             name: "Quotes",
             icon: <BsChatQuote />,
@@ -119,9 +114,15 @@ const Sidebar = ({ children }) => {
                     <Box className="top_section">
                         <img src={logo_img} style={{ width: isOpen ? "180px" : "80px", padding: isOpen ? "2rem" : "2rem 1rem " }} alt='logo'></img>
                     </Box>
-                    <Grid container direction="column" spacing={0}>
+
+                    <Grid container direction="column" spacing={0}>                    
+                        <Grid sx={{display:"flex",paddingLeft:"1rem"}} className={`sidebar-menu ${activeMenuItem ? 'active' : ''}`}>
+                        <RiBarChartGroupedFill style={{paddingRight:"0.6rem",fontSize:"2rem"}} />  <Link href="/Dashboard" sx={{textDecoration:"none",color:"#fff", display: isOpen ? 'block' : 'none'}}> Dashboard</Link>
+                        </Grid>
+        
 
                         {menuItem.map((item, index) => (
+                            
                             <Grid item key={index}>
                                 <div className={`sidebar-menu ${item.path === activeMenuItem ? 'active' : ''}`}
                                 >
