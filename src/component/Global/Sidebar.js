@@ -149,7 +149,7 @@ const Sidebar = ({ children }) => {
                                             <Grid item className="icon">
                                                 {item.icon}
                                             </Grid>
-                                            <Grid item component={Box} sx={{ display: isOpen ? 'block' : 'none' }}>
+                                            <Grid item component={Box} sx={{ display: isOpen ? 'block' : 'none' }} >
                                                 {item.name}
                                             </Grid>
                                             {item.subMenu && (
@@ -164,7 +164,7 @@ const Sidebar = ({ children }) => {
                                     <ul >
                                         {item.subMenu.map((subItem, subIndex) => (
                                             <li key={subIndex} >
-                                                <NavLink className={`submenu ${index === activeSubMenuIndex ? 'active' : ''}`} to={subItem.path} >
+                                                <NavLink className={`submenu ${index === activeSubMenuIndex ? 'active' : ''}`}  to={subItem.path} >
                                                     <Grid sx={{ padding: "0 1rem 0 0", fontSize: "1.1rem" }}>{subItem.icon}</Grid>
                                                     <Grid sx={{ display: isOpen ? 'block' : 'none' }}> {subItem.name}</Grid>
                                                 </NavLink>

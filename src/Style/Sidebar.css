@@ -11,14 +11,14 @@
   padding-left: 0.2rem;
 }
 
- .sidebar-menu.active {
+.sidebar-menu.active {
   background: var(--light-bg-color);
   border-radius: 4px;
   color: #723997;
   font-size: 1rem;
   font-weight: 500;
   display: flex;
-  padding: 0.5rem ;
+  padding: 0.5rem;
 
 }
 
@@ -30,7 +30,7 @@
   font-size: 1rem;
   font-weight: 400;
   text-decoration: none;
-} 
+}
 
 .bars {
   padding: 3rem 0 0 0;
@@ -60,7 +60,8 @@
   max-Height: 55rem;
   overflow-Y: scroll;
 }
-label{
+
+label {
   font-size: 1rem;
   padding-bottom: 0.5rem;
   font-weight: 600;
@@ -70,22 +71,16 @@ label{
   text-decoration: none;
   color: #fff;
   display: flex;
-  padding: 0.5rem 0 0 0;
-}
-
-.submenu {
-  color: #fff; 
-  background-color: transparent; 
-  padding: 0.8rem; 
+  padding: 0.5rem;
+  color: #fff;
+  background-color: transparent;
   display: flex;
+  right: 1rem;
   align-items: center;
-  width: 12rem;
   border-radius: 0.5rem;
 }
 
 .submenu.active {
-  color: white; 
-  background-color: var(--light-bg-color, #C1A4E9); 
-
+  color: white;
+  background-color: var(--light-bg-color, #C1A4E9);
 }
-
