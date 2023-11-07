@@ -12,7 +12,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { NavLink } from 'react-router-dom';
 import logo_img from '../../images/Group 49110.png';
 import '../../Style/Sidebar.css';
-import { Box, Grid, IconButton,Link } from '@mui/material';
+import { Box, Grid, IconButton } from '@mui/material';
 import AndroidIcon from '@mui/icons-material/Android';
 import DevicesIcon from '@mui/icons-material/Devices';
 const Sidebar = ({ children }) => {
@@ -22,8 +22,15 @@ const Sidebar = ({ children }) => {
     const [activeSubMenuIndex,] = useState('');
 
     const toggle = () => setIsOpen(!isOpen);
-
     const menuItem = [
+        {
+            path: "/Dashboard",
+            name: "Dashboard",
+            icon: <RiBarChartGroupedFill />
+        },
+    ]
+    const submenuItem = [
+
         {
             name: "Quotes",
             icon: <BsChatQuote />,
@@ -81,7 +88,6 @@ const Sidebar = ({ children }) => {
                     name: "Image Category",
                     icon: <PiDiamondsFourThin />,
                 },
-
             ],
         },
         {
@@ -97,12 +103,10 @@ const Sidebar = ({ children }) => {
                     path: "/Manage Ads/android",
                     name: "android",
                     icon: <AndroidIcon />
-
                 },
             ],
         },
     ];
-    console.log("hello",menuItem.subItem)
 
     const handleSubMenuClick = (index) => {
         setOpenSubMenu(openSubMenu === index ? null : index);
@@ -114,22 +118,33 @@ const Sidebar = ({ children }) => {
                     <Box className="top_section">
                         <img src={logo_img} style={{ width: isOpen ? "180px" : "80px", padding: isOpen ? "2rem" : "2rem 1rem " }} alt='logo'></img>
                     </Box>
-
-                    <Grid container direction="column" spacing={0}>                    
-                        <Grid sx={{display:"flex",paddingLeft:"1rem"}} className={`sidebar-menu ${activeMenuItem ? 'active' : ''}`}>
-                        <RiBarChartGroupedFill style={{paddingRight:"0.6rem",fontSize:"2rem"}} />  <Link href="/Dashboard" sx={{textDecoration:"none",color:"#fff", display: isOpen ? 'block' : 'none'}}> Dashboard</Link>
-                        </Grid>
-        
-
+                    <Grid container direction="column" spacing={0}>
                         {menuItem.map((item, index) => (
-                            
                             <Grid item key={index}>
-                                <div className={`sidebar-menu ${item.path === activeMenuItem ? 'active' : ''}`}
+                                <NavLink
+                                    to={item.path}
+                                    className={`sidebar-menu ${item.path === activeSubMenuIndex ? "active" : ""}`}
+                                    onClick={() => setActiveMenuItem(item.path)}
                                 >
-                                    <div
+                                    <Grid container alignItems="center" spacing={2}>
+                                        <Grid item className="icon">
+                                            {item.icon}
+                                        </Grid>
+                                        <Grid item component={Box} style={{ display: isOpen ? "block" : "none" }} >
+                                            {item.name}
+                                        </Grid>
+                                    </Grid>
+                                </NavLink>
+                            </Grid>
+                        ))}
+                    </Grid>
+                    <Grid container direction="column" spacing={0}>
+                        {submenuItem.map((item, index) => (
+                            <Grid item key={index}>
+                                <Box className={`sidebar-menu ${item.path === activeMenuItem ? 'active' : ''}`} >
+                                    <Box
                                         className="menu-item"
-                                        onClick={() => (item.subMenu ? handleSubMenuClick(index) : setActiveMenuItem(item.path))}
-                                    >
+                                        onClick={() => (item.subMenu ? handleSubMenuClick(index) : setActiveMenuItem(item.path))} >
                                         <Grid container alignItems="center" spacing={2}>
                                             <Grid item className="icon">
                                                 {item.icon}
@@ -143,17 +158,15 @@ const Sidebar = ({ children }) => {
                                                 </Grid>
                                             )}
                                         </Grid>
-                                    </div>
-
-                                </div>
-
+                                    </Box>
+                                </Box>
                                 {item.subMenu && openSubMenu === index && (
                                     <ul >
                                         {item.subMenu.map((subItem, subIndex) => (
                                             <li key={subIndex} >
                                                 <NavLink className={`submenu ${index === activeSubMenuIndex ? 'active' : ''}`} to={subItem.path} >
                                                     <Grid sx={{ padding: "0 1rem 0 0", fontSize: "1.1rem" }}>{subItem.icon}</Grid>
-                                                    <Grid item component={Box} sx={{ display: isOpen ? 'block' : 'none' }}> {subItem.name}</Grid>
+                                                    <Grid sx={{ display: isOpen ? 'block' : 'none' }}> {subItem.name}</Grid>
                                                 </NavLink>
                                             </li>
                                         ))}
