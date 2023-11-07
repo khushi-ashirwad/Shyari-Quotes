@@ -47,12 +47,12 @@ const {show,handleClose,handleShow} = useContext(BasicContext)
         <Modal.Body>
          <label>Enter Name</label>
          <br/>
-         <input type="text" value="" style={{width:"100%",border:"1px solid #7E7E7E",background:"#EDEFF5"}}/>
+         <input type="text" style={{width:"100%",border:"1px solid #7E7E7E",background:"#EDEFF5"}}/>
          <br/>
          <br/>
          <label>Description</label>
          <br/>
-         <input type="text" value="" style={{width:"100%",border:"1px solid #7E7E7E",background:"#EDEFF5"}}/>
+         <input type="text" style={{width:"100%",border:"1px solid #7E7E7E",background:"#EDEFF5"}}/>
          <br/><br/>
          <label>Thumbnail</label>
          <br/>

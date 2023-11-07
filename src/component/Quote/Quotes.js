@@ -41,7 +41,7 @@ const Quotes = () => {
     >
       <TitleHeader title="Manage Quotes" />
       <Box style={containerStyle}>
-        <button style={buttonStyle} onClick={handleShow}>Add Category</button>
+        <button style={buttonStyle} onClick={handleShow}>Add Quotes</button>
       </Box>
       <Manage data={quotesdata}/>
       <Modal
@@ -65,7 +65,7 @@ const Quotes = () => {
          <br/>
          <label>Enter Quotes</label>
          <br/>
-         <textarea value="" style={{width:"100%",border:"1px solid #7E7E7E",}}/>
+         <textarea  style={{width:"100%",border:"1px solid #7E7E7E",}}/>
         </Modal.Body>
         <Modal.Footer style={{alignItems:"center",justifyContent:"center",display:"flex"}}>
           <Button
