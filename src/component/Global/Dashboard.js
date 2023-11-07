@@ -1,16 +1,17 @@
 import React from 'react';
 import { Grid, Typography, Box } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import TitleHeader from './TitleHeader';
 
 const items = [
-  { heading: '20', content: ' shayari category ' },
-  { heading: '69', content: ' premium quotes ' },
-  { heading: '9', content: ' shayari category ' },
-  { heading: '1233', content: 'category ' },
-  { heading: '543', content: ' shayari category ' },
-  { heading: '123', content: 'shayari’s ' },
-  { heading: '45', content: ' image ios' },
-  { heading: '78', content: ' shayari category ' },
+  { heading: '20', content: ' Quote	 ', button: "Quote", path: '/Quotes' },
+  { heading: '69', content: ' Quotes Category ', button: "Quotes Category ", path: '/Category' },
+  { heading: '9', content: ' Shayari ', button: "Shayari", path: '/Shayari' },
+  { heading: '1233', content: 'Shayari category ', button: "Shayari category", path: '/Shayari Category' },
+  { heading: '543', content: ' Image', button: "Image", path: '/Image' },
+  { heading: '123', content: 'Image Category  ', button: "Image Category", path: '/Image Category' },
+  { heading: '45', content: 'ios', button: "ios", path: '/ios' },
+  { heading: '78', content: 'Android ', button: "Android", path: '/Android' },
 ];
 const buttonStyle = {
   backgroundColor: '#fff',
@@ -22,13 +23,17 @@ const buttonStyle = {
   borderRadius: "5px"
 };
 const Dashboard = () => {
+  const navigate = useNavigate();
+  const handleButtonClick = (path) => {
+    navigate(path);
+  }
   return (
     <Box sx={{
       maxHeight: "50rem",
       overflowY: "auto",
       padding: "5rem 1rem 3rem",
     }}>
-      <TitleHeader title="Dashboard"/>
+      <TitleHeader title="Dashboard" />
       <Grid container spacing={4} >
         {items.map((item, index) => (
           <Grid item xs={16} md={3} sm={16} key={index} >
@@ -39,8 +44,13 @@ const Dashboard = () => {
               <Typography variant="body1" gutterBottom>
                 {item.content}
               </Typography>
-              <button style={buttonStyle} variant="contained" color="primary">
-                Manage category
+              <button
+                onClick={() => handleButtonClick(item.path)}
+                style={buttonStyle}
+                variant="contained"
+                color="primary"
+              >
+                {item.button}
               </button>
             </Box>
           </Grid>
@@ -49,5 +59,4 @@ const Dashboard = () => {
     </Box>
   );
 };
-
 export default Dashboard;

@@ -71,11 +71,11 @@ label {
   text-decoration: none;
   color: #fff;
   display: flex;
-  padding: 0.5rem;
+  padding: 0.5rem 0.5rem 0.5rem 0.1rem;
   color: #fff;
   background-color: transparent;
   display: flex;
-  right: 1rem;
+  right: 2rem;
   align-items: center;
   border-radius: 0.5rem;
 }
