@@ -46,7 +46,7 @@ const Shayari=()=> {
         style={buttonStyle}
         onClick={handleShow}
          >
-          Add Category
+          Add Shayari
         </button>
       </Box>
     <Manage data={quotesdata}/>
@@ -71,7 +71,7 @@ const Shayari=()=> {
          <br/>
          <label>Enter Shayari</label>
          <br/>
-         <textarea value="" style={{width:"100%",border:"1px solid #7E7E7E",}}/>
+         <textarea  style={{width:"100%",border:"1px solid #7E7E7E",}}/>
         </Modal.Body>
         <Modal.Footer style={{alignItems:"center",justifyContent:"center",display:"flex"}}>
           <Button
