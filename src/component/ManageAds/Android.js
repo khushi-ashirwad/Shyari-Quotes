@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-const Mangeads = () => {
+const Android = () => {
     const InputStyle = {
         width: "100%",
         border: "1px solid #7E7E7E",
@@ -15,7 +15,7 @@ const Mangeads = () => {
     }
     return (
         <Box sx={{ padding: "5rem 1rem 3rem" }}>
-            <TitleHeader title="Mange Ads" />
+            <TitleHeader title="Mange Ads/Android" />
             <Box style={{
                 display: 'block',
                 width: 700,
@@ -74,4 +74,4 @@ const Mangeads = () => {
     )
 }
 
-export default Mangeads;
+export default Android;

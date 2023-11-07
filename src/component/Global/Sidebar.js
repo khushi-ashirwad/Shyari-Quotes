@@ -95,13 +95,13 @@ const Sidebar = ({ children }) => {
             icon: <GiClapperboard />,
             subMenu: [
                 {
-                    path: "/Manage Ads/ios",
+                    path: "/ios",
                     name: "ios",
                     icon: <DevicesIcon />
                 },
                 {
-                    path: "/Manage Ads/android",
-                    name: "android",
+                    path: "/Android",
+                    name: "Android",
                     icon: <AndroidIcon />
                 },
             ],
@@ -164,7 +164,7 @@ const Sidebar = ({ children }) => {
                                     <ul >
                                         {item.subMenu.map((subItem, subIndex) => (
                                             <li key={subIndex} >
-                                                <NavLink className={`submenu ${index === activeSubMenuIndex ? 'active' : ''}`}  to={subItem.path} >
+                                                <NavLink className={`submenu ${index === activeSubMenuIndex ? 'active' : ''}`} to={subItem.path} >
                                                     <Grid sx={{ padding: "0 1rem 0 0", fontSize: "1.1rem" }}>{subItem.icon}</Grid>
                                                     <Grid sx={{ display: isOpen ? 'block' : 'none' }}> {subItem.name}</Grid>
                                                 </NavLink>
@@ -175,7 +175,7 @@ const Sidebar = ({ children }) => {
                             </Grid>
                         ))}
                     </Grid>
-                    <Box style={{ marginLeft: isOpen ? "8px" : "8px", paddingTop: isOpen ? "12rem" : "14rem" }} >
+                    <Box style={{ marginLeft: isOpen ? "0.8rem" : "0.8rem", paddingTop: isOpen ? "12rem" : "14rem" }} >
                         <IconButton onClick={toggle} size="large">
                             <RiMenu2Line style={{ color: "#fff" }} />
                         </IconButton>
