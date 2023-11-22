@@ -16,7 +16,7 @@ import { Box, Grid, IconButton } from '@mui/material';
 import AndroidIcon from '@mui/icons-material/Android';
 import DevicesIcon from '@mui/icons-material/Devices';
 const Sidebar = ({ children }) => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(true);
     const [activeMenuItem, setActiveMenuItem] = useState('');
     const [openSubMenu, setOpenSubMenu] = useState('');
     const [activeSubMenuIndex,] = useState('');
@@ -24,7 +24,7 @@ const Sidebar = ({ children }) => {
     const toggle = () => setIsOpen(!isOpen);
     const menuItem = [
         {
-            path: "/Dashboard",
+            path: "/",
             name: "Dashboard",
             icon: <RiBarChartGroupedFill />
         },

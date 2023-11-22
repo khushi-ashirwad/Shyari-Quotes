@@ -1,7 +1,5 @@
 import React from "react";
-import {
-  Box,
-} from "@mui/material";
+import { Box } from "@mui/material";
 import { categorydata } from "../../data/QuoteCategory";
 import TitleHeader from "../Global/TitleHeader";
 import "../../Style/Sidebar.css";
@@ -10,6 +8,8 @@ import Modal from "react-bootstrap/Modal";
 import ManageCategory from "../ManageTable/ManageCategory";
 import { useContext } from "react";
 import { BasicContext } from "../../context/BasicProvider";
+import { useDispatch } from "react-redux";
+import { addCategory } from "../../redux/action/categoryAction";
 
 const QuoutesCategory = () => {
   const buttonStyle = {
@@ -27,7 +27,33 @@ const QuoutesCategory = () => {
     padding: "1rem",
     marginTop: "-3rem",
   };
- const {show,handleClose,handleShow} = useContext(BasicContext)
+  const {
+    show,
+    handleClose,
+    handleShow,
+    category,
+    setCategory,
+    file,
+    setFile,
+  } = useContext(BasicContext);
+  const dispatch = useDispatch();
+  const handleChange = (e) => {
+    setCategory({
+      ...category,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const handlechnagefile = (e) => {
+    setFile(e.target.files[0]);
+  };
+  const handlecategory = () => {
+    const formData = new FormData();
+    formData.append("name", category.name);
+    formData.append("description", category.description);
+    formData.append("file", file);
+    formData.append("type", "quotes");
+    dispatch(addCategory(formData));
+  };
   return (
     <Box
       className="full-screen"
@@ -39,7 +65,7 @@ const QuoutesCategory = () => {
           Add Category
         </button>
       </Box>
-      <ManageCategory categorydata={ categorydata}/>
+      <ManageCategory categorydata={categorydata} />
       <Modal
         show={show}
         onHide={handleClose}
@@ -50,29 +76,76 @@ const QuoutesCategory = () => {
           <Modal.Title>Quotes</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-         <label>Enter Name</label>
-         <br/>
-         <input type="text"  style={{width:"100%",border:"1px solid #7E7E7E",background:"#EDEFF5"}}/>
-         <br/>
-         <br/>
-         <label>Description</label>
-         <br/>
-         <input type="text" style={{width:"100%",border:"1px solid #7E7E7E",background:"#EDEFF5"}}/>
-         <br/><br/>
-         <label>Thumbnail</label>
-         <br/>
-         <input type="file" style={{width:"100%",border:"1px solid #7E7E7E",padding:"0.2rem",background:"#EDEFF5"}}/>
+          <label>Enter Name</label>
+          <br />
+          <input
+            type="text"
+            name="name"
+            value={category.name}
+            style={{
+              width: "100%",
+              border: "1px solid #7E7E7E",
+              background: "#EDEFF5",
+            }}
+            onChange={handleChange}
+          />
+          <br />
+          <br />
+          <label>Description</label>
+          <br />
+          <input
+            type="text"
+            name="description"
+            value={category.description}
+            style={{
+              width: "100%",
+              border: "1px solid #7E7E7E",
+              background: "#EDEFF5",
+            }}
+            onChange={handleChange}
+          />
+          <br />
+          <br />
+          <label>Thumbnail</label>
+          <br />
+          <input
+            type="file"
+            style={{
+              width: "100%",
+              border: "1px solid #7E7E7E",
+              padding: "0.2rem",
+              background: "#EDEFF5",
+            }}
+            onChange={handlechnagefile}
+          />
         </Modal.Body>
-        <Modal.Footer style={{alignItems:"center",justifyContent:"center",display:"flex"}}>
+        <Modal.Footer
+          style={{
+            alignItems: "center",
+            justifyContent: "center",
+            display: "flex",
+          }}
+        >
           <Button
-            style={{ backgroundColor: "#A30D11", border: "none",padding:"0.5rem 2rem" }}
+            style={{
+              backgroundColor: "#A30D11",
+              border: "none",
+              padding: "0.5rem 2rem",
+            }}
             onClick={handleClose}
           >
             Close
           </Button>
           <Button
-            style={{ backgroundColor: "#59167C", border: "none",padding:"0.5rem 2rem" }}
-            onClick={handleClose}
+            style={{
+              backgroundColor: "#59167C",
+              border: "none",
+              padding: "0.5rem 2rem",
+            }}
+            onClick={() => {
+              handleClose();
+              handlecategory();
+            }}
           >
             Save
           </Button>

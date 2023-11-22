@@ -1,8 +1,22 @@
-import React from 'react'
-import { Table, TableCell, TableContainer, TableRow, Typography, TableHead, Box, IconButton, Paper, TableBody } from '@mui/material'
+import React from "react";
+import {
+  Table,
+  TableCell,
+  TableContainer,
+  TableRow,
+  Typography,
+  TableHead,
+  Box,
+  IconButton,
+  Paper,
+  TableBody,
+} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getCategory } from "../../redux/action/categoryAction";
 
 const ManageCategory = ({ categorydata }) => {
   const tableCellStyle = {
@@ -12,6 +26,12 @@ const ManageCategory = ({ categorydata }) => {
     fontSize: "1rem",
     fontWeight: "500",
   };
+  const dispatch = useDispatch();
+  const { category } = useSelector((state) => state.categoryRducer);
+  useEffect(() => {
+    dispatch(getCategory());
+  }, [category]);
+
   return (
     <>
       <Box
@@ -34,7 +54,7 @@ const ManageCategory = ({ categorydata }) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {categorydata.map((item, index) => (
+              {category.map((item, index) => (
                 <TableRow key={index}>
                   <TableCell style={tableCellStyle}>{item.name}</TableCell>
                   <TableCell style={tableCellStyle}>
@@ -42,12 +62,12 @@ const ManageCategory = ({ categorydata }) => {
                   </TableCell>
                   <TableCell style={tableCellStyle}>
                     <img
-                      src={item.img}
+                      src={item.file}
                       alt={item.name}
                       style={{ width: "100px", height: "100px" }}
                     />
                   </TableCell>
-                  
+
                   <TableCell
                     sx={{
                       border: "2px solid black",
@@ -104,7 +124,7 @@ const ManageCategory = ({ categorydata }) => {
         </TableContainer>
       </Box>
     </>
-  )
-}
+  );
+};
 
-export default ManageCategory
+export default ManageCategory;
