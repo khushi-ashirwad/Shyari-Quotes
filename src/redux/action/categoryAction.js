@@ -7,7 +7,6 @@ export const addCategory = (data) => async (dispatch) => {
     const response = await axios.post(url + "/category/add", data);
     dispatch({ type: ADD_CATEGORY, payload: response.data });
   } catch (error) {
-    console.log(error);
     dispatch({ type: FAILER, payload: error });
   }
 };
@@ -15,7 +14,7 @@ export const addCategory = (data) => async (dispatch) => {
 export const getCategory = () => async (dispatch) => {
   try {
     const response = await axios.get(url + "/category/get");
-    console.log("action", response.data);
+    // console.log("action", response.data);
     dispatch({ type: GET_CATEGORY, payload: response.data });
   } catch (error) {
     dispatch({ type: FAILER, payload: error });

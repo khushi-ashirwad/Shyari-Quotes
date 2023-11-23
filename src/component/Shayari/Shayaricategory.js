@@ -8,7 +8,8 @@ import { useContext,useEffect } from "react";
 import { BasicContext } from "../../context/BasicProvider";
 import CategoryModal from "../Modal/CategoryModal";
 import { getCategory } from "../../redux/action/categoryAction";
-import { useDispatch,useSelector} from "react-redux";
+import { useDispatch} from "react-redux";
+import Getcategory from "../Global/Getcategory";
 
 const Shayaricategory = () => {
   const buttonStyle = {
@@ -26,16 +27,18 @@ const Shayaricategory = () => {
     padding: "1rem",
     marginTop: "-3rem",
   };
-const {handleShow} = useContext(BasicContext)
+const {handleShow,dataFetched,setDataFetched} = useContext(BasicContext)
 const currentPath = window.location.pathname;
 const dispatch = useDispatch();
-const { category } = useSelector((state) => state.categoryRducer);
-const currentvalue = category
-const filterShayari=currentvalue.filter(category=>category.type==="shayari");
+const categories = Getcategory();
+const filterShayari=categories.filter(category=>category.type==="shayari");
 
 useEffect(() => {
-  dispatch(getCategory());
-}, [dispatch,currentvalue]);
+  if (!dataFetched) {
+    dispatch(getCategory());
+    setDataFetched(true);
+  }
+}, [dispatch,dataFetched,setDataFetched]);
 
   return (
     <>

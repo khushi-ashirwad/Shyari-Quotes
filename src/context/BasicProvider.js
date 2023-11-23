@@ -1,5 +1,4 @@
 import { createContext,useState} from "react";
-import { useSelector } from "react-redux";
 
 export const BasicContext = createContext(null);
 
@@ -12,9 +11,10 @@ const Basicprovider = ({ children }) => {
     description: "",
   });
   const [file, setFile] = useState(null);
+  const [dataFetched, setDataFetched] = useState(false); 
   return (
     <>
-      <BasicContext.Provider value={{ show, setShow, handleClose, handleShow,Category,setCategory,file,setFile}}>
+      <BasicContext.Provider value={{ show, setShow, handleClose, handleShow,Category,setCategory,file,setFile,dataFetched,setDataFetched}}>
         {children}
       </BasicContext.Provider>
     </>

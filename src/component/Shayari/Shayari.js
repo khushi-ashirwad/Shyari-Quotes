@@ -1,17 +1,15 @@
-import React  from 'react'
-import {
-  Box,
-} from "@mui/material";
-import TitleHeader from '../Global/TitleHeader';
-import { quotesdata } from "../../data/Quotes";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import Manage from '../ManageTable/Manage';
-import { useContext } from 'react';
-import { BasicContext } from '../../context/BasicProvider';
+import { useContext, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { Box } from "@mui/material";
+import TitleHeader from "../Global/TitleHeader";
+import Manage from "../ManageTable/Manage";
+import { BasicContext } from "../../context/BasicProvider";
+import Addshayariquotes from "../Modal/Addshayari&quotes";
+import { Getcontent } from "../Global/Getcategory";
+import { getContent } from "../../redux/action/ContentAction";
 
-const Shayari=()=> {
-  const {show,handleClose,handleShow} = useContext(BasicContext)
+const Shayari = () => {
+  const { handleShow, dataFetched, setDataFetched } = useContext(BasicContext);
   const buttonStyle = {
     padding: "0.75rem 1.1875rem",
     borderRadius: " 0.125rem",
@@ -27,9 +25,19 @@ const Shayari=()=> {
     padding: "1rem",
     marginTop: "-3.5rem",
   };
+  const currentPath = window.location.pathname;
+  const content = Getcontent();
+  const filtercontent=content.filter(content=>content.category.type==="shayari");
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (!dataFetched) {
+      dispatch(getContent());
+      setDataFetched(true);
+    }
+  }, [dispatch, dataFetched, setDataFetched]);
   return (
     <Box
-    className="full-screen"
+      className="full-screen"
       sx={{
         padding: "5rem 1rem 3rem",
         justifyContent: "center",
@@ -38,65 +46,16 @@ const Shayari=()=> {
         width: "140rem",
       }}
     >
-    <TitleHeader title="Manage Shayari"/>
-    <Box 
-      style={containerStyle}
-      >
-        <button 
-        style={buttonStyle}
-        onClick={handleShow}
-         >
+      <TitleHeader title="Manage Shayari" />
+      <Box style={containerStyle}>
+        <button style={buttonStyle} onClick={handleShow}>
           Add Shayari
         </button>
       </Box>
-    <Manage data={quotesdata}/>
-    <Modal
-        show={show}
-        onHide={handleClose}
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Add Shayari</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-         <label>select category </label>
-         <br/>
-         <select style={{width:"100%",border:" none",background:"#EDEFF5",padding:"0.5rem 0.5rem"}}>
-            <option value="angry">Angry</option>
-            <option value="happy">Happy</option>
-            <option value="sad">Sad</option>
-         </select>
-         <br/>
-         <br/>
-         <label>Enter Shayari</label>
-         <br/>
-         <textarea  style={{width:"100%",border:"1px solid #7E7E7E",}}/>
-        </Modal.Body>
-        <Modal.Footer style={{alignItems:"center",justifyContent:"center",display:"flex"}}>
-          <Button
-            style={{ backgroundColor: "#A30D11", border: "none",padding:"0.5rem 2rem" }}
-            onClick={handleClose}
-          >
-            Close
-          </Button>
-          <Button
-            style={{ backgroundColor: "#59167C", border: "none",padding:"0.5rem 2rem" }}
-            onClick={handleClose}
-          >
-            Save
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <Manage content={filtercontent} />
+      <Addshayariquotes currentPath={currentPath} />
     </Box>
-  )
-}
+  );
+};
 
-export default Shayari
-
-
-
-
-
-
-
+export default Shayari;

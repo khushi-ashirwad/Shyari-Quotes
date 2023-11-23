@@ -10,7 +10,7 @@ export const categoryRducer = (state = intialvalue, action) => {
         error: null,
       };
       case GET_CATEGORY:
-        console.log("reducer",action.payload);
+        // console.log("reducer",action.payload);
         return{
           ...state,
           category:action.payload,

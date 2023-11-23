@@ -14,7 +14,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { FiEdit } from "react-icons/fi";
 import { PiTable } from "react-icons/pi";
 
-const Manage = ({ data }) => {
+const Manage = ({ content }) => {
   const tableCellStyle = {
     border: "1px solid #ccc",
     padding: "15px",
@@ -22,6 +22,7 @@ const Manage = ({ data }) => {
     fontSize: "18px",
     fontWeight: "500",
   };
+  const currentPath = window.location.pathname;
   return (
     <>
       <TableContainer component={Paper} sx={{ maxWidth: "100%" }}>
@@ -35,28 +36,28 @@ const Manage = ({ data }) => {
         >
           <PiTable style={{ fontSize: "1.9rem" }} />
           <Typography sx={{ fontSize: "1.3rem", paddingLeft: "1rem" }}>
-            All Quotes
+            All {currentPath==="/Quotes"?"Quotes":"Shayari"}
           </Typography>
         </TableHead>
         <Table style={{ minWidth: "500px" }}>
           <TableHead sx={{ backgroundColor: "#F8F2FF" }}>
             <TableRow>
-              <TableCell style={tableCellStyle}>Quote</TableCell>
+              <TableCell style={tableCellStyle}>{currentPath==="/Quotes"?"Quotes":"Shayari"}</TableCell>
               <TableCell style={tableCellStyle}>Category</TableCell>
               <TableCell style={tableCellStyle}>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map((quoteData, index) => (
+            {content.map((contantData, index) => (
               <TableRow
                 key={index}
                 sx={{
                   backgroundColor: index % 2 === 1 ? "#F8F2FF" : "transparent",
                 }}
               >
-                <TableCell style={tableCellStyle}>{quoteData.quote}</TableCell>
+                <TableCell style={tableCellStyle}>{contantData.content}</TableCell>
                 <TableCell style={tableCellStyle}>
-                  {quoteData.category}
+                  {contantData.category.name}
                 </TableCell>
                 <TableCell style={tableCellStyle}>
                   <IconButton aria-label="edit" color="primary">
