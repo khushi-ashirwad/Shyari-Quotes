@@ -14,11 +14,8 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { getCategory } from "../../redux/action/categoryAction";
 
-const ManageCategory = ({ categorydata }) => {
+const ManageCategory = ({filterdata}) => {
   const tableCellStyle = {
     border: "2px solid #000",
     padding: "1rem",
@@ -26,11 +23,6 @@ const ManageCategory = ({ categorydata }) => {
     fontSize: "1rem",
     fontWeight: "500",
   };
-  const dispatch = useDispatch();
-  const { category } = useSelector((state) => state.categoryRducer);
-  useEffect(() => {
-    dispatch(getCategory());
-  }, [category]);
 
   return (
     <>
@@ -54,7 +46,7 @@ const ManageCategory = ({ categorydata }) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {category.map((item, index) => (
+              {filterdata.map((item, index) => (
                 <TableRow key={index}>
                   <TableCell style={tableCellStyle}>{item.name}</TableCell>
                   <TableCell style={tableCellStyle}>

@@ -3,12 +3,12 @@ import {
   Box,
 } from "@mui/material";
 import TitleHeader from "../Global/TitleHeader";
-import { categorydata } from "../../data/QuoteCategory";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
 import ManageCategory from "../ManageTable/ManageCategory";
-import { useContext } from "react";
+import { useContext,useEffect } from "react";
 import { BasicContext } from "../../context/BasicProvider";
+import CategoryModal from "../Modal/CategoryModal";
+import { getCategory } from "../../redux/action/categoryAction";
+import { useDispatch,useSelector} from "react-redux";
 
 const Shayaricategory = () => {
   const buttonStyle = {
@@ -26,7 +26,17 @@ const Shayaricategory = () => {
     padding: "1rem",
     marginTop: "-3rem",
   };
-const {show,handleClose,handleShow} = useContext(BasicContext)
+const {handleShow} = useContext(BasicContext)
+const currentPath = window.location.pathname;
+const dispatch = useDispatch();
+const { category } = useSelector((state) => state.categoryRducer);
+const currentvalue = category
+const filterShayari=currentvalue.filter(category=>category.type==="shayari");
+
+useEffect(() => {
+  dispatch(getCategory());
+}, [dispatch,currentvalue]);
+
   return (
     <>
       <Box className="full-screen" sx={{ padding: "5rem 1rem 3rem" }}>
@@ -34,45 +44,8 @@ const {show,handleClose,handleShow} = useContext(BasicContext)
         <Box style={containerStyle}>
           <button style={buttonStyle} onClick={handleShow}>Add Category</button>
         </Box>
-        <ManageCategory categorydata={ categorydata}/>
-        <Modal
-        show={show}
-        onHide={handleClose}
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Quotes</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-         <label>Enter Name</label>
-         <br/>
-         <input type="text" style={{width:"100%",border:"1px solid #7E7E7E",background:"#EDEFF5"}}/>
-         <br/>
-         <br/>
-         <label>Description</label>
-         <br/>
-         <input type="text" style={{width:"100%",border:"1px solid #7E7E7E",background:"#EDEFF5"}}/>
-         <br/><br/>
-         <label>Thumbnail</label>
-         <br/>
-         <input type="file" style={{width:"100%",border:"1px solid #7E7E7E",padding:"0.2rem",background:"#EDEFF5"}}/>
-        </Modal.Body>
-        <Modal.Footer style={{alignItems:"center",justifyContent:"center",display:"flex"}}>
-          <Button
-            style={{ backgroundColor: "#A30D11", border: "none",padding:"0.5rem 2rem" }}
-            onClick={handleClose}
-          >
-            Close
-          </Button>
-          <Button
-            style={{ backgroundColor: "#59167C", border: "none",padding:"0.5rem 2rem" }}
-            onClick={handleClose}
-          >
-            Save
-          </Button>
-        </Modal.Footer>
-      </Modal>
+        <ManageCategory filterdata={filterShayari}/>
+        <CategoryModal currentPath={currentPath}/>
       </Box>
     </>
   );
