@@ -14,8 +14,11 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { useDispatch } from "react-redux";
+import { deleteCategory, getCategory, updateCategory } from "../../redux/action/categoryAction";
+import { getContent } from "../../redux/action/ContentAction";
 
-const ManageCategory = ({filterdata}) => {
+const ManageCategory = ({ filterdata }) => {
   const tableCellStyle = {
     border: "2px solid #000",
     padding: "1rem",
@@ -23,7 +26,26 @@ const ManageCategory = ({filterdata}) => {
     fontSize: "1rem",
     fontWeight: "500",
   };
-
+  const dispatch = useDispatch();
+  const handleupdateCategory = (id, value) => {
+    console.log("id", id, value);
+    const data = {
+      isdisable: value,
+    };
+    dispatch(updateCategory(id, data)).then(() => {
+      dispatch(getCategory()).then(() => {
+        dispatch(getContent());
+      });
+    });
+  };
+  const handledeleteCategory = (id)=>{
+    console.log("click",id);
+    dispatch(deleteCategory(id)).then(()=>{
+      dispatch(getCategory()).then(() => {
+        dispatch(getContent());
+      });
+    })
+  }
   return (
     <>
       <Box
@@ -82,6 +104,7 @@ const ManageCategory = ({filterdata}) => {
                           color: "#fff",
                           marginBottom: "0.5rem",
                         }}
+                        onClick={()=>handledeleteCategory(item._id)}
                       >
                         <DeleteIcon />
                         <Typography>Delete</Typography>
@@ -97,16 +120,31 @@ const ManageCategory = ({filterdata}) => {
                         <EditIcon />
                         <Typography>Edit</Typography>
                       </IconButton>
-                      <IconButton
-                        style={{
-                          background: "#005792",
-                          borderRadius: "8rem",
-                          color: "#fff",
-                        }}
-                      >
-                        <VisibilityOffIcon />
-                        <Typography>Disable</Typography>
-                      </IconButton>
+                      {item.isdisable === true ? (
+                        <IconButton
+                          style={{
+                            background: "#005792",
+                            borderRadius: "8rem",
+                            color: "#fff",
+                          }}
+                          onClick={() => handleupdateCategory(item._id, false)}
+                        >
+                          <VisibilityOffIcon />
+                          <Typography>Disable</Typography>
+                        </IconButton>
+                      ) : (
+                        <IconButton
+                          style={{
+                            background: "#005792",
+                            borderRadius: "8rem",
+                            color: "#fff",
+                          }}
+                          onClick={() => handleupdateCategory(item._id, true)}
+                        >
+                          <VisibilityOffIcon />
+                          <Typography>able</Typography>
+                        </IconButton>
+                      )}
                     </Box>
                   </TableCell>
                 </TableRow>

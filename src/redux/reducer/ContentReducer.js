@@ -1,8 +1,4 @@
-import {
-  ADD_CONTENT,
-  FAILER,
-  GET_CONTENT,
-} from "../constants";
+import { ADD_CONTENT, DELETE_CONTENT, FAILER, GET_CONTENT } from "../constants";
 import { intialvalue } from "../intialvalue";
 
 export const contentReducer = (state = intialvalue, action) => {
@@ -17,6 +13,12 @@ export const contentReducer = (state = intialvalue, action) => {
       return {
         ...state,
         quotescontent: action.payload,
+        error: null,
+      };
+    case DELETE_CONTENT:
+      return {
+        ...state,
+        success: action.payload,
         error: null,
       };
     case FAILER:

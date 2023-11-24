@@ -38,7 +38,7 @@ const QuoutesCategory = () => {
       setDataFetched(true);
     }
   }, [dispatch,dataFetched,setDataFetched]);
-
+  
   return (
     <Box
       className="full-screen"

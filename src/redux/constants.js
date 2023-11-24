@@ -3,3 +3,6 @@ export const FAILER = "FAILER";
 export const GET_CATEGORY = "GET_CATEGORY";
 export const ADD_CONTENT = "ADD_CONTENT";
 export const GET_CONTENT = "GET_CONTENT";
+export const UPDATE_CATEGORY = "UPDATE_CATEGORY";
+export const DELETE_CATEGORY = "DELETE_CATEGORY";
+export const DELETE_CONTENT = "DELETE_CONTENT";
