@@ -27,7 +27,6 @@ const Manage = ({ content }) => {
   const dispatch = useDispatch();
   const currentPath = window.location.pathname;
   const handledeleteContent = (id) => {
-    console.log("click", id);
     dispatch(deleteContent(id)).then(() => dispatch(getContent()));
   };
   return (

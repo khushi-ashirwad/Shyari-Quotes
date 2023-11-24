@@ -6,7 +6,7 @@ import { BasicContext } from "../../context/BasicProvider";
 import { useDispatch } from "react-redux";
 import { addCategory, getCategory } from "../../redux/action/categoryAction";
 
-const CategoryModal = ({ currentPath}) => {
+const CategoryModal = ({ currentPath }) => {
   const { show, handleClose, Category, setCategory, file, setFile } =
     useContext(BasicContext);
   const dispatch = useDispatch();
@@ -22,14 +22,21 @@ const CategoryModal = ({ currentPath}) => {
   const handlecategory = () => {
     const formData = new FormData();
     formData.append("name", Category.name);
-    formData.append("description", Category.description);
+    if (Category.description) {
+      formData.append("description", Category.description);
+    }
     formData.append("file", file);
     if (currentPath === "/Category") {
       formData.append("type", "quotes");
+    } else if (currentPath === "/Image%20Category") {
+      formData.append("type", "image");
     } else {
       formData.append("type", "shayari");
     }
-    dispatch(addCategory(formData)).then(() => {dispatch(getCategory());setCategory({})});
+    dispatch(addCategory(formData)).then(() => {
+      dispatch(getCategory());
+      setCategory({});
+    });
   };
   return (
     <>
