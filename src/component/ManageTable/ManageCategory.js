@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState} from "react";
 import {
   Table,
   TableCell,
@@ -15,10 +15,22 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useDispatch } from "react-redux";
-import { deleteCategory, getCategory, updateCategory } from "../../redux/action/categoryAction";
+import ModalComponent from "../Modal/Editshayari&quotes"; 
+import {
+  deleteCategory,
+  getCategory,
+  updateCategory,
+} from "../../redux/action/categoryAction";
 import { getContent } from "../../redux/action/ContentAction";
-
 const ManageCategory = ({ filterdata }) => {
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [editedCategory, setEditedCategory] = useState({});
+  const [defaultValues, setDefaultValues] = useState({
+    name: "",
+    description: "",
+    Image:"" ,
+   });
+
   const tableCellStyle = {
     border: "2px solid #000",
     padding: "1rem",
@@ -26,9 +38,10 @@ const ManageCategory = ({ filterdata }) => {
     fontSize: "1rem",
     fontWeight: "500",
   };
+
   const dispatch = useDispatch();
+
   const handleupdateCategory = (id, value) => {
-    console.log("id", id, value);
     const data = {
       isdisable: value,
     };
@@ -38,14 +51,41 @@ const ManageCategory = ({ filterdata }) => {
       });
     });
   };
-  const handledeleteCategory = (id)=>{
-    console.log("click",id);
-    dispatch(deleteCategory(id)).then(()=>{
+
+  const handledeleteCategory = (id) => {
+    dispatch(deleteCategory(id)).then(() => {
       dispatch(getCategory()).then(() => {
         dispatch(getContent());
       });
-    })
-  }
+    });
+  };
+
+  const handleEditClick = (item) => {
+    setEditedCategory(item);
+    setDefaultValues({
+      name: item.name,
+      description: item.description,
+      image:item.Image
+    });
+    setIsEditModalOpen(true);
+  };
+
+  const handleSaveChanges = () => {
+    const updatedData = {
+      name: defaultValues.name,
+      description: defaultValues.description,
+      image:defaultValues.Image,
+
+    };
+
+    dispatch(updateCategory(editedCategory._id, updatedData)).then(() => {
+      dispatch(getCategory()).then(() => {
+        dispatch(getContent());
+        setIsEditModalOpen(false);
+      });
+    });
+  };
+
   return (
     <>
       <Box
@@ -104,7 +144,7 @@ const ManageCategory = ({ filterdata }) => {
                           color: "#fff",
                           marginBottom: "0.5rem",
                         }}
-                        onClick={()=>handledeleteCategory(item._id)}
+                        onClick={() => handledeleteCategory(item._id)}
                       >
                         <DeleteIcon />
                         <Typography>Delete</Typography>
@@ -116,6 +156,7 @@ const ManageCategory = ({ filterdata }) => {
                           color: "#fff",
                           marginBottom: "0.5rem",
                         }}
+                        onClick={() => handleEditClick(item)}
                       >
                         <EditIcon />
                         <Typography>Edit</Typography>
@@ -142,7 +183,7 @@ const ManageCategory = ({ filterdata }) => {
                           onClick={() => handleupdateCategory(item._id, true)}
                         >
                           <VisibilityOffIcon />
-                          <Typography>able</Typography>
+                          <Typography>Enable</Typography>
                         </IconButton>
                       )}
                     </Box>
@@ -150,9 +191,18 @@ const ManageCategory = ({ filterdata }) => {
                 </TableRow>
               ))}
             </TableBody>
+            
           </Table>
         </TableContainer>
       </Box>
+      <ModalComponent
+        isOpen={isEditModalOpen}
+        onClose={() => setIsEditModalOpen(false)}
+        editedCategory={editedCategory}
+        defaultValues={defaultValues}
+        setDefaultValues={setDefaultValues}
+        handleSaveChanges={handleSaveChanges}
+      />
     </>
   );
 };
