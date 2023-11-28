@@ -70,7 +70,7 @@ const CategoryModal = ({ currentPath }) => {
           <br />
           <label>Description</label>
           <br />
-          <input
+          <textarea
             type="text"
             name="description"
             value={Category.description}

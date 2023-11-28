@@ -16,21 +16,19 @@ import EditIcon from "@mui/icons-material/Edit";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useDispatch } from "react-redux";
 import ModalComponent from "../Modal/Editshayari&quotes"; 
-import {
-  deleteCategory,
-  getCategory,
-  updateCategory,
-} from "../../redux/action/categoryAction";
+import {deleteCategory,getCategory,updateCategory,} from "../../redux/action/categoryAction";
 import { getContent } from "../../redux/action/ContentAction";
+import { BasicContext } from "../../context/BasicProvider";
+import { useContext } from "react";
+
 const ManageCategory = ({ filterdata }) => {
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [editedCategory, setEditedCategory] = useState({});
+  const { isEditModalOpen, setIsEditModalOpen,editedCategory, setEditedCategory } =
+  useContext(BasicContext);
   const [defaultValues, setDefaultValues] = useState({
     name: "",
     description: "",
     Image:"" ,
    });
-
   const tableCellStyle = {
     border: "2px solid #000",
     padding: "1rem",
@@ -75,9 +73,7 @@ const ManageCategory = ({ filterdata }) => {
       name: defaultValues.name,
       description: defaultValues.description,
       image:defaultValues.Image,
-
     };
-
     dispatch(updateCategory(editedCategory._id, updatedData)).then(() => {
       dispatch(getCategory()).then(() => {
         dispatch(getContent());

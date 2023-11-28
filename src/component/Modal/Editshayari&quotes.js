@@ -9,9 +9,10 @@ const EditModal = ({
   setDefaultValues,
   handleSaveChanges,
 }) => {
-  
+
   return (
-    <Modal show={isOpen}
+    <Modal
+      show={isOpen}
       onHide={onClose}
       aria-labelledby="contained-modal-title-vcenter"
       centered>
@@ -19,7 +20,7 @@ const EditModal = ({
         <Modal.Title>Edit Category</Modal.Title>
       </Modal.Header>
       <Modal.Body> <br />
-        <label>Enter Name:</label> <br />
+        <label> Enter Name: </label> <br />
         <input style={{
           width: "100%",
           border: "1px solid #7E7E7E",
@@ -36,7 +37,7 @@ const EditModal = ({
         /> <br />
         <br />
         <label>Description:</label><br />
-        <input
+        <textarea
           type="text"
           style={{
             width: "100%",
@@ -62,7 +63,7 @@ const EditModal = ({
               reader.onloadend = () => {
                 setDefaultValues((prevValues) => ({
                   ...prevValues,
-                  Image: reader.result,
+                  image: reader.result,
                 }));
               };
               reader.readAsDataURL(selectedFile);
