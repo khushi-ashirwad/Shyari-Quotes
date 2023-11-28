@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import {
   Table,
   TableCell,
@@ -14,16 +14,17 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useDispatch } from "react-redux";
-import ModalComponent from "../Modal/Editshayari&quotes"; 
-import {deleteCategory,getCategory,updateCategory,} from "../../redux/action/categoryAction";
+import ModalComponent from "../Modal/Editshayari&quotes";
+import { deleteCategory, getCategory, updateCategory, } from "../../redux/action/categoryAction";
 import { getContent } from "../../redux/action/ContentAction";
 import { BasicContext } from "../../context/BasicProvider";
 import { useContext } from "react";
 
 const ManageCategory = ({ filterdata }) => {
-  const { isEditModalOpen, setIsEditModalOpen,editedCategory, setEditedCategory } =
-  useContext(BasicContext);
+  const { isEditModalOpen, setIsEditModalOpen, editedCategory, setEditedCategory } =
+    useContext(BasicContext);
   const [defaultValues, setDefaultValues] = useState({
     name: "",
     description: "",
@@ -176,7 +177,7 @@ const ManageCategory = ({ filterdata }) => {
                           }}
                           onClick={() => handleupdateCategory(item._id, true)}
                         >
-                          <VisibilityOffIcon />
+                          < VisibilityIcon />
                           <Typography>Enable</Typography>
                         </IconButton>
                       )}
@@ -185,7 +186,7 @@ const ManageCategory = ({ filterdata }) => {
                 </TableRow>
               ))}
             </TableBody>
-            
+
           </Table>
         </TableContainer>
       </Box>
