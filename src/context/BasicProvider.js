@@ -11,12 +11,18 @@ const Basicprovider = ({ children }) => {
     description: "",
   });
   const [file, setFile] = useState(null);
+  const [image,setImage] = useState({
+    name:'',
+    description:"",
+    category:'',
+    issensitive:''
+  })
   const [dataFetched, setDataFetched] = useState(false); 
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editedCategory, setEditedCategory] = useState({});
   return (
     <>
-      <BasicContext.Provider value={{ show, setShow, handleClose, handleShow,Category,setCategory,file,setFile,dataFetched,setDataFetched,isEditModalOpen, setIsEditModalOpen,editedCategory, setEditedCategory}}>
+      <BasicContext.Provider value={{ show, setShow, handleClose, handleShow,Category,setCategory,file,setFile,dataFetched,setDataFetched,isEditModalOpen, setIsEditModalOpen,editedCategory, setEditedCategory,image,setImage}}>
         {children}
       </BasicContext.Provider>
     </>
