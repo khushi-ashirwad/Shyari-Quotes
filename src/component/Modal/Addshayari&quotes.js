@@ -70,12 +70,12 @@ const Addshayariquotes = ({ currentPath }) => {
           >
             {currentPath === "/Quotes"
               ? currentvalue
-                  .filter((category) => category.type === "quotes")
+                  .filter((category) => category.type === "quotes" && category.isdisable===true)
                   .map((option) => (
                     <option value={option._id}>{option.name}</option>
                   ))
               : currentvalue
-                  .filter((category) => category.type === "shayari")
+                  .filter((category) => category.type === "shayari" && category.isdisable===true)
                   .map((option) => (
                     <option value={option._id}>{option.name}</option>
                   ))}
