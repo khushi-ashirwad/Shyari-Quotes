@@ -2,7 +2,7 @@ import React from "react";
 import { Grid, Typography, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import TitleHeader from "./TitleHeader";
-import Getcategory, { Getcontent } from "./Getcategory";
+import Getcategory, { GetImage, Getcontent } from "./Getcategory";
 
 const buttonStyle = {
   backgroundColor: "#fff",
@@ -20,11 +20,15 @@ const Dashboard = () => {
   };
   const categories = Getcategory();
   const content = Getcontent();
+  const image= GetImage();
   const filterquotecategory = categories.filter(
     (category) => category.type === "quotes"
   );
   const filteshayaricategory = categories.filter(
     (category) => category.type === "shayari"
+  );
+  const filteimagecategory = categories.filter(
+    (category) => category.type === "image"
   );
   const filterquotescontent = content.filter(
     (content) => content.category.type === "quotes"
@@ -32,6 +36,7 @@ const Dashboard = () => {
   const filtershayaricontent = content.filter(
     (content) => content.category.type === "shayari"
   );
+  
   const items = [
     {
       heading: filterquotescontent.length,
@@ -57,9 +62,9 @@ const Dashboard = () => {
       button: "Shayari category",
       path: "/Shayari Category",
     },
-    { heading: "543", content: " Image", button: "Image", path: "/Image" },
+    { heading: image.length, content: " Image", button: "Image", path: "/Image" },
     {
-      heading: "123",
+      heading: filteimagecategory.length,
       content: "Image Category  ",
       button: "Image Category",
       path: "/Image Category",

@@ -3,4 +3,5 @@ export const intialvalue = {
   error: null,
   category: [],
   quotescontent: [],
+  image:[]
 };

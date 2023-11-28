@@ -4,12 +4,11 @@ import { Modal, Button } from "react-bootstrap";
 const EditModal = ({
   isOpen,
   onClose,
-  editedCategory,
+
   defaultValues,
   setDefaultValues,
   handleSaveChanges,
 }) => {
-
   return (
     <Modal
       show={isOpen}
@@ -54,6 +53,7 @@ const EditModal = ({
         /> <br />
         <br />
         <label>Image:</label><br />
+        <img src={defaultValues?.file || ""} height="100" weight="100" alt={defaultValues.name}/><br/>
         <input
           // type="file"
           // onChange={(e) => {
@@ -70,11 +70,10 @@ const EditModal = ({
           //   }
           // }}
           type="file"
-          value={defaultValues?.image || ""}
           onChange={(e) =>
             setDefaultValues((prevValues) => ({
               ...prevValues,
-              image: e.target.value,
+              file: e.target.files[0],
             }))
           }
         />

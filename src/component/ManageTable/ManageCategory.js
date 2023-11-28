@@ -28,8 +28,8 @@ const ManageCategory = ({ filterdata }) => {
   const [defaultValues, setDefaultValues] = useState({
     name: "",
     description: "",
-    image: "",
-  });
+    file:null ,
+   });
   const tableCellStyle = {
     border: "2px solid #000",
     padding: "1rem",
@@ -39,7 +39,6 @@ const ManageCategory = ({ filterdata }) => {
   };
 
   const dispatch = useDispatch();
-
   const handleupdateCategory = (id, value) => {
     const data = {
       isdisable: value,
@@ -64,18 +63,17 @@ const ManageCategory = ({ filterdata }) => {
     setDefaultValues({
       name: item.name,
       description: item.description,
-      image: item.image
+      file:item.file
     });
     setIsEditModalOpen(true);
   };
 
   const handleSaveChanges = () => {
-    const updatedData = {
-      name: defaultValues.name,
-      description: defaultValues.description,
-      image: defaultValues.image,
-    };
-    dispatch(updateCategory(editedCategory._id, updatedData)).then(() => {
+  const formdate = new FormData();
+  formdate.append("name",defaultValues.name);
+  formdate.append("description",defaultValues.description)
+  formdate.append("file",defaultValues.file)
+    dispatch(updateCategory(editedCategory._id,formdate)).then(() => {
       dispatch(getCategory()).then(() => {
         dispatch(getContent());
         setIsEditModalOpen(false);

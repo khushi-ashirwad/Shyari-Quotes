@@ -1,12 +1,15 @@
-import React from 'react'
-import { Box } from '@mui/material';
-import TitleHeader from '../Global/TitleHeader';
-import { categorydata } from "../../data/QuoteCategory";
-import Imagemanage from '../ManageTable/image';
+import React from "react";
+import { Box } from "@mui/material";
+import TitleHeader from "../Global/TitleHeader";
+import Imagemanage from "../ManageTable/image";
 import "../../Style/Sidebar.css";
 import { useContext } from "react";
 import { BasicContext } from "../../context/BasicProvider";
 import ImageModal from "../Modal/ImageModal" ; 
+import { useEffect } from "react";
+import { useDispatch} from "react-redux";
+import { getImage } from "../../redux/action/ImageAction";
+import { GetImage } from "../Global/Getcategory";
 
 const Image = () => {
   const buttonStyle = {
@@ -24,17 +27,24 @@ const Image = () => {
     padding: "1rem",
     marginTop: "-3rem",
   };
-  const { show, handleClose, handleShow } = useContext(BasicContext);
+  const { show, handleClose, handleShow, dataFetched, setDataFetched } =
+    useContext(BasicContext);
+  const dispatch = useDispatch();
+  const currentimage = GetImage();
+  useEffect(() => {
+    dispatch(getImage());
+    setDataFetched(false);
+  }, [dispatch, dataFetched, setDataFetched]);
 
   return (
-    <Box sx={{ padding: "5rem 1rem 3rem" }}>
+    <Box   className="full-screen"  sx={{ padding: "5rem 1rem 3rem" }}>
       <TitleHeader title="Image" />
       <Box style={containerStyle}>
         <button style={buttonStyle} onClick={handleShow}>
           Add Image
         </button>
       </Box>
-      <Imagemanage categorydata={categorydata} />
+      <Imagemanage imageData={currentimage} />
       {show && <ImageModal handleClose={handleClose} />}
     </Box>
   );
