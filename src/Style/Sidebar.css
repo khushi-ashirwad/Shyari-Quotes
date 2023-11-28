@@ -2,34 +2,34 @@
   --main-bg-color: linear-gradient(131deg, #59167C 8.87%, #C1A4E9 73.32%);
   --light-bg-color: #C1A4E9;
 }
+
 .sidebar {
   background: var(--main-bg-color);
   color: #fff;
   overflow-y: auto;
   height: 100vh;
   padding-left: 0.2rem;
-
 }
+
 .sidebar-menu.active {
   background: var(--light-bg-color);
   border-radius: 4px;
-  color:#723997;
+  color: #723997;
   font-size: 1rem;
   font-weight: 500;
-  margin-left: 0.2rem;
   display: flex;
+  padding: 0.5rem;
 
 }
+
 .sidebar-menu {
   display: flex;
   align-items: center;
-  padding: 15px;
+  padding: 1.5rem 0rem 0 0.5rem;
   color: #fff;
   font-size: 1rem;
   font-weight: 400;
   text-decoration: none;
-  transition: background-color 0.3s ease;
-   
 }
 
 .bars {
@@ -37,9 +37,11 @@
   font-size: 1.5rem;
   color: #fff;
 }
- .icon{
+
+.icon {
   font-size: 22px;
-} 
+}
+
 /* dasborad start */
 .dashboardbox {
   text-align: center;
@@ -49,6 +51,7 @@
   color: #fff;
   border-radius: 0.5rem;
 }
+
 /* dasborad end */
 
 .full-screen {
@@ -58,3 +61,26 @@
   overflow-Y: scroll;
 }
 
+label {
+  font-size: 1rem;
+  padding-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.submenu {
+  text-decoration: none;
+  color: #fff;
+  display: flex;
+  padding: 0.5rem 0.5rem 0.5rem 0.1rem;
+  color: #fff;
+  background-color: transparent;
+  display: flex;
+  right: 2rem;
+  align-items: center;
+  border-radius: 0.5rem;
+}
+
+.submenu.active {
+  color: white;
+  background-color: var(--light-bg-color, #C1A4E9);
+}
