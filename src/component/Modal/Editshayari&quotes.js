@@ -37,7 +37,7 @@ const EditModal = ({
         /> <br />
         <br />
         <label>Description:</label><br />
-        <textarea
+        <input
           type="text"
           style={{
             width: "100%",
@@ -55,20 +55,28 @@ const EditModal = ({
         <br />
         <label>Image:</label><br />
         <input
+          // type="file"
+          // onChange={(e) => {
+          //   const selectedFile = e.target.files[0];
+          //   if (selectedFile) {
+          //     const reader = new FileReader();
+          //     reader.onloadend = () => {
+          //       setDefaultValues((prevValues) => ({
+          //         ...prevValues,
+          //         image: reader.result,
+          //       }));
+          //     };
+          //     reader.readAsDataURL(selectedFile);
+          //   }
+          // }}
           type="file"
-          onChange={(e) => {
-            const selectedFile = e.target.files[0];
-            if (selectedFile) {
-              const reader = new FileReader();
-              reader.onloadend = () => {
-                setDefaultValues((prevValues) => ({
-                  ...prevValues,
-                  image: reader.result,
-                }));
-              };
-              reader.readAsDataURL(selectedFile);
-            }
-          }}
+          value={defaultValues?.image || ""}
+          onChange={(e) =>
+            setDefaultValues((prevValues) => ({
+              ...prevValues,
+              image: e.target.value,
+            }))
+          }
         />
 
       </Modal.Body>

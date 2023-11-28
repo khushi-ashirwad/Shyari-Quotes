@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import {
   Table,
   TableCell,
@@ -14,21 +14,22 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useDispatch } from "react-redux";
-import ModalComponent from "../Modal/Editshayari&quotes"; 
-import {deleteCategory,getCategory,updateCategory,} from "../../redux/action/categoryAction";
+import ModalComponent from "../Modal/Editshayari&quotes";
+import { deleteCategory, getCategory, updateCategory, } from "../../redux/action/categoryAction";
 import { getContent } from "../../redux/action/ContentAction";
 import { BasicContext } from "../../context/BasicProvider";
 import { useContext } from "react";
 
 const ManageCategory = ({ filterdata }) => {
-  const { isEditModalOpen, setIsEditModalOpen,editedCategory, setEditedCategory } =
-  useContext(BasicContext);
+  const { isEditModalOpen, setIsEditModalOpen, editedCategory, setEditedCategory } =
+    useContext(BasicContext);
   const [defaultValues, setDefaultValues] = useState({
     name: "",
     description: "",
-    Image:"" ,
-   });
+    image: "",
+  });
   const tableCellStyle = {
     border: "2px solid #000",
     padding: "1rem",
@@ -63,7 +64,7 @@ const ManageCategory = ({ filterdata }) => {
     setDefaultValues({
       name: item.name,
       description: item.description,
-      image:item.Image
+      image: item.image
     });
     setIsEditModalOpen(true);
   };
@@ -72,7 +73,7 @@ const ManageCategory = ({ filterdata }) => {
     const updatedData = {
       name: defaultValues.name,
       description: defaultValues.description,
-      image:defaultValues.Image,
+      image: defaultValues.image,
     };
     dispatch(updateCategory(editedCategory._id, updatedData)).then(() => {
       dispatch(getCategory()).then(() => {
@@ -178,7 +179,7 @@ const ManageCategory = ({ filterdata }) => {
                           }}
                           onClick={() => handleupdateCategory(item._id, true)}
                         >
-                          <VisibilityOffIcon />
+                          < VisibilityIcon />
                           <Typography>Enable</Typography>
                         </IconButton>
                       )}
@@ -187,7 +188,7 @@ const ManageCategory = ({ filterdata }) => {
                 </TableRow>
               ))}
             </TableBody>
-            
+
           </Table>
         </TableContainer>
       </Box>
