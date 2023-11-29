@@ -26,8 +26,6 @@ const Shayari = () => {
     marginTop: "-3.5rem",
   };
   const currentPath = window.location.pathname;
-  const content = Getcontent();
-  const filtercontent=content.filter(content=>content.category.type==="shayari");
   const dispatch = useDispatch();
   useEffect(() => {
     if (!dataFetched) {
@@ -35,6 +33,8 @@ const Shayari = () => {
       setDataFetched(true);
     }
   }, [dispatch, dataFetched, setDataFetched]);
+  const content = Getcontent();
+  const filtercontent=content.filter(content=>content.category.type==="shayari");
   return (
     <Box
       className="full-screen"

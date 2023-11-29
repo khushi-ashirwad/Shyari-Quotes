@@ -30,8 +30,6 @@ const Shayaricategory = () => {
 const {handleShow,dataFetched,setDataFetched} = useContext(BasicContext)
 const currentPath = window.location.pathname;
 const dispatch = useDispatch();
-const categories = Getcategory();
-const filterShayari=categories.filter(category=>category.type==="shayari");
 
 useEffect(() => {
   if (!dataFetched) {
@@ -39,6 +37,8 @@ useEffect(() => {
     setDataFetched(true);
   }
 }, [dispatch,dataFetched,setDataFetched]);
+const categories = Getcategory();
+const filterShayari=categories.filter(category=>category.type==="shayari");
 
   return (
     <>

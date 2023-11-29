@@ -5,9 +5,9 @@ import Imagemanage from "../ManageTable/image";
 import "../../Style/Sidebar.css";
 import { useContext } from "react";
 import { BasicContext } from "../../context/BasicProvider";
-import ImageModal from "../Modal/ImageModal" ; 
+import ImageModal from "../Modal/ImageModal";
 import { useEffect } from "react";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { getImage } from "../../redux/action/ImageAction";
 import { GetImage } from "../Global/Getcategory";
 
@@ -30,14 +30,17 @@ const Image = () => {
   const { show, handleClose, handleShow, dataFetched, setDataFetched } =
     useContext(BasicContext);
   const dispatch = useDispatch();
-  const currentimage = GetImage();
   useEffect(() => {
-    dispatch(getImage());
-    setDataFetched(false);
+    if (!dataFetched) {
+      dispatch(getImage());
+      setDataFetched(false);
+    }
   }, [dispatch, dataFetched, setDataFetched]);
-
+ 
+  const currentimage = GetImage();
+  console.log("currentimage",currentimage);
   return (
-    <Box   className="full-screen"  sx={{ padding: "5rem 1rem 3rem" }}>
+    <Box className="full-screen" sx={{ padding: "5rem 1rem 3rem" }}>
       <TitleHeader title="Image" />
       <Box style={containerStyle}>
         <button style={buttonStyle} onClick={handleShow}>
@@ -48,6 +51,6 @@ const Image = () => {
       {show && <ImageModal handleClose={handleClose} />}
     </Box>
   );
-}
+};
 
 export default Image;

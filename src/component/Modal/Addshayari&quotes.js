@@ -18,7 +18,7 @@ const Addshayariquotes = ({ currentPath }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!dataFetched) {
+    if (dataFetched) {
       dispatch(getCategory());
       setDataFetched(true);
     }
@@ -36,11 +36,11 @@ const Addshayariquotes = ({ currentPath }) => {
       content: adddata.content,
       category: adddata.category,
     };
-    console.log("data", data);
     dispatch(addContent(data)).then(()=>{
         setadddata({});dispatch(getContent())
     });
   };
+
   return (
     <>
       <Modal
@@ -68,6 +68,7 @@ const Addshayariquotes = ({ currentPath }) => {
             value={adddata.category}
             onChange={handlechnagecontent}
           >
+               <option>Select category</option>
             {currentPath === "/Quotes"
               ? currentvalue
                   .filter((category) => category.type === "quotes" && category.isdisable===true)

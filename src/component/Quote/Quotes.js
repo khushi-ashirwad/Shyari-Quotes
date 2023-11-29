@@ -27,8 +27,6 @@ const Quotes = () => {
     marginTop: "-3.5rem",
   };
   const currentPath = window.location.pathname;
-  const content = Getcontent();
-  const filtercontent=content.filter(content=>content.category.type==="quotes");
   const dispatch = useDispatch();
   useEffect(() => {
     if (!dataFetched) {
@@ -36,6 +34,9 @@ const Quotes = () => {
       setDataFetched(true);
     }
   }, [dispatch, dataFetched, setDataFetched]);
+  const content = Getcontent();
+  const filtercontent=content.filter(content=>content.category.type==="quotes");
+ 
   return (
     <Box
       className="full-screen"

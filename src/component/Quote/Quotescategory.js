@@ -29,15 +29,14 @@ const QuoutesCategory = () => {
   const { handleShow ,dataFetched,setDataFetched} = useContext(BasicContext);
   const currentPath = window.location.pathname;
   const dispatch = useDispatch();
-  const categories = Getcategory();
-  const filterQuotes=categories.filter(category=>category.type==="quotes");
-
   useEffect(() => {
     if (!dataFetched) {
       dispatch(getCategory());
       setDataFetched(true);
     }
   }, [dispatch,dataFetched,setDataFetched]);
+  const categories = Getcategory();
+  const filterQuotes=categories.filter(category=>category.type==="quotes");
   
   return (
     <Box

@@ -28,7 +28,7 @@ const ModalContentComponent = ({
               background: "#EDEFF5",
             }}
               type="text"
-              value={defaultValues. categoryId}
+              value={defaultValues.categoryId}
               onChange={(e) =>
                 setDefaultValues({ ...defaultValues,  categoryId: e.target.value })
               }
