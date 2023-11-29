@@ -47,7 +47,7 @@ const Manage = ({ content }) => {
   const handleSaveChanges = () => {
     const data = {
       content: defaultValues.content,
-      category: defaultValues.categoryId,
+      categoryId: defaultValues.categoryId,
     };
 
     dispatch(updateContent(editedContent._id, data)).then(() => {
