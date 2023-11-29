@@ -15,7 +15,6 @@ export const addContent = (data) => async (dispatch) => {
 export const getContent = () => async (dispatch) => {
   try {
     const response = await axios.get(url + "/content/get");
-    console.log("action call",response.data);
     dispatch({ type: GET_CONTENT, payload: response.data });
   } catch (error) {
     dispatch({ type: FAILER, payload: error });

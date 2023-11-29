@@ -38,7 +38,7 @@ const Image = () => {
   }, [dispatch, dataFetched, setDataFetched]);
  
   const currentimage = GetImage();
-  console.log("currentimage",currentimage);
+
   return (
     <Box className="full-screen" sx={{ padding: "5rem 1rem 3rem" }}>
       <TitleHeader title="Image" />
