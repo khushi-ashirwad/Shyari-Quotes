@@ -19,10 +19,12 @@ const Basicprovider = ({ children }) => {
   })
   const [dataFetched, setDataFetched] = useState(false); 
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [editedContent, setEditedContent] = useState({});
   const [editedCategory, setEditedCategory] = useState({});
+
   return (
     <>
-      <BasicContext.Provider value={{ show, setShow, handleClose, handleShow,Category,setCategory,file,setFile,dataFetched,setDataFetched,isEditModalOpen, setIsEditModalOpen,editedCategory, setEditedCategory,image,setImage}}>
+      <BasicContext.Provider value={{ show, setShow, handleClose, handleShow,Category,setCategory,file,setFile,dataFetched,setDataFetched,isEditModalOpen, setIsEditModalOpen,editedCategory, setEditedCategory,image,setImage,editedContent, setEditedContent}}>
         {children}
       </BasicContext.Provider>
     </>

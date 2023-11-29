@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState,useContext } from "react";
 import {
   TableBody,
   TableCell,
@@ -14,9 +14,16 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { FiEdit } from "react-icons/fi";
 import { PiTable } from "react-icons/pi";
 import { useDispatch } from "react-redux";
-import { deleteContent, getContent } from "../../redux/action/ContentAction";
-
+import { deleteContent, getContent, updateContent } from "../../redux/action/ContentAction";
+import ModalContentComponent from "../Modal/ManageModal";
+import { BasicContext } from "../../context/BasicProvider";
 const Manage = ({ content }) => {
+  const { isEditModalOpen, setIsEditModalOpen, editedContent, setEditedContent } =
+    useContext(BasicContext);
+  const [defaultValues, setDefaultValues] = useState({
+    content: "",
+    categoryId: "",
+  });
   const tableCellStyle = {
     border: "1px solid #ccc",
     padding: "15px",
@@ -26,6 +33,28 @@ const Manage = ({ content }) => {
   };
   const dispatch = useDispatch();
   const currentPath = window.location.pathname;
+
+
+  const handleEditClick = (item) => {
+    console.log("Edit button clicked:", item);
+    setEditedContent(item);
+    setDefaultValues({
+      content: item.content,
+      categoryId: item.category.name,
+    });
+    setIsEditModalOpen(true);
+  };
+  const handleSaveChanges = () => {
+    const data = {
+      content: defaultValues.content,
+      categoryId: defaultValues.categoryId,
+    };
+
+    dispatch(updateContent(editedContent._id, data)).then(() => {
+      dispatch(getContent());
+      setIsEditModalOpen(false);
+    });
+  };
   const handledeleteContent = (id) => {
     dispatch(deleteContent(id)).then(() => dispatch(getContent()));
   };
@@ -70,7 +99,7 @@ const Manage = ({ content }) => {
                   {contantData.category.name}
                 </TableCell>
                 <TableCell style={tableCellStyle}>
-                  <IconButton aria-label="edit" color="primary">
+                  <IconButton aria-label="edit" color="primary" onClick={() => handleEditClick(contantData)}>
                     <FiEdit />
                   </IconButton>
                   <IconButton
@@ -85,6 +114,14 @@ const Manage = ({ content }) => {
             ))}
           </TableBody>
         </Table>
+        <ModalContentComponent
+          isOpen={isEditModalOpen}
+          onClose={() => setIsEditModalOpen(false)}
+          editedContent={editedContent}
+          defaultValues={defaultValues}
+          setDefaultValues={setDefaultValues}
+          handleSaveChanges={handleSaveChanges}
+        />
       </TableContainer>
     </>
   );

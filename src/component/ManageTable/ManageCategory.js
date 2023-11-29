@@ -23,7 +23,7 @@ import { BasicContext } from "../../context/BasicProvider";
 import { useContext } from "react";
 
 const ManageCategory = ({ filterdata }) => {
-  const { isEditModalOpen, setIsEditModalOpen, editedCategory, setEditedCategory } =
+  const { isEditModalOpen, setIsEditModalOpen, editedCategory,  setEditedCategory } =
     useContext(BasicContext);
   const [defaultValues, setDefaultValues] = useState({
     name: "",
