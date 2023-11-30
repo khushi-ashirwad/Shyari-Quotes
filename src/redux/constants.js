@@ -9,3 +9,4 @@ export const DELETE_CONTENT = "DELETE_CONTENT";
 export const ADD_IMAGE="ADD_IMAGE";
 export const GET_IMAGE="GET_IMAGE"
 export const UPDATE_CONTENT = 'UPDATE_CONTENT';
+export const DAILY_CONTENT="DAILY_CONTENT";

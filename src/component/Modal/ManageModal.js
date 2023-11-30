@@ -40,8 +40,8 @@ const ModalContentComponent = ({
       </Modal.Header>
       <Modal.Body>
         <Form>
-          <Form.Group controlId="category">
-            <Form.Label>Category Name</Form.Label>
+        <Form.Group controlId="content">
+            <Form.Label> Category Name</Form.Label>
             <select
               style={{
                 width: "100%",

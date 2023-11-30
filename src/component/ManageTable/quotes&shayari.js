@@ -85,7 +85,7 @@ const Manage = ({ content }) => {
         <Table style={{ minWidth: "500px" }}>
           <TableHead sx={{ backgroundColor: "#F8F2FF" }}>
             <TableRow>
-              <TableCell style={tableCellheadingStyle}>
+              <TableCell style={tableCellheadingStyle} sx={{width:"60rem"}}>
                 {currentPath === "/Quotes" ? "Quotes" : "Shayari"}
               </TableCell>
               <TableCell style={tableCellheadingStyle}>Category</TableCell>
