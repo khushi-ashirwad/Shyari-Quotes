@@ -7,7 +7,7 @@ const TitleHeader = ({title}) => {
     <Typography
         sx={{
           fontSize: "1.5rem",
-          paddingBottom:"2rem",
+          paddingBottom:"1rem",
           fontWeight:500
         }}
       >

@@ -42,7 +42,7 @@ const QuoutesCategory = () => {
   return (
     <Box
       className="full-screen"
-      sx={{ padding: "5rem 1rem 3rem", justifyContent: "end" }}
+      sx={{ padding: "2rem 1rem 3rem", justifyContent: "end" }}
     >
       <TitleHeader title="Manage Quotes Category" />
       <Box style={containerStyle}>

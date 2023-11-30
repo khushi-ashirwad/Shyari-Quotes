@@ -1,4 +1,4 @@
-import React, { useState, Component } from "react";
+import React, { useState} from "react";
 import { Box, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -29,7 +29,7 @@ const TodayShayariQuotes = () => {
   const currentPath = window.location.pathname;
   return (
     <>
-      <Box sx={{ padding: "5rem 1rem 3rem" }}>
+      <Box sx={{ padding: "2rem 1rem 3rem" }}>
         <Typography variant="h5"
           sx={{ fontWeight: "500" }}>
           {currentPath === "/Today%20Quotes" ? "Today Quotess" : "Today Shayari"}

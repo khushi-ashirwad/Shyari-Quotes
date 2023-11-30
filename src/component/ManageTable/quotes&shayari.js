@@ -22,34 +22,42 @@ const Manage = ({ content }) => {
     useContext(BasicContext);
   const [defaultValues, setDefaultValues] = useState({
     content: "",
-    categoryId: "",
+    category: "",
   });
-  const tableCellStyle = {
+  const tableCellheadingStyle={
     border: "1px solid #ccc",
     padding: "15px",
     textAlign: "center",
-    fontSize: "18px",
+    fontSize: "21px",
     fontWeight: "500",
+  }
+  const tableCellStyle = {
+    border: "1px solid #ccc",
+    padding: "2px",
+    textAlign: "center",
+    fontSize: "18px",
+    fontWeight: "400",
   };
   const dispatch = useDispatch();
   const currentPath = window.location.pathname;
-
-
   const handleEditClick = (item) => {
     console.log("Edit button clicked:", item);
     setEditedContent(item);
     setDefaultValues({
       content: item.content,
-      categoryId: item.category.name,
+      category: item.category.name, 
     });
+    
     setIsEditModalOpen(true);
   };
+  
   const handleSaveChanges = () => {
+   
     const data = {
       content: defaultValues.content,
-      categoryId: defaultValues.categoryId,
+      category: defaultValues.category,
     };
-
+  
     dispatch(updateContent(editedContent._id, data)).then(() => {
       dispatch(getContent());
       setIsEditModalOpen(false);
@@ -77,11 +85,11 @@ const Manage = ({ content }) => {
         <Table style={{ minWidth: "500px" }}>
           <TableHead sx={{ backgroundColor: "#F8F2FF" }}>
             <TableRow>
-              <TableCell style={tableCellStyle}>
+              <TableCell style={tableCellheadingStyle}>
                 {currentPath === "/Quotes" ? "Quotes" : "Shayari"}
               </TableCell>
-              <TableCell style={tableCellStyle}>Category</TableCell>
-              <TableCell style={tableCellStyle}>Actions</TableCell>
+              <TableCell style={tableCellheadingStyle}>Category</TableCell>
+              <TableCell style={tableCellheadingStyle}>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
