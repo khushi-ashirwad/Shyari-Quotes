@@ -21,18 +21,21 @@ import { deleteCategory, getCategory, updateCategory, } from "../../redux/action
 import { getContent } from "../../redux/action/ContentAction";
 import { BasicContext } from "../../context/BasicProvider";
 import { useContext } from "react";
+import {
+  showSuccessAlert,
+  showCancelDataAlert,
+} from "../Global/Validation";
 
 const ManageCategory = ({ filterdata }) => {
-  const { isEditModalOpen, setIsEditModalOpen, editedCategory,  setEditedCategory } =
+  const { isEditModalOpen, setIsEditModalOpen, editedCategory, setEditedCategory } =
     useContext(BasicContext);
   const [defaultValues, setDefaultValues] = useState({
     name: "",
     description: "",
-    file:null ,
-   });
+    file: null,
+  });
   const tableCellStyle = {
     border: "2px solid #000",
-    padding: "1rem",
     textAlign: "center",
     fontSize: "1rem",
     fontWeight: "500",
@@ -63,17 +66,18 @@ const ManageCategory = ({ filterdata }) => {
     setDefaultValues({
       name: item.name,
       description: item.description,
-      file:item.file
+      file: item.file
     });
+
     setIsEditModalOpen(true);
   };
 
   const handleSaveChanges = () => {
-  const formdate = new FormData();
-  formdate.append("name",defaultValues.name);
-  formdate.append("description",defaultValues.description)
-  formdate.append("file",defaultValues.file)
-    dispatch(updateCategory(editedCategory._id,formdate)).then(() => {
+    const formdate = new FormData();
+    formdate.append("name", defaultValues.name);
+    formdate.append("description", defaultValues.description)
+    formdate.append("file", defaultValues.file)
+    dispatch(updateCategory(editedCategory._id, formdate)).then(() => {
       dispatch(getCategory()).then(() => {
         dispatch(getContent());
         setIsEditModalOpen(false);
@@ -93,7 +97,7 @@ const ManageCategory = ({ filterdata }) => {
           component={Paper}
           sx={{ overflowX: "auto", width: "100%" }}
         >
-          <Table style={{ minWidth: "500px" }}>
+          <Table style={{ minWidth: "500px", height: "0.5rem" }}>
             <TableHead>
               <TableRow>
                 <TableCell style={tableCellStyle}>Name</TableCell>
@@ -109,11 +113,11 @@ const ManageCategory = ({ filterdata }) => {
                   <TableCell style={tableCellStyle}>
                     {item.description}
                   </TableCell>
-                  <TableCell style={tableCellStyle}>
+                  <TableCell style={tableCellStyle} sx={{ width: "15%", height: "7.5rem" }}>
                     <img
                       src={item.file}
                       alt={item.name}
-                      style={{ width: "100px", height: "100px" }}
+                      style={{ width: "100%", height: "160%" }}
                     />
                   </TableCell>
 

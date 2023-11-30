@@ -2,10 +2,15 @@ import React, { useContext, useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { BasicContext } from "../../context/BasicProvider";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { getCategory } from "../../redux/action/categoryAction";
 import Getcategory from "../Global/Getcategory";
 import { addContent, getContent } from "../../redux/action/ContentAction";
+import {
+  showSuccessAlert,
+  showCancelDataAlert,
+  showCloseDataAlert
+} from "../Global/Validation";
 
 const Addshayariquotes = ({ currentPath }) => {
   const { show, handleClose, dataFetched, setDataFetched } =
@@ -22,7 +27,7 @@ const Addshayariquotes = ({ currentPath }) => {
       dispatch(getCategory());
       setDataFetched(true);
     }
-  }, [dispatch, dataFetched,setDataFetched]);
+  }, [dispatch, dataFetched, setDataFetched]);
 
   const handlechnagecontent = (e) => {
     setadddata({
@@ -32,13 +37,38 @@ const Addshayariquotes = ({ currentPath }) => {
   };
 
   const handlecontent = () => {
+    if (!adddata.content || !adddata.category) {
+      showCancelDataAlert("Please fill in all fields.");
+      return;
+    }
+
     const data = {
       content: adddata.content,
       category: adddata.category,
     };
-    dispatch(addContent(data)).then(()=>{
-        setadddata({});dispatch(getContent())
+
+    dispatch(addContent(data)).then(() => {
+      setadddata({});
+      dispatch(getContent());
+      showSuccessAlert("Content added successfully!");
     });
+  };
+
+  const handleSaveAndClose = () => {
+    if (!adddata.content || !adddata.category) {
+      showCancelDataAlert("Please fill in all fields.");
+      return;
+    }
+
+    handlecontent();
+    handleClose();
+  };
+  const handleUnsavedChanges = () => {
+    if (adddata.content || adddata.category) {
+      showCloseDataAlert("You have unsaved changes. Are you sure you want to close?", handleClose);
+    } else {
+      handleClose();
+    }
   };
 
   return (
@@ -107,7 +137,7 @@ const Addshayariquotes = ({ currentPath }) => {
               border: "none",
               padding: "0.5rem 2rem",
             }}
-            onClick={handleClose}
+            onClick={handleUnsavedChanges}
           >
             Close
           </Button>
@@ -117,10 +147,7 @@ const Addshayariquotes = ({ currentPath }) => {
               border: "none",
               padding: "0.5rem 2rem",
             }}
-            onClick={() => {
-              handleClose();
-              handlecontent();
-            }}
+            onClick={handleSaveAndClose}
           >
             Save
           </Button>

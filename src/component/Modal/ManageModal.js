@@ -62,7 +62,7 @@ const ModalContentComponent = ({
               ))}
             </select>
           </Form.Group>
-          <Form.Group controlId="content">
+          <Form.Group controlId="content"> 
             <Form.Label>{currentPath === "/Quotes" ? "Quotes" : "Shayari"}</Form.Label>
             <textarea
               style={{
