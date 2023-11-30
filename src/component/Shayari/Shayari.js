@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Box } from "@mui/material";
 import TitleHeader from "../Global/TitleHeader";
-import Manage from "../ManageTable/Manage";
+import Manage from "../ManageTable/quotes&shayari";
 import { BasicContext } from "../../context/BasicProvider";
 import Addshayariquotes from "../Modal/Addshayari&quotes";
 import { Getcontent } from "../Global/Getcategory";
@@ -39,7 +39,7 @@ const Shayari = () => {
     <Box
       className="full-screen"
       sx={{
-        padding: "5rem 1rem 3rem",
+        padding: "2rem 1rem 3rem",
         justifyContent: "center",
         alignItems: "center",
         borderRadius: "8px",

@@ -41,7 +41,7 @@ const Imagecategory=()=> {
   return (
     <Box
     className="full-screen" 
-    sx={{padding:"5rem 1rem 3rem"}}>
+    sx={{padding:"2rem 1rem 3rem"}}>
       <TitleHeader title="Manage Image "/>
           <Box style={containerStyle}>
         <button style={buttonStyle} onClick={handleShow}>

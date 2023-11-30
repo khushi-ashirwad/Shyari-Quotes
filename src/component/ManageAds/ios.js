@@ -14,7 +14,7 @@ const Ios = () => {
         borderRadius: "0rem"
     }
     return (
-        <Box sx={{ padding: "5rem 1rem 3rem" }}>
+        <Box sx={{ padding: "2rem 1rem 3rem" }}>
             <TitleHeader title="Mange Ads/Ios" />
             <Box style={{
                 display: 'block',
