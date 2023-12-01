@@ -1,14 +1,13 @@
-import React from "react";
+import React,{useContext,useEffect} from "react";
 import { Grid, Typography, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import TitleHeader from "./TitleHeader";
 import Getcategory, { GetImage, Getcontent } from "./Getcategory";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { getContent } from "../../redux/action/ContentAction";
 import { getCategory } from "../../redux/action/categoryAction";
-import { useContext } from "react";
 import { BasicContext } from "../../context/BasicProvider";
+import { useDispatch } from "react-redux";
+import { getImage } from "../../redux/action/ImageAction";
 
 const buttonStyle = {
   backgroundColor: "#fff",
@@ -30,6 +29,7 @@ const Dashboard = () => {
     if(!dataFetched){
     dispatch(getContent());
     dispatch(getCategory());
+    dispatch(getImage())
     setDataFetched(true)
     }
   },[ dataFetched])
