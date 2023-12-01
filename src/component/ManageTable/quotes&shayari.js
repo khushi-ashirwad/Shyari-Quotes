@@ -17,6 +17,11 @@ import { useDispatch } from "react-redux";
 import { deleteContent, getContent, updateContent } from "../../redux/action/ContentAction";
 import ModalContentComponent from "../Modal/ManageModal";
 import { BasicContext } from "../../context/BasicProvider";
+import {
+  showRemoveAlert2,
+  showDeleteDataAlert,
+  showSuccessAlert
+} from "../Global/Validation";
 const Manage = ({ content }) => {
   const { isEditModalOpen, setIsEditModalOpen, editedContent, setEditedContent } =
     useContext(BasicContext);
@@ -45,26 +50,39 @@ const Manage = ({ content }) => {
     setEditedContent(item);
     setDefaultValues({
       content: item.content,
-      category: item.category.name, 
+      category: item.category.name,
     });
-    
+
     setIsEditModalOpen(true);
   };
-  
+
   const handleSaveChanges = () => {
-   
-    const data = {
+    const updatedContent = {
       content: defaultValues.content,
       category: defaultValues.category,
     };
+
   
-    dispatch(updateContent(editedContent._id, data)).then(() => {
-      dispatch(getContent());
-      setIsEditModalOpen(false);
-    });
+    dispatch(updateContent(editedContent._id, updatedContent))
+      .then(() => {
+        dispatch(getContent());
+        setIsEditModalOpen(false);
+        showSuccessAlert(`${updatedContent.content} has been updated.`);
+        
+      })
+      .catch((error) => {
+        console.error("Error updating content:", error);
+        showRemoveAlert2(`${editedContent.content} has been deleted.`);
+      });
   };
+  
   const handledeleteContent = (id) => {
-    dispatch(deleteContent(id)).then(() => dispatch(getContent()));
+    showDeleteDataAlert("Please fill in all fields.", () => {
+      dispatch(deleteContent(id)).then(() => {
+        dispatch(getContent());
+        showRemoveAlert2(`${editedContent.content} has been deleted.`);
+      });
+    });
   };
   return (
     <>

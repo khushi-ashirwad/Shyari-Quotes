@@ -8,8 +8,6 @@ import Getcategory from "../Global/Getcategory";
 import { addContent, getContent } from "../../redux/action/ContentAction";
 import {
   showSuccessAlert,
-  showCancelDataAlert,
-  showCloseDataAlert
 } from "../Global/Validation";
 
 const Addshayariquotes = ({ currentPath }) => {
@@ -38,7 +36,6 @@ const Addshayariquotes = ({ currentPath }) => {
 
   const handlecontent = () => {
     if (!adddata.content || !adddata.category) {
-      showCancelDataAlert("Please fill in all fields.");
       return;
     }
 
@@ -56,7 +53,6 @@ const Addshayariquotes = ({ currentPath }) => {
 
   const handleSaveAndClose = () => {
     if (!adddata.content || !adddata.category) {
-      showCancelDataAlert("Please fill in all fields.");
       return;
     }
 
@@ -65,8 +61,7 @@ const Addshayariquotes = ({ currentPath }) => {
   };
   const handleUnsavedChanges = () => {
     if (adddata.content || adddata.category) {
-      showCloseDataAlert("You have unsaved changes. Are you sure you want to close?", handleClose);
-    } else {
+      } else {
       handleClose();
     }
   };
