@@ -42,7 +42,7 @@ const filterShayari=categories.filter(category=>category.type==="shayari");
 
   return (
     <>
-      <Box className="full-screen" sx={{ padding: "5rem 1rem 3rem" }}>
+      <Box className="full-screen" sx={{ padding: "2rem 1rem 3rem" }}>
         <TitleHeader title="Manage Shayari Category " />
         <Box style={containerStyle}>
           <button style={buttonStyle} onClick={handleShow}>Add Category</button>

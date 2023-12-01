@@ -40,7 +40,7 @@ const Image = () => {
   const currentimage = GetImage();
 
   return (
-    <Box className="full-screen" sx={{ padding: "5rem 1rem 3rem" }}>
+    <Box   className="full-screen"  sx={{ padding: "2rem 1rem 3rem" }}>
       <TitleHeader title="Image" />
       <Box style={containerStyle}>
         <button style={buttonStyle} onClick={handleShow}>

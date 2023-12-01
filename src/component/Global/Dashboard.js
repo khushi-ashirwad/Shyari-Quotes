@@ -93,7 +93,7 @@ const Dashboard = () => {
       sx={{
         maxHeight: "50rem",
         overflowY: "auto",
-        padding: "5rem 1rem 3rem",
+        padding: "2rem 1rem 3rem",
       }}
     >
       <TitleHeader title="Dashboard" />
