@@ -40,8 +40,8 @@ const ModalContentComponent = ({
       </Modal.Header>
       <Modal.Body>
         <Form>
-          <Form.Group controlId="category">
-            <Form.Label>Category Name</Form.Label>
+        <Form.Group controlId="content">
+            <Form.Label> Category Name</Form.Label>
             <select
               style={{
                 width: "100%",
@@ -62,7 +62,7 @@ const ModalContentComponent = ({
               ))}
             </select>
           </Form.Group>
-          <Form.Group controlId="content">
+          <Form.Group controlId="content"> 
             <Form.Label>{currentPath === "/Quotes" ? "Quotes" : "Shayari"}</Form.Label>
             <textarea
               style={{

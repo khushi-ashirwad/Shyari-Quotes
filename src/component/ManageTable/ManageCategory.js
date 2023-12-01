@@ -21,18 +21,22 @@ import { deleteCategory, getCategory, updateCategory, } from "../../redux/action
 import { getContent } from "../../redux/action/ContentAction";
 import { BasicContext } from "../../context/BasicProvider";
 import { useContext } from "react";
+import {
+  showSuccessAlert,
+  showRemoveAlert2,
+  showDeleteDataAlert,
+} from "../Global/Validation";
 
 const ManageCategory = ({ filterdata }) => {
-  const { isEditModalOpen, setIsEditModalOpen, editedCategory,  setEditedCategory } =
+  const { isEditModalOpen, setIsEditModalOpen, editedCategory, setEditedCategory } =
     useContext(BasicContext);
   const [defaultValues, setDefaultValues] = useState({
     name: "",
     description: "",
-    file:null ,
-   });
+    file: null,
+  });
   const tableCellStyle = {
     border: "2px solid #000",
-    padding: "1rem",
     textAlign: "center",
     fontSize: "1rem",
     fontWeight: "500",
@@ -43,18 +47,31 @@ const ManageCategory = ({ filterdata }) => {
     const data = {
       isdisable: value,
     };
-    dispatch(updateCategory(id, data)).then(() => {
-      dispatch(getCategory()).then(() => {
-        dispatch(getContent());
+
+    dispatch(updateCategory(id, data))
+      .then(() => {
+        dispatch(getCategory()).then(() => {
+          dispatch(getContent());
+          // showSuccessAlert('your data has been Disable');
+        });
+      })
+      .catch((error) => {
+        console.error('Error updating category:', error);
       });
-    });
   };
 
   const handledeleteCategory = (id) => {
-    dispatch(deleteCategory(id)).then(() => {
-      dispatch(getCategory()).then(() => {
-        dispatch(getContent());
-      });
+    showDeleteDataAlert('Are you sure you want to delete this category?', () => {
+      dispatch(deleteCategory(id))
+        .then(() => {
+          dispatch(getCategory()).then(() => {
+            dispatch(getContent());
+            showRemoveAlert2('Category has been deleted.');
+          });
+        })
+        .catch((error) => {
+          console.error('Error deleting category:', error);
+        });
     });
   };
 
@@ -63,24 +80,30 @@ const ManageCategory = ({ filterdata }) => {
     setDefaultValues({
       name: item.name,
       description: item.description,
-      file:item.file
+      file: item.file,
     });
+
     setIsEditModalOpen(true);
   };
 
   const handleSaveChanges = () => {
-  const formdate = new FormData();
-  formdate.append("name",defaultValues.name);
-  formdate.append("description",defaultValues.description)
-  formdate.append("file",defaultValues.file)
-    dispatch(updateCategory(editedCategory._id,formdate)).then(() => {
-      dispatch(getCategory()).then(() => {
-        dispatch(getContent());
-        setIsEditModalOpen(false);
-      });
-    });
-  };
+    const formData = new FormData();
+    formData.append('name', defaultValues.name);
+    formData.append('description', defaultValues.description);
+    formData.append('file', defaultValues.file);
 
+    dispatch(updateCategory(editedCategory._id, formData))
+      .then(() => {
+        dispatch(getCategory()).then(() => {
+          dispatch(getContent());
+          setIsEditModalOpen(false);
+          showSuccessAlert('Category has been updated.');
+        });
+      })
+      .catch((error) => {
+        console.error('Error updating category:', error);
+      });
+  };
   return (
     <>
       <Box
@@ -93,7 +116,7 @@ const ManageCategory = ({ filterdata }) => {
           component={Paper}
           sx={{ overflowX: "auto", width: "100%" }}
         >
-          <Table style={{ minWidth: "500px" }}>
+          <Table style={{ minWidth: "500px", height: "0.5rem" }}>
             <TableHead>
               <TableRow>
                 <TableCell style={tableCellStyle}>Name</TableCell>
@@ -109,11 +132,11 @@ const ManageCategory = ({ filterdata }) => {
                   <TableCell style={tableCellStyle}>
                     {item.description}
                   </TableCell>
-                  <TableCell style={tableCellStyle}>
+                  <TableCell style={tableCellStyle} sx={{ width: "15%", height: "7.5rem" }}>
                     <img
                       src={item.file}
                       alt={item.name}
-                      style={{ width: "100px", height: "100px" }}
+                      style={{ width: "100%", height: "160%" }}
                     />
                   </TableCell>
 

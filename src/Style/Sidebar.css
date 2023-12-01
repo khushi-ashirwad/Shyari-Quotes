@@ -58,7 +58,7 @@
   height: 100%;
   width: 100%;
   max-Height: 55rem;
-  overflow-Y: scroll;
+  overflow-y: auto;
 }
 
 label {
@@ -70,17 +70,17 @@ label {
 .submenu {
   text-decoration: none;
   color: #fff;
-  display: flex;
-  padding: 0.5rem 0.5rem 0.5rem 0.1rem;
+  padding: 0.5rem 0rem 0.5rem 0.7rem;
   color: #fff;
   background-color: transparent;
   display: flex;
-  right: 2rem;
   align-items: center;
   border-radius: 0.5rem;
+  position: relative;
+  right: 0.5rem;
 }
 
 .submenu.active {
-  color: white;
+  color: #723997;
   background-color: var(--light-bg-color, #C1A4E9);
 }

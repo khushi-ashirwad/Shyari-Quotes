@@ -2,10 +2,13 @@ import React, { useContext, useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { BasicContext } from "../../context/BasicProvider";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { getCategory } from "../../redux/action/categoryAction";
 import Getcategory from "../Global/Getcategory";
 import { addContent, getContent } from "../../redux/action/ContentAction";
+import {
+  showSuccessAlert,
+} from "../Global/Validation";
 
 const Addshayariquotes = ({ currentPath }) => {
   const { show, handleClose, dataFetched, setDataFetched } =
@@ -18,11 +21,11 @@ const Addshayariquotes = ({ currentPath }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!dataFetched) {
+    if (dataFetched) {
       dispatch(getCategory());
       setDataFetched(true);
     }
-  }, [dispatch, dataFetched,setDataFetched]);
+  }, [dispatch, dataFetched, setDataFetched]);
 
   const handlechnagecontent = (e) => {
     setadddata({
@@ -32,15 +35,37 @@ const Addshayariquotes = ({ currentPath }) => {
   };
 
   const handlecontent = () => {
+    if (!adddata.content || !adddata.category) {
+      return;
+    }
+
     const data = {
       content: adddata.content,
       category: adddata.category,
     };
-    console.log("data", data);
-    dispatch(addContent(data)).then(()=>{
-        setadddata({});dispatch(getContent())
+
+    dispatch(addContent(data)).then(() => {
+      setadddata({});
+      dispatch(getContent());
+      showSuccessAlert("Content added successfully!");
     });
   };
+
+  const handleSaveAndClose = () => {
+    if (!adddata.content || !adddata.category) {
+      return;
+    }
+
+    handlecontent();
+    handleClose();
+  };
+  const handleUnsavedChanges = () => {
+    if (adddata.content || adddata.category) {
+      } else {
+      handleClose();
+    }
+  };
+
   return (
     <>
       <Modal
@@ -68,6 +93,7 @@ const Addshayariquotes = ({ currentPath }) => {
             value={adddata.category}
             onChange={handlechnagecontent}
           >
+               <option>Select category</option>
             {currentPath === "/Quotes"
               ? currentvalue
                   .filter((category) => category.type === "quotes" && category.isdisable===true)
@@ -106,7 +132,7 @@ const Addshayariquotes = ({ currentPath }) => {
               border: "none",
               padding: "0.5rem 2rem",
             }}
-            onClick={handleClose}
+            onClick={handleUnsavedChanges}
           >
             Close
           </Button>
@@ -116,10 +142,7 @@ const Addshayariquotes = ({ currentPath }) => {
               border: "none",
               padding: "0.5rem 2rem",
             }}
-            onClick={() => {
-              handleClose();
-              handlecontent();
-            }}
+            onClick={handleSaveAndClose}
           >
             Save
           </Button>

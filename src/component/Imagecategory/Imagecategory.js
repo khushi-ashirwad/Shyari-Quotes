@@ -28,16 +28,16 @@ const Imagecategory=()=> {
   };
   const {handleShow,setDataFetched,dataFetched} = useContext(BasicContext)
   const currentPath = window.location.pathname;
-  console.log(currentPath);
   const dispatch = useDispatch();
-  const categories = Getcategory();
-  const filterimage=categories.filter(category=>category.type==="image");
+
   useEffect(() => {
     if (!dataFetched) {
       dispatch(getCategory());
       setDataFetched(true);
     }
   }, [dispatch,dataFetched,setDataFetched]);
+  const categories = Getcategory();
+  const filterimage=categories.filter(category=>category.type==="image");
   return (
     <Box
     className="full-screen" 
