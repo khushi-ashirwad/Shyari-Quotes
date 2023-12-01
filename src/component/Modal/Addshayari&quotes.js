@@ -2,13 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { BasicContext } from "../../context/BasicProvider";
-import { useDispatch } from "react-redux";
+import { useDispatch ,useSelector} from "react-redux";
 import { getCategory } from "../../redux/action/categoryAction";
 import Getcategory from "../Global/Getcategory";
 import { addContent, getContent } from "../../redux/action/ContentAction";
-import {
-  showSuccessAlert,
-} from "../Global/Validation";
+
 
 const Addshayariquotes = ({ currentPath }) => {
   const { show, handleClose, dataFetched, setDataFetched } =
@@ -47,7 +45,6 @@ const Addshayariquotes = ({ currentPath }) => {
     dispatch(addContent(data)).then(() => {
       setadddata({});
       dispatch(getContent());
-      showSuccessAlert("Content added successfully!");
     });
   };
 
@@ -80,7 +77,7 @@ const Addshayariquotes = ({ currentPath }) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <label>select category </label>
+          <label>select  </label>
           <br />
           <select
             style={{

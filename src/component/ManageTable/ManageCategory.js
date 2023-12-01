@@ -21,11 +21,7 @@ import { deleteCategory, getCategory, updateCategory, } from "../../redux/action
 import { getContent } from "../../redux/action/ContentAction";
 import { BasicContext } from "../../context/BasicProvider";
 import { useContext } from "react";
-import {
-  showSuccessAlert,
-  showRemoveAlert2,
-  showDeleteDataAlert,
-} from "../Global/Validation";
+
 
 const ManageCategory = ({ filterdata }) => {
   const { isEditModalOpen, setIsEditModalOpen, editedCategory, setEditedCategory } =
@@ -52,29 +48,19 @@ const ManageCategory = ({ filterdata }) => {
       .then(() => {
         dispatch(getCategory()).then(() => {
           dispatch(getContent());
-          // showSuccessAlert('your data has been Disable');
         });
       })
       .catch((error) => {
         console.error('Error updating category:', error);
       });
   };
-
-  const handledeleteCategory = (id) => {
-    showDeleteDataAlert('Are you sure you want to delete this category?', () => {
-      dispatch(deleteCategory(id))
-        .then(() => {
-          dispatch(getCategory()).then(() => {
-            dispatch(getContent());
-            showRemoveAlert2('Category has been deleted.');
-          });
-        })
-        .catch((error) => {
-          console.error('Error deleting category:', error);
-        });
+ const handledeleteCategory = (id) => {
+    dispatch(deleteCategory(id)).then(() => {
+      dispatch(getCategory()).then(() => {
+        dispatch(getContent());
+      });
     });
   };
-
   const handleEditClick = (item) => {
     setEditedCategory(item);
     setDefaultValues({
@@ -97,7 +83,6 @@ const ManageCategory = ({ filterdata }) => {
         dispatch(getCategory()).then(() => {
           dispatch(getContent());
           setIsEditModalOpen(false);
-          showSuccessAlert('Category has been updated.');
         });
       })
       .catch((error) => {

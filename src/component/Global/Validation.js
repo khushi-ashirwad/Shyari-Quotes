@@ -12,10 +12,10 @@ export const showSuccessAlert = (message) => {
   });
 };
 
-export const showRemoveAlert2 = (itemName) => {
+export const showRemoveAlert2 = (message) => {
   Swal.fire({
     icon: 'error',
-    title:'your data has been deleted',
+    title:message,
     timer: 1800,
     timerProgressBar: true,
     toast: true,
@@ -48,21 +48,5 @@ export const showDeleteDataAlert = (itemName, callback) => {
     }
   });
 };
-export const showCloseDataAlert = (itemName, callback) => {
-  Swal.fire({
-    title:'you never data added',
-    icon: 'error',
-    timer: 1800,
-    timerProgressBar: true,
-    toast: true,
-    position: 'top-right',
-    showConfirmButton: false,
-   
-  }).then((result) => {
-    if (result.isConfirmed) {
-      callback();
-      showSuccessAlert(`${itemName} has been deleted.`);
-    }
-  });
-}
+
 
