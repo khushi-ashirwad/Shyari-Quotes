@@ -58,7 +58,7 @@
   height: 100%;
   width: 100%;
   max-Height: 55rem;
-  overflow-y: auto;
+  overflow-Y: auto;
 }
 
 label {

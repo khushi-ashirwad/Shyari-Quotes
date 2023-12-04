@@ -32,7 +32,7 @@ const Dashboard = () => {
     dispatch(getImage())
     setDataFetched(true)
     }
-  },[ dataFetched])
+  },[dispatch,dataFetched,setDataFetched])
   const categories = Getcategory();
   const content = Getcontent();
   const image= GetImage();

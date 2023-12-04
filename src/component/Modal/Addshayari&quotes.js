@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { BasicContext } from "../../context/BasicProvider";
-import { useDispatch ,useSelector} from "react-redux";
+import { useDispatch} from "react-redux";
 import { getCategory } from "../../redux/action/categoryAction";
 import Getcategory from "../Global/Getcategory";
 import { addContent, getContent } from "../../redux/action/ContentAction";
