@@ -5,7 +5,7 @@ import Getcategory from "../Global/Getcategory";
 import { useDispatch } from "react-redux";
 import { addImage, getImage } from "../../redux/action/ImageAction";
 const ImageModal = () => {
-  const { show, handleClose, image, setImage, setFile, file } =
+ const { show, handleClose, image, setImage, setFile, file } =
     useContext(BasicContext);
   const imagecategory = Getcategory();
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ const ImageModal = () => {
     setFile(e.target.files[0]);
   };
   const handleimagesubmit = () => {
-    console.log(image, file);
+    console.log( "data",image, file);
     const formdata = new FormData();
     formdata.append("name", image.name);
     if (image.description) {
@@ -33,6 +33,7 @@ const ImageModal = () => {
       setImage({});
     });
   };
+
   return (
     <div>
       <Modal

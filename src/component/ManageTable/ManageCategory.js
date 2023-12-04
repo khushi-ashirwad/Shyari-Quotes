@@ -117,7 +117,7 @@ const ManageCategory = ({ filterdata }) => {
                   <TableCell style={tableCellStyle}>
                     {item.description}
                   </TableCell>
-                  <TableCell style={tableCellStyle} sx={{ width: "15%", height: "7.5rem" }}>
+                  <TableCell style={tableCellStyle} sx={{ width: "15%", height: "9.5rem" }}>
                     <img
                       src={item.file}
                       alt={item.name}
