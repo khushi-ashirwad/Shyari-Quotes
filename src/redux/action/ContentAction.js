@@ -53,11 +53,20 @@ export const updateContent = (id, data) => async (dispatch) => {
   }
 }
 
-export const addDailycontent = (data) => async (dispatch) => {
+export const addDailyquotes = (data) => async (dispatch) => {
   try {
-    const response = await axios.post(url + "/dailycontent", data);
+    const response = await axios.post(url + "/dailyquotes", data);
     dispatch({ type: DAILY_CONTENT, payload: response.data });
   } catch (error) {
     dispatch({ type: FAILER, payload: error });
   }
 };
+
+export const addDailyshayari = (data)=>async(dispatch)=>{
+  try{
+    const response = await axios.post(url + "/dailyshayari", data);
+    dispatch({ type: DAILY_CONTENT, payload: response.data });
+  }catch(error){
+    dispatch({ type: FAILER, payload: error });
+  }
+}

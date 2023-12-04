@@ -1,35 +1,41 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { Box, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Getcategory from "../Global/Getcategory";
 import { useDispatch } from "react-redux";
-import { addDailycontent } from "../../redux/action/ContentAction";
+import { addDailyquotes, addDailyshayari } from "../../redux/action/ContentAction";
 const TodayShayariQuotes = () => {
-  const [dailycontent,setDailycontent]=useState({
-    category:'',
-    content:'',
-  })
+  const [dailycontent, setDailycontent] = useState({
+    category: "",
+    content: "",
+    type: "dailycontent",
+  });
   const category = Getcategory();
-
+  const currentPath = window.location.pathname;
   const handleInputChange = (e) => {
     setDailycontent({
       ...dailycontent,
-      [e.target.name]:e.target.value
-    })
+      [e.target.name]: e.target.value,
+    });
   };
-const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const handleSubmit = () => {
-   console.log(dailycontent);
-   dispatch(addDailycontent(dailycontent))
+    console.log(dailycontent);
+    if (currentPath === "/Today%20Quotes") {
+      dispatch(addDailyquotes(dailycontent));
+    } else {
+      dispatch(addDailyshayari(dailycontent))
+    }
   };
-  const currentPath = window.location.pathname;
+
   return (
     <>
       <Box sx={{ padding: "2rem 1rem 3rem" }}>
-        <Typography variant="h5"
-          sx={{ fontWeight: "500" }}>
-          {currentPath === "/Today%20Quotes" ? "Today Quotess" : "Today Shayari"}
+        <Typography variant="h5" sx={{ fontWeight: "500" }}>
+          {currentPath === "/Today%20Quotes"
+            ? "Today Quotess"
+            : "Today Shayari"}
         </Typography>
         <Box sx={{ margin: "2rem" }}>
           <Typography variant="h6">Developers </Typography>
