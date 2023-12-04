@@ -1,4 +1,4 @@
-import React from "react";
+import {React,useState} from "react";
 import {
   Table,
   TableCell,
@@ -13,16 +13,45 @@ import {
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-
+import { useDispatch } from "react-redux";
+import { getContent } from "../../redux/action/ContentAction";
+import { deleteImage, getImage,updateImage } from "../../redux/action/ImageAction";
+import EditImage from "../../component/Modal/EditImageModal";
 const Imagemanage = ({ imageData }) => {
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [selectedImageData, setSelectedImageData] = useState(null);
+  const dispatch = useDispatch();
+
   const tableCellStyle = {
     border: "2px solid #000",
-    padding: "1.5rem 3rem",
     textAlign: "center",
     fontSize: "1rem",
     fontWeight: "500",
-    width: "55rem",
   };
+  const handleEdit = (item) => {
+    setSelectedImageData(item);
+    setEditModalOpen(true);
+  };
+  
+  const handleUpdate = (id, updatedData) => {
+    dispatch(updateImage(id, updatedData)).then(() => {
+      dispatch(getImage()).then(() => {
+        dispatch(getContent());
+        setEditModalOpen(false); 
+      });
+    }).catch((error) => {
+      console.error('Error updating image:', error);
+    });
+  };
+  
+  const handleDelete = (id) => {
+    dispatch(deleteImage(id)).then(() => {
+      dispatch(getImage()).then(() => {
+        dispatch(getContent());
+      });    
+    });
+  };
+ 
   return (
     <>
       <Box
@@ -49,27 +78,28 @@ const Imagemanage = ({ imageData }) => {
                 ? imageData.map((item, index) => (
                     <TableRow key={index}>
                       <TableCell style={tableCellStyle}>{item.name}</TableCell>
-                      <TableCell style={tableCellStyle}>
+                      <TableCell style={tableCellStyle} sx={{ width: "50rem" }}>
                         {item.description}
                       </TableCell>
-                      <TableCell style={tableCellStyle}>
+                      <TableCell
+                        style={tableCellStyle}
+                        sx={{ width: "15%", height: "7.5rem" }}
+                      >
                         <img
                           src={item.file}
                           alt={item.name}
-                          style={{ width: "100px", height: "100px" }}
+                          style={{ width: "100%", height: "170%" }}
                         />
                       </TableCell>
                       <TableCell
                         sx={{
                           border: "2px solid black",
-                          width: "6rem",
-                          padding: "2.5rem 5rem",
+                          width: "15rem",
                         }}
                       >
                         <Box
                           sx={{
                             display: "flex",
-                            width: "8rem",
                             justifyContent: "center",
                           }}
                         >
@@ -80,6 +110,7 @@ const Imagemanage = ({ imageData }) => {
                               color: "#fff",
                               marginRight: "0.5rem",
                             }}
+                            onClick={() => handleDelete(item._id)}
                           >
                             <DeleteIcon />
                             <Typography>Delete</Typography>
@@ -91,6 +122,8 @@ const Imagemanage = ({ imageData }) => {
                               color: "#fff",
                               marginRight: "0.5rem",
                             }}
+                            onClick={() => handleEdit(item)}
+
                           >
                             <EditIcon />
                             <Typography>Edit</Typography>
@@ -104,6 +137,17 @@ const Imagemanage = ({ imageData }) => {
           </Table>
         </TableContainer>
       </Box>
+      {selectedImageData && (
+        <EditImage
+          isOpen={editModalOpen}
+          onClose={() => {
+            setEditModalOpen(false);
+            setSelectedImageData(null);
+          }}
+          imageData={selectedImageData}
+          handleUpdate={handleUpdate}
+        />
+      )}
     </>
   );
 };

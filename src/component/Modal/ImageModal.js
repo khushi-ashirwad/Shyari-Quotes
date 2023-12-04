@@ -33,7 +33,7 @@ const ImageModal = () => {
     }
   }, [dispatch, dataFetched, setDataFetched]);
   const handleimagesubmit = () => {
-    console.log(image, file);
+    console.log( "data",image, file);
     const formdata = new FormData();
     formdata.append("name", image.name);
     if (image.description) {
@@ -47,6 +47,7 @@ const ImageModal = () => {
       setImage({});
     });
   };
+
   return (
     <div>
       <Modal

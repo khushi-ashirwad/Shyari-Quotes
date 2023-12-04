@@ -6,7 +6,7 @@ import {
   GET_CATEGORY,
   UPDATE_CATEGORY,
 } from "../constants";
-import { showRemoveAlert2, showSuccessAlert,showDeleteDataAlert } from "../../component/Global/Validation";
+import { showRemoveAlert2, showSuccessAlert, showDeleteDataAlert } from "../../component/Global/Validation";
 
 const url = process.env.REACT_APP_URL;
 export const addCategory = (data) => async (dispatch) => {
@@ -44,12 +44,12 @@ export const updateCategory = (id, data) => async (dispatch) => {
 export const deleteCategory = (id) => async (dispatch) => {
   try {
     showDeleteDataAlert('Are you sure you want to delete this category?', async () => {
-    const response = await axios.delete(url + "/category/delete/" + id);
-    dispatch({ type: DELETE_CATEGORY, payload: response.data });
-    showRemoveAlert2(response.data.message);
-    dispatch(getCategory())
+      const response = await axios.delete(url + "/category/delete/" + id);
+      dispatch({ type: DELETE_CATEGORY, payload: response.data });
+      showRemoveAlert2(response.data.message);
+      dispatch(getCategory())
     });
-    } catch (error) {
+  } catch (error) {
     dispatch({ type: FAILER, payload: error });
     showRemoveAlert2(error)
   }
