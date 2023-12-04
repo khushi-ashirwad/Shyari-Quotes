@@ -5,9 +5,6 @@ import { useContext } from "react";
 import { BasicContext } from "../../context/BasicProvider";
 import { useDispatch } from "react-redux";
 import { addCategory, getCategory } from "../../redux/action/categoryAction";
-import {
-  showSuccessAlert,
-} from "../Global/Validation";
 const CategoryModal = ({ currentPath }) => {
   const { show, handleClose, Category, setCategory, file, setFile } =
     useContext(BasicContext);

@@ -4,9 +4,18 @@ import { BasicContext } from "../../context/BasicProvider";
 import Getcategory from "../Global/Getcategory";
 import { useDispatch } from "react-redux";
 import { addImage, getImage } from "../../redux/action/ImageAction";
+import { useEffect } from "react";
 const ImageModal = () => {
-  const { show, handleClose, image, setImage, setFile, file } =
-    useContext(BasicContext);
+  const {
+    show,
+    handleClose,
+    image,
+    setImage,
+    setFile,
+    file,
+    dataFetched,
+    setDataFetched,
+  } = useContext(BasicContext);
   const imagecategory = Getcategory();
   const dispatch = useDispatch();
   const handlechange = (e) => {
@@ -18,6 +27,11 @@ const ImageModal = () => {
   const handlechnagefile = (e) => {
     setFile(e.target.files[0]);
   };
+  useEffect(() => {
+    if (!dataFetched) {
+      dispatch(getImage());
+    }
+  }, [dispatch, dataFetched, setDataFetched]);
   const handleimagesubmit = () => {
     console.log(image, file);
     const formdata = new FormData();
