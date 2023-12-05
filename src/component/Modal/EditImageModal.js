@@ -55,7 +55,7 @@ const EditImage = ({ isOpen, onClose, imageData, handleUpdate, categories }) => 
             </Modal.Header>
             <Modal.Body>
                 <Form><br />
-
+                 <Form.Label>Select Category</Form.Label>
                     <select
                         style={{
                             width: "100%",
@@ -75,8 +75,7 @@ const EditImage = ({ isOpen, onClose, imageData, handleUpdate, categories }) => 
                             </option>
                         ))}
                     </select>
-
-                    <Form.Group controlId="formName">
+                    <Form.Group controlId="formName"><br/>
                         <Form.Label>Enter Name:</Form.Label>
                         <Form.Control
                             type="text"
@@ -118,7 +117,7 @@ const EditImage = ({ isOpen, onClose, imageData, handleUpdate, categories }) => 
                             type="radio"
                             value="true"
                             name="issensitive"
-                            checked={updatedData.isSensitive}
+                            checked={updatedData?.isSensitive}
                             onChange={(e) =>
                                 setUpdatedData({
                                     ...updatedData,
@@ -130,7 +129,7 @@ const EditImage = ({ isOpen, onClose, imageData, handleUpdate, categories }) => 
                             type="radio"
                             value="false"
                             name="issensitive"
-                            checked={!updatedData.isSensitive}
+                            checked={!updatedData?.isSensitive}
                             onChange={(e) =>
                                 setUpdatedData({
                                     ...updatedData,
