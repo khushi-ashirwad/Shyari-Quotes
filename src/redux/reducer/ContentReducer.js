@@ -4,6 +4,7 @@ import {
   DELETE_CONTENT,
   FAILER,
   GET_CONTENT,
+  GET_DAILY_CONTENT,
 } from "../constants";
 import { intialvalue } from "../intialvalue";
 
@@ -31,6 +32,12 @@ export const contentReducer = (state = intialvalue, action) => {
       return {
         ...state,
         success: action.payload,
+        error: null,
+      };
+    case GET_DAILY_CONTENT:
+      return {
+        ...state,
+        dailyContent: action.payload,
         error: null,
       };
     case FAILER:
