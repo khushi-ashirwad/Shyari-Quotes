@@ -115,7 +115,7 @@ const ManageCategory = ({ filterdata }) => {
                 <TableRow key={index}>
                   <TableCell style={tableCellStyle}>{item.name}</TableCell>
                   <TableCell style={tableCellStyle}>
-                    {item.description}
+               {item.description ? item.description : "N/A"}
                   </TableCell>
                   <TableCell style={tableCellStyle} sx={{ width: "15%", height: "9.5rem" }}>
                     <img

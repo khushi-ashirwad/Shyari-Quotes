@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Getcategory from "../Global/Getcategory";
-import { useDispatch } from "react-redux";
-import { addDailyquotes, addDailyshayari } from "../../redux/action/ContentAction";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addDailyquotes,
+  addDailyshayari,
+  getDailycontent,
+} from "../../redux/action/ContentAction";
+
 const TodayShayariQuotes = () => {
   const [dailycontent, setDailycontent] = useState({
     category: "",
@@ -21,14 +26,21 @@ const TodayShayariQuotes = () => {
   };
   const dispatch = useDispatch();
   const handleSubmit = () => {
-    console.log(dailycontent);
     if (currentPath === "/Today%20Quotes") {
-      dispatch(addDailyquotes(dailycontent));
+      dispatch(addDailyquotes(dailycontent)).then(() => {
+        setDailycontent({});
+      });
     } else {
-      dispatch(addDailyshayari(dailycontent))
+      dispatch(addDailyshayari(dailycontent)).then(() => {
+        setDailycontent({});
+      });
     }
   };
+  useEffect(() => {
+    dispatch(getDailycontent());
+  }, [dispatch]);
 
+  const { dailyContent } = useSelector((state) => state.contentReducer);
   return (
     <>
       <Box sx={{ padding: "2rem 1rem 3rem" }}>
@@ -134,7 +146,25 @@ const TodayShayariQuotes = () => {
           }}
         >
           <Typography sx={{ margin: "1.5rem" }}>
-            <p style={{ wordWrap: "break-word" }}>{dailycontent.content}</p>
+            {
+              currentPath === "/Today%20Quotes"
+                ? dailyContent
+                  ? dailyContent
+                      .filter((value) => value.category.type === "quotes")
+                      .map((value) => (
+                        <p style={{ wordWrap: "break-word" }}>
+                          {value.content}
+                        </p>
+                      ))
+                  : null 
+                : dailyContent
+                ? dailyContent
+                    .filter((value) => value.category.type === "shayari")
+                    .map((value) => (
+                      <p style={{ wordWrap: "break-word" }}>{value.content}</p>
+                    ))
+                : null
+            }
           </Typography>
         </Box>
       </Box>

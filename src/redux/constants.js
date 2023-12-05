@@ -12,5 +12,4 @@ export const UPDATE_CONTENT = 'UPDATE_CONTENT';
 export const DAILY_CONTENT = "DAILY_CONTENT";
 export const DELETE_IMAGE = "DELETE_IMAGE";
 export const UPDATE_IMAGE = " UPDATE_IMAGE";
-
-
+export const GET_DAILY_CONTENT = "GET_DAILY_CONTENT";

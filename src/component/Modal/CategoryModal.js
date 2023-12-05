@@ -47,7 +47,7 @@ const CategoryModal = ({ currentPath }) => {
       .then(() => {
         dispatch(getCategory());
         setCategory({});
-        // showSuccessAlert('Category has been added.'); 
+        
       })
       .catch((error) => {
         console.error('Error adding category:', error);
