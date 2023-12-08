@@ -8,7 +8,7 @@ import {
   addDailyquotes,
   addDailyshayari,
   getDailycontent,
-} from "../../redux/action/ContentAction";
+} from "../../redux/action/QuoteAction";
 
 const TodayShayariQuotes = () => {
   const [dailycontent, setDailycontent] = useState({
@@ -146,25 +146,29 @@ const TodayShayariQuotes = () => {
           }}
         >
           <Typography sx={{ margin: "1.5rem" }}>
-            {
-              currentPath === "/Today%20Quotes"
-                ? dailyContent
-                  ? dailyContent
-                      .filter((value) => value.category.type === "quotes")
-                      .map((value) => (
-                        <p style={{ wordWrap: "break-word" }}>
-                          {value.content}
-                        </p>
-                      ))
-                  : null 
-                : dailyContent
-                ? dailyContent
-                    .filter((value) => value.category.type === "shayari")
-                    .map((value) => (
-                      <p style={{ wordWrap: "break-word" }}>{value.content}</p>
-                    ))
-                : null
-            }
+            {currentPath === "/Today%20Quotes" ? (
+              dailyContent.lenght > 0 ? (
+                dailyContent
+                  .filter((value) => value.category.type === "quotes")
+                  .map((value) => (
+                    <p style={{ wordWrap: "break-word" }}>{value.content}</p>
+                  ))
+              ) : (
+                <p style={{ wordWrap: "break-word" }}>
+                  yet today content not added
+                </p>
+              )
+            ) : dailyContent.lenght > 0 ? (
+              dailyContent
+                .filter((value) => value.category.type === "shayari")
+                .map((value) => (
+                  <p style={{ wordWrap: "break-word" }}>{value.content}</p>
+                ))
+            ) : (
+              <p style={{ wordWrap: "break-word" }}>
+                yet today content not added
+              </p>
+            )}
           </Typography>
         </Box>
       </Box>

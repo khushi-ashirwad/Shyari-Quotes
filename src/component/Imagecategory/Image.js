@@ -34,11 +34,11 @@ const Image = () => {
     if (!dataFetched) {
       dispatch(getImage());
       setDataFetched(false);
+      console.log("call imag eapi");
     }
-  }, [dispatch, dataFetched, setDataFetched]);
+  }, []);
  
   const currentimage = GetImage();
-  console.log(currentimage);
 
   return (
     <Box   className="full-screen"  sx={{ padding: "2rem 1rem 3rem" }}>

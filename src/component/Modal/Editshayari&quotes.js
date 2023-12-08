@@ -4,7 +4,6 @@ import { Modal, Button } from "react-bootstrap";
 const EditModal = ({
   isOpen,
   onClose,
-
   defaultValues,
   setDefaultValues,
   handleSaveChanges,

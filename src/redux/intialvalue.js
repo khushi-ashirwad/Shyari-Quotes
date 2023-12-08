@@ -3,6 +3,7 @@ export const intialvalue = {
   error: null,
   category: [],
   quotescontent: [],
+  shayaricontent : [],
   image: [],
   dailyContent: [],
 };

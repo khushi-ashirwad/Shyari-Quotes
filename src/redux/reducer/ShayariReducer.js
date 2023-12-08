@@ -1,43 +1,36 @@
 import {
-  ADD_CONTENT,
-  DAILY_CONTENT,
-  DELETE_CONTENT,
+  DELETE_SHAYARI,
   FAILER,
-  GET_CONTENT,
-  GET_DAILY_CONTENT,
+  SHAYARI_ADD,
+  SHAYARI_GET,
+  UPDATE_SHAYARI,
 } from "../constants";
 import { intialvalue } from "../intialvalue";
 
-export const contentReducer = (state = intialvalue, action) => {
+export const shayariReducer = (state = intialvalue, action) => {
   switch (action.type) {
-    case ADD_CONTENT:
+    case SHAYARI_ADD:
       return {
         ...state,
         success: action.payload,
         error: null,
       };
-    case GET_CONTENT:
+    case SHAYARI_GET:
       return {
         ...state,
-        quotescontent: action.payload,
+        shayaricontent: action.payload,
         error: null,
       };
-    case DELETE_CONTENT:
+    case UPDATE_SHAYARI:
       return {
         ...state,
         success: action.payload,
         error: null,
       };
-    case DAILY_CONTENT:
+    case DELETE_SHAYARI:
       return {
         ...state,
         success: action.payload,
-        error: null,
-      };
-    case GET_DAILY_CONTENT:
-      return {
-        ...state,
-        dailyContent: action.payload,
         error: null,
       };
     case FAILER:

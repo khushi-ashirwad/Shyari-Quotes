@@ -1,4 +1,4 @@
-import React, { useState,useContext } from "react";
+import React, { useState, useContext } from "react";
 import {
   TableBody,
   TableCell,
@@ -14,23 +14,37 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { FiEdit } from "react-icons/fi";
 import { PiTable } from "react-icons/pi";
 import { useDispatch } from "react-redux";
-import { deleteContent, getContent, updateContent } from "../../redux/action/ContentAction";
+import {
+  deleteContent,
+  getContent,
+  updateContent,
+} from "../../redux/action/QuoteAction";
 import ModalContentComponent from "../Modal/ManageModal";
 import { BasicContext } from "../../context/BasicProvider";
+import {
+  deleteShayari,
+  getShayari,
+  updateShayari,
+} from "../../redux/action/ShayatiAction";
 const Manage = ({ content }) => {
-  const { isEditModalOpen, setIsEditModalOpen, editedContent, setEditedContent } =
-    useContext(BasicContext);
+  const {
+    isEditModalOpen,
+    setIsEditModalOpen,
+    editedContent,
+    setEditedContent,
+  } = useContext(BasicContext);
   const [defaultValues, setDefaultValues] = useState({
     content: "",
     category: "",
+    category_id:""
   });
-  const tableCellheadingStyle={
+  const tableCellheadingStyle = {
     border: "1px solid #ccc",
     padding: "15px",
     textAlign: "center",
     fontSize: "21px",
     fontWeight: "500",
-  }
+  };
   const tableCellStyle = {
     border: "1px solid #ccc",
     padding: "2px",
@@ -41,39 +55,45 @@ const Manage = ({ content }) => {
   const dispatch = useDispatch();
   const currentPath = window.location.pathname;
   const handleEditClick = (item) => {
-    console.log("Edit button clicked:", item);
     setEditedContent(item);
     setDefaultValues({
       content: item.content,
       category: item.category.name,
+      category_id:item.category._id
     });
-
     setIsEditModalOpen(true);
   };
 
   const handleSaveChanges = () => {
     const updatedContent = {
       content: defaultValues.content,
-      category: defaultValues.category,
+      category: defaultValues.category_id,
     };
-
-  
-    dispatch(updateContent(editedContent._id, updatedContent))
-      .then(() => {
+    if (currentPath === "/Quotes") {
+      dispatch(updateContent(editedContent._id, updatedContent)).then(() => {
         dispatch(getContent());
         setIsEditModalOpen(false);
-        
-      })
-      .catch((error) => {
-        console.error("Error updating content:", error);
       });
+    } else {
+      dispatch(updateShayari(editedContent._id, updatedContent)).then(() => {
+        dispatch(getShayari());
+        setIsEditModalOpen(false);
+      });
+    }
   };
-  
+
   const handledeleteContent = (id) => {
+    if (currentPath === "/Quotes") {
       dispatch(deleteContent(id)).then(() => {
         dispatch(getContent());
       });
+    } else {
+      dispatch(deleteShayari(id)).then(() => {
+        dispatch(getShayari());
+      });
+    }
   };
+
   return (
     <>
       <TableContainer component={Paper} sx={{ maxWidth: "100%" }}>
@@ -93,7 +113,7 @@ const Manage = ({ content }) => {
         <Table style={{ minWidth: "500px" }}>
           <TableHead sx={{ backgroundColor: "#F8F2FF" }}>
             <TableRow>
-              <TableCell style={tableCellheadingStyle} sx={{width:"60rem"}}>
+              <TableCell style={tableCellheadingStyle} sx={{ width: "60rem" }}>
                 {currentPath === "/Quotes" ? "Quotes" : "Shayari"}
               </TableCell>
               <TableCell style={tableCellheadingStyle}>Category</TableCell>
@@ -115,7 +135,11 @@ const Manage = ({ content }) => {
                   {contantData.category.name}
                 </TableCell>
                 <TableCell style={tableCellStyle}>
-                  <IconButton aria-label="edit" color="primary" onClick={() => handleEditClick(contantData)}>
+                  <IconButton
+                    aria-label="edit"
+                    color="primary"
+                    onClick={() => handleEditClick(contantData)}
+                  >
                     <FiEdit />
                   </IconButton>
                   <IconButton

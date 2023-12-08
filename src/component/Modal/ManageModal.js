@@ -25,14 +25,6 @@ const ModalContentComponent = ({
     }
   }, [dispatch, dataFetched,setDataFetched]);
 
-  const filteredOptions =
-    currentvalue &&
-    currentvalue.filter &&
-    typeof currentvalue.filter === "function"
-      ? currentPath === "/Quotes"
-        ? currentvalue.filter((category) => category.type === "quotes" && category.isdisable === true)
-        : currentvalue.filter((category) => category.type === "shayari" && category.isdisable === true)
-      : [];
   return (
     <Modal show={isOpen} onHide={onClose} aria-labelledby="contained-modal-title-vcenter" centered>
       <Modal.Header closeButton>
@@ -52,14 +44,19 @@ const ModalContentComponent = ({
               name="category"
               value={defaultValues.category}
               onChange={(e) => {
-                console.log("Selected Category ID:", e.target.value);
                 setDefaultValues({ ...defaultValues, category     : e.target.value });
-              }}              >
-              {(filteredOptions.length > 0 ? filteredOptions : currentvalue || []).map((option) => (
-                <option key={option._id} value={option._id}>
-                  {option.name}
-                </option>
-              ))}
+              }}>
+                {currentPath === "/Quotes"
+              ? currentvalue
+                  .filter((category) => category.type === "quotes" && category.isdisable===true)
+                  .map((option) => (
+                    <option value={option._id}>{option.name}</option>
+                  ))
+              : currentvalue
+                  .filter((category) => category.type === "shayari" && category.isdisable===true)
+                  .map((option) => (
+                    <option value={option._id}>{option.name}</option>
+                  ))}
             </select>
           </Form.Group>
           <Form.Group controlId="content"> 

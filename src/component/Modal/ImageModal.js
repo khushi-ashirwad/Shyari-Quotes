@@ -33,7 +33,6 @@ const ImageModal = () => {
     }
   }, [dispatch, dataFetched, setDataFetched]);
   const handleimagesubmit = () => {
-    console.log( "data",image, file);
     const formdata = new FormData();
     formdata.append("name", image.name);
     if (image.description) {
@@ -41,7 +40,11 @@ const ImageModal = () => {
     }
     formdata.append("category", image.category);
     formdata.append("file", file);
-    formdata.append("issensitive", image.issensitive);
+    if(image.issensitive){
+      formdata.append("issensitive", image.issensitive);
+    }else{
+      formdata.append("issensitive",true)
+    }
     dispatch(addImage(formdata)).then(() => {
       dispatch(getImage());
       setImage({});

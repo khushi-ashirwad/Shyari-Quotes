@@ -14,6 +14,11 @@ export const Getcontent = () =>{
     return quotescontent;
 }
 
+export const GetShayari = () =>{
+  const {shayaricontent} = useSelector((state)=>state.shayariReducer);
+  return shayaricontent;
+}
+
 export const GetImage = ()=>{
   const {image} = useSelector(state=>state.imageReducer);
   return image;

@@ -3,7 +3,7 @@ import { Grid, Typography, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import TitleHeader from "./TitleHeader";
 import Getcategory, { GetImage, Getcontent } from "./Getcategory";
-import { getContent } from "../../redux/action/ContentAction";
+import { getContent } from "../../redux/action/QuoteAction";
 import { getCategory } from "../../redux/action/categoryAction";
 import { BasicContext } from "../../context/BasicProvider";
 import { useDispatch } from "react-redux";

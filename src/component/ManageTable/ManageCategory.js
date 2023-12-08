@@ -18,9 +18,10 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useDispatch } from "react-redux";
 import ModalComponent from "../Modal/Editshayari&quotes";
 import { deleteCategory, getCategory, updateCategory, } from "../../redux/action/categoryAction";
-import { getContent } from "../../redux/action/ContentAction";
+import { getContent } from "../../redux/action/QuoteAction";
 import { BasicContext } from "../../context/BasicProvider";
 import { useContext } from "react";
+import { getImage } from "../../redux/action/ImageAction";
 
 
 const ManageCategory = ({ filterdata }) => {
@@ -48,6 +49,7 @@ const ManageCategory = ({ filterdata }) => {
       .then(() => {
         dispatch(getCategory()).then(() => {
           dispatch(getContent());
+          dispatch(getImage());
         });
       })
       .catch((error) => {
@@ -68,7 +70,6 @@ const ManageCategory = ({ filterdata }) => {
       description: item.description,
       file: item.file,
     });
-
     setIsEditModalOpen(true);
   };
 
@@ -81,6 +82,7 @@ const ManageCategory = ({ filterdata }) => {
     dispatch(updateCategory(editedCategory._id, formData))
       .then(() => {
         dispatch(getCategory()).then(() => {
+          dispatch(getImage());
           dispatch(getContent());
           setIsEditModalOpen(false);
         });

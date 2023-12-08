@@ -14,7 +14,7 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { useDispatch } from "react-redux";
-import { getContent } from "../../redux/action/ContentAction";
+import { getContent } from "../../redux/action/QuoteAction";
 import { deleteImage, getImage,updateImage } from "../../redux/action/ImageAction";
 import EditImage from "../../component/Modal/EditImageModal";
 const Imagemanage = ({ imageData }) => {
@@ -35,10 +35,8 @@ const Imagemanage = ({ imageData }) => {
   
   const handleUpdate = (id, updatedData) => {
     dispatch(updateImage(id, updatedData)).then(() => {
-      dispatch(getImage()).then(() => {
-        dispatch(getContent());
+      dispatch(getImage())
         setEditModalOpen(false); 
-      });
     }).catch((error) => {
       console.error('Error updating image:', error);
     });
@@ -79,7 +77,7 @@ const Imagemanage = ({ imageData }) => {
                     <TableRow key={index}>
                       <TableCell style={tableCellStyle}>{item.name}</TableCell>
                       <TableCell style={tableCellStyle} sx={{ width: "50rem" }}>
-                        {item.description}
+                        {item.description ? item.description : "N/A"}
                       </TableCell>
                       <TableCell
                         style={tableCellStyle}

@@ -18,7 +18,7 @@ const url = process.env.REACT_APP_URL;
 
 export const addContent = (data) => async (dispatch) => {
   try {
-    const response = await axios.post(url + "/quotesshayari/add", data);
+    const response = await axios.post(url + "/quotes", data);
     dispatch({ type: ADD_CONTENT, payload: response.data });
     showSuccessAlert(response.data.message);
   } catch (error) {
@@ -29,7 +29,7 @@ export const addContent = (data) => async (dispatch) => {
 
 export const getContent = () => async (dispatch) => {
   try {
-    const response = await axios.get(url + "/content/get");
+    const response = await axios.get(url + "/quotes");
     dispatch({ type: GET_CONTENT, payload: response.data });
   } catch (error) {
     dispatch({ type: FAILER, payload: error });
@@ -41,7 +41,7 @@ export const deleteContent = (id) => async (dispatch) => {
     showDeleteDataAlert(
       "Are you sure you want to delete this category?",
       async () => {
-        const response = await axios.delete(url + "/content/delete/" + id);
+        const response = await axios.delete(url + "/quotes/" + id);
         dispatch({ type: DELETE_CONTENT, payload: response.data });
         showRemoveAlert2(response.data.message);
         dispatch(getContent());
@@ -55,11 +55,11 @@ export const deleteContent = (id) => async (dispatch) => {
 
 export const updateContent = (id, data) => async (dispatch) => {
   try {
-    const response = await axios.put(url + `/content/update/${id}`, data);
+    const response = await axios.put(url + `/quotes/${id}`, data);
     dispatch({ type: UPDATE_CONTENT, payload: response.data });
     showSuccessAlert(response.data.message);
   } catch (error) {
-    dispatch({ type: UPDATE_CONTENT, payload: error });
+    dispatch({ type: FAILER, payload: error });
     showRemoveAlert2(error);
   }
 };
