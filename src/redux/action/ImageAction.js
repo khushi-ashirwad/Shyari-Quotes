@@ -36,7 +36,6 @@ export const deleteImage = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({ type: FAILER, payload: error });
     showRemoveAlert2(error)
-
   }
 };
 

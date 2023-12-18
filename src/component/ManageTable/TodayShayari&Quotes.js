@@ -4,11 +4,9 @@ import Button from "@mui/material/Button";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Getcategory from "../Global/Getcategory";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addDailyquotes,
-  getDailycontent,
-} from "../../redux/action/QuoteAction";
+import { addDailyquotes, getDailycontent } from "../../redux/action/QuoteAction";
 import { addDailyshayari } from "../../redux/action/ShayatiAction";
+import Select from 'react-select';
 
 const TodayShayariQuotes = () => {
   const [dailycontent, setDailycontent] = useState({
@@ -18,13 +16,16 @@ const TodayShayariQuotes = () => {
   });
   const category = Getcategory();
   const currentPath = window.location.pathname;
+
   const handleInputChange = (e) => {
     setDailycontent({
       ...dailycontent,
       [e.target.name]: e.target.value,
     });
   };
+
   const dispatch = useDispatch();
+
   const handleSubmit = () => {
     if (currentPath === "/Today%20Quotes") {
       dispatch(addDailyquotes(dailycontent)).then(() => {
@@ -36,21 +37,19 @@ const TodayShayariQuotes = () => {
       });
     }
   };
+
   useEffect(() => {
     dispatch(getDailycontent());
   }, [dispatch]);
 
   const { dailyContent } = useSelector((state) => state.contentReducer);
-  console.log("dailycontent", dailyContent);
-  // const filter = dailyContent
-  //   .filter((value) => value.category.type === "quotes")
-  //   .map((value) => console.log("FILTER", value.content));
+
   return (
     <>
       <Box sx={{ padding: "2rem 1rem 3rem" }}>
         <Typography variant="h5" sx={{ fontWeight: "500" }}>
           {currentPath === "/Today%20Quotes"
-            ? "Today Quotess"
+            ? "Today Quotes"
             : "Today Shayari"}
         </Typography>
         <Box sx={{ margin: "2rem" }}>
@@ -76,34 +75,39 @@ const TodayShayariQuotes = () => {
             marginLeft:"68rem",
             marginBottom:"-3.5rem"
             }}/>
-          <select
-            style={{
-              marginBottom: "1rem",
-              backgroundColor: "#EDEFF5",
-              border: "1px solid black",
-              width: "70rem",
-              height: "2.5rem",
-              borderRadius: "1px",
+          <Select
+            options={category
+              .filter(
+                (category) =>
+                  (currentPath === '/Today%20Quotes' &&
+                    category.type === 'quotes' &&
+                    category.isdisable === true) ||
+                  (currentPath !== '/Today%20Quotes' &&
+                    category.type === 'shayari' &&
+                    category.isdisable === true)
+              )
+              .map((option) => ({
+                label: option.name,
+                value: option._id,
+              }))}
+            // onChange={handleChangeContent}
+            styles={{
+              control: (provided) => ({
+                ...provided,
+                height: "2.5rem",
+                backgroundColor: "#EDEFF5",
+                border: "1px solid black",
+                borderRadius: "1px",
+              }),
+              menuPortal: (provided) => ({ ...provided, zIndex: 9999 }),
+              menu: (provided) => ({
+                ...provided,
+                maxHeight: "200px",
+                overflowY: "auto",
+              }),
             }}
-            name="category"
-            value={dailycontent.category}
-            onChange={handleInputChange}
-            className="form-control"
-            id="paymentMethod"
-          >
-            <option>Select category</option>
-            {currentPath === "/Today%20Quotes"
-              ? category
-                  .filter((category) => category.type === "quotes")
-                  .map((value) => (
-                    <option value={value._id}>{value.name}</option>
-                  ))
-              : category
-                  .filter((category) => category.type === "shayari")
-                  .map((value) => (
-                    <option value={value._id}>{value.name}</option>
-                  ))}
-          </select>
+            menuPortalTarget={document.body}
+          />
           <Typography variant="h6" sx={{ marginBottom: "1rem" }}>
             {currentPath === "/Today%20Quotes"
               ? "Enter Your Quotes"
@@ -139,7 +143,7 @@ const TodayShayariQuotes = () => {
           }}
         >
           <Typography variant="h5" sx={{ alignItems: "center" }}>
-            Today {currentPath === "/Today%20Quotes" ? "Quotes" : "Shayari"}- Of
+            Today {currentPath === "/Today%20Quotes" ? "Quotes" : "Shayari"} - Of
             The Day
           </Typography>
         </Box>
@@ -161,7 +165,7 @@ const TodayShayariQuotes = () => {
                   ))
               ) : (
                 <p style={{ wordWrap: "break-word" }}>
-                  yet today content not added
+                  Yet today content not added
                 </p>
               )
             ) :  Array.isArray(dailyContent) && dailyContent.length > 0 ? (
@@ -172,7 +176,7 @@ const TodayShayariQuotes = () => {
                 ))
             ) : (
               <p style={{ wordWrap: "break-word" }}>
-                yet today content not added
+                Yet today content not added
               </p>
             )}
           </Typography>

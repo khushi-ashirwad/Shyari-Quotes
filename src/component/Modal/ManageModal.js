@@ -1,9 +1,10 @@
-import React,{useContext, useEffect} from "react";
+import React, { useContext, useEffect } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
+import Select from 'react-select';
 import Getcategory from "../Global/Getcategory";
 import { BasicContext } from "../../context/BasicProvider";
 import { getCategory } from "../../redux/action/categoryAction";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 
 const ModalContentComponent = ({
   isOpen,
@@ -14,8 +15,7 @@ const ModalContentComponent = ({
 }) => {
   const currentPath = window.location.pathname;
   const currentvalue = Getcategory();
-  const {  dataFetched, setDataFetched } =
-  useContext(BasicContext);
+  const { dataFetched, setDataFetched } = useContext(BasicContext);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -23,45 +23,75 @@ const ModalContentComponent = ({
       dispatch(getCategory());
       setDataFetched(true);
     }
-  }, [dispatch, dataFetched,setDataFetched]);
+  }, [dispatch, dataFetched, setDataFetched]);
+
+  let options = [];
+  if (currentPath === "/Quotes") {
+    options = currentvalue
+      .filter(
+        (category) =>
+          category.type === "quotes" && category.isdisable === true
+      )
+      .map((option) => ({
+        value: option._id,
+        label: option.name,
+      }));
+  } else {
+    options = currentvalue
+      .filter(
+        (category) =>
+          category.type === "shayari" && category.isdisable === true
+      )
+      .map((option) => ({
+        value: option._id,
+        label: option.name,
+      }));
+  }
 
   return (
-    <Modal show={isOpen} onHide={onClose} aria-labelledby="contained-modal-title-vcenter" centered size="lg">
+    <Modal
+      show={isOpen}
+      onHide={onClose}
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+      size="lg"
+    >
       <Modal.Header closeButton>
         <Modal.Title>Edit Content</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
-        <Form.Group controlId="content">
-            <Form.Label> Category Name</Form.Label>
-            <select
-              style={{
-                width: "100%",
-                border: "none",
-                background: "#EDEFF5",
-                padding: "0.5rem",
+          <Form.Group controlId="content">
+            <Form.Label>Category Name</Form.Label>
+            <Select
+              styles={{
+                menuPortal: (provided) => ({ ...provided, zIndex: 9999 }),
+                menu: (provided) => ({
+                  ...provided,
+                  maxHeight: "200px",
+                  overflowY: "auto",
+                }),
               }}
-
-              name="category"
-              value={defaultValues.category}
-              onChange={(e) => {
-                setDefaultValues({ ...defaultValues, category_id: e.target.value });
-              }}>
-                {currentPath === "/Quotes"
-              ? currentvalue
-                  .filter((category) => category.type === "quotes" && category.isdisable===true)
-                  .map((option) => (
-                    <option value={option._id}>{option.name}</option>
-                  ))
-              : currentvalue
-                  .filter((category) => category.type === "shayari" && category.isdisable===true)
-                  .map((option) => (
-                    <option value={option._id}>{option.name}</option>
-                  ))}
-            </select>
+              menuPortalTarget={document.body}
+              options={options}
+              value={{
+                value: defaultValues.category_id,
+                label: currentvalue.find(
+                  (category) => category._id === defaultValues.category_id
+                )?.name,
+              }}
+              onChange={(selectedOption) => {
+                setDefaultValues({
+                  ...defaultValues,
+                  category_id: selectedOption.value,
+                });
+              }}
+            />
           </Form.Group>
-          <Form.Group controlId="content"> 
-            <Form.Label>{currentPath === "/Quotes" ? "Quotes" : "Shayari"}</Form.Label>
+          <Form.Group controlId="content">
+            <Form.Label>
+              {currentPath === "/Quotes" ? "Quotes" : "Shayari"}
+            </Form.Label>
             <textarea
               style={{
                 width: "100%",
@@ -71,7 +101,9 @@ const ModalContentComponent = ({
                 marginTop: "0.5rem",
               }}
               value={defaultValues.content}
-              onChange={(e) => setDefaultValues({ ...defaultValues, content: e.target.value })}
+              onChange={(e) =>
+                setDefaultValues({ ...defaultValues, content: e.target.value })
+              }
             />
           </Form.Group>
         </Form>
