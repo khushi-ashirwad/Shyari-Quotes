@@ -35,10 +35,9 @@ const Image = () => {
       dispatch(getImage());
       setDataFetched(false);
     }
-  }, [dispatch, dataFetched, setDataFetched]);
+  }, []);
  
   const currentimage = GetImage();
-  console.log(currentimage);
 
   return (
     <Box   className="full-screen"  sx={{ padding: "2rem 1rem 3rem" }}>

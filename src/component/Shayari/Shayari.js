@@ -5,8 +5,8 @@ import TitleHeader from "../Global/TitleHeader";
 import Manage from "../ManageTable/quotes&shayari";
 import { BasicContext } from "../../context/BasicProvider";
 import Addshayariquotes from "../Modal/Addshayari&quotes";
-import { Getcontent } from "../Global/Getcategory";
-import { getContent } from "../../redux/action/ContentAction";
+import { GetShayari } from "../Global/Getcategory";
+import { getShayari } from "../../redux/action/ShayatiAction";
 
 const Shayari = () => {
   const { handleShow, dataFetched, setDataFetched } = useContext(BasicContext);
@@ -29,12 +29,11 @@ const Shayari = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (!dataFetched) {
-      dispatch(getContent());
+      dispatch(getShayari());
       setDataFetched(true);
     }
   }, [dispatch, dataFetched, setDataFetched]);
-  const content = Getcontent();
-  const filtercontent=content.filter(content=>content.category.type==="shayari");
+  const content = GetShayari();
   return (
     <Box
       className="full-screen"
@@ -52,7 +51,7 @@ const Shayari = () => {
           Add Shayari
         </button>
       </Box>
-      <Manage content={filtercontent} />
+      <Manage content={content} />
       <Addshayariquotes currentPath={currentPath} />
     </Box>
   );

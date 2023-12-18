@@ -2,12 +2,13 @@ import React,{useContext,useEffect} from "react";
 import { Grid, Typography, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import TitleHeader from "./TitleHeader";
-import Getcategory, { GetImage, Getcontent } from "./Getcategory";
-import { getContent } from "../../redux/action/ContentAction";
+import Getcategory, { GetImage, GetShayari, Getcontent } from "./Getcategory";
+import { getContent } from "../../redux/action/QuoteAction";
 import { getCategory } from "../../redux/action/categoryAction";
 import { BasicContext } from "../../context/BasicProvider";
 import { useDispatch } from "react-redux";
 import { getImage } from "../../redux/action/ImageAction";
+import { getShayari } from "../../redux/action/ShayatiAction";
 
 const buttonStyle = {
   backgroundColor: "#fff",
@@ -29,13 +30,15 @@ const Dashboard = () => {
     if(!dataFetched){
     dispatch(getContent());
     dispatch(getCategory());
-    dispatch(getImage())
+    dispatch(getImage());
+    dispatch(getShayari())
     setDataFetched(true)
     }
   },[dispatch,dataFetched,setDataFetched])
   const categories = Getcategory();
   const content = Getcontent();
   const image= GetImage();
+  const shayari = GetShayari();
   const filterquotecategory = categories.filter(
     (category) => category.type === "quotes"
   );
@@ -45,16 +48,11 @@ const Dashboard = () => {
   const filteimagecategory = categories.filter(
     (category) => category.type === "image"
   );
-  const filterquotescontent = content.filter(
-    (content) => content.category.type === "quotes"
-  );
-  const filtershayaricontent = content.filter(
-    (content) => content.category.type === "shayari"
-  );
+
   
   const items = [
     {
-      heading: filterquotescontent.length,
+      heading: content.length,
       content: " Quote	 ",
       button: "Quote",
       path: "/Quotes",
@@ -66,7 +64,7 @@ const Dashboard = () => {
       path: "/Category",
     },
     {
-      heading: filtershayaricontent.length,
+      heading: shayari.length,
       content: " Shayari ",
       button: "Shayari",
       path: "/Shayari",

@@ -6,7 +6,7 @@ import { BasicContext } from "../../context/BasicProvider";
 import Addshayariquotes from "../Modal/Addshayari&quotes";
 import { Getcontent } from "../Global/Getcategory";
 import { useDispatch } from "react-redux";
-import { getContent } from "../../redux/action/ContentAction";
+import { getContent } from "../../redux/action/QuoteAction";
 
 const Quotes = () => {
   const { handleShow, dataFetched, setDataFetched } = useContext(BasicContext);

@@ -6,7 +6,6 @@ const url = process.env.REACT_APP_URL;
 
 export const addImage = (data) => async (dispatch) => {
   try {
-    console.log("action call", data);
     const response = await axios.post(url + "/image", data);
     dispatch({ type: ADD_IMAGE, payload: response.data });
     showSuccessAlert(response.data.message)

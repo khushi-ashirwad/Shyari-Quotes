@@ -4,7 +4,6 @@ import { Modal, Button } from "react-bootstrap";
 const EditModal = ({
   isOpen,
   onClose,
-
   defaultValues,
   setDefaultValues,
   handleSaveChanges,
@@ -12,6 +11,7 @@ const EditModal = ({
   return (
     <Modal
       show={isOpen}
+      size="lg"
       onHide={onClose}
       aria-labelledby="contained-modal-title-vcenter"
       centered>

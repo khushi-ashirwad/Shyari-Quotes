@@ -2,11 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { BasicContext } from "../../context/BasicProvider";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { getCategory } from "../../redux/action/categoryAction";
 import Getcategory from "../Global/Getcategory";
-import { addContent, getContent } from "../../redux/action/ContentAction";
-
+import { addContent, getContent } from "../../redux/action/QuoteAction";
+import { addShayari, getShayari } from "../../redux/action/ShayatiAction";
 
 const Addshayariquotes = ({ currentPath }) => {
   const { show, handleClose, dataFetched, setDataFetched } =
@@ -36,16 +36,21 @@ const Addshayariquotes = ({ currentPath }) => {
     if (!adddata.content || !adddata.category) {
       return;
     }
-
     const data = {
       content: adddata.content,
       category: adddata.category,
     };
-
-    dispatch(addContent(data)).then(() => {
-      setadddata({});
-      dispatch(getContent());
-    });
+    if (currentPath === "/Quotes") {
+      dispatch(addContent(data)).then(() => {
+        setadddata({});
+        dispatch(getContent());
+      });
+    } else {
+      dispatch(addShayari(data)).then(()=>{
+        setadddata({});
+        dispatch(getShayari())
+      })
+    }
   };
 
   const handleSaveAndClose = () => {
@@ -58,7 +63,7 @@ const Addshayariquotes = ({ currentPath }) => {
   };
   const handleUnsavedChanges = () => {
     if (adddata.content || adddata.category) {
-      } else {
+    } else {
       handleClose();
     }
   };
@@ -67,6 +72,7 @@ const Addshayariquotes = ({ currentPath }) => {
     <>
       <Modal
         show={show}
+        size="lg"
         onHide={handleClose}
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -77,7 +83,7 @@ const Addshayariquotes = ({ currentPath }) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <label>select  </label>
+          <label>select </label>
           <br />
           <select
             style={{
@@ -90,15 +96,21 @@ const Addshayariquotes = ({ currentPath }) => {
             value={adddata.category}
             onChange={handlechnagecontent}
           >
-               <option>Select category</option>
+            <option>Select category</option>
             {currentPath === "/Quotes"
               ? currentvalue
-                  .filter((category) => category.type === "quotes" && category.isdisable===true)
+                  .filter(
+                    (category) =>
+                      category.type === "quotes" && category.isdisable === true
+                  )
                   .map((option) => (
                     <option value={option._id}>{option.name}</option>
                   ))
               : currentvalue
-                  .filter((category) => category.type === "shayari" && category.isdisable===true)
+                  .filter(
+                    (category) =>
+                      category.type === "shayari" && category.isdisable === true
+                  )
                   .map((option) => (
                     <option value={option._id}>{option.name}</option>
                   ))}
