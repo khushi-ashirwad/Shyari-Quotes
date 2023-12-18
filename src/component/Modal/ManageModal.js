@@ -41,10 +41,11 @@ const ModalContentComponent = ({
                 background: "#EDEFF5",
                 padding: "0.5rem",
               }}
+
               name="category"
               value={defaultValues.category}
               onChange={(e) => {
-                setDefaultValues({ ...defaultValues, category     : e.target.value });
+                setDefaultValues({ ...defaultValues, category_id: e.target.value });
               }}>
                 {currentPath === "/Quotes"
               ? currentvalue

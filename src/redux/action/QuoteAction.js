@@ -54,10 +54,14 @@ export const deleteContent = (id) => async (dispatch) => {
 };
 
 export const updateContent = (id, data) => async (dispatch) => {
+  console.log("current value",id);
+
   try {
     const response = await axios.put(url + `/quotes/${id}`, data);
     dispatch({ type: UPDATE_CONTENT, payload: response.data });
     showSuccessAlert(response.data.message);
+    console.log("value changed",id);
+
   } catch (error) {
     dispatch({ type: FAILER, payload: error });
     showRemoveAlert2(error);
