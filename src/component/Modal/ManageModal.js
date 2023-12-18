@@ -26,7 +26,7 @@ const ModalContentComponent = ({
   }, [dispatch, dataFetched,setDataFetched]);
 
   return (
-    <Modal show={isOpen} onHide={onClose} aria-labelledby="contained-modal-title-vcenter" centered>
+    <Modal show={isOpen} onHide={onClose} aria-labelledby="contained-modal-title-vcenter" centered size="lg">
       <Modal.Header closeButton>
         <Modal.Title>Edit Content</Modal.Title>
       </Modal.Header>

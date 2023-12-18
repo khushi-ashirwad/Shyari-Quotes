@@ -68,19 +68,13 @@ export const addDailyquotes = (data) => async (dispatch) => {
   try {
     const response = await axios.post(url + "/dailyquotes", data);
     dispatch({ type: DAILY_CONTENT, payload: response.data });
+    showRemoveAlert2(response.data.message)
   } catch (error) {
     dispatch({ type: FAILER, payload: error });
+    showRemoveAlert2(error)
   }
 };
 
-export const addDailyshayari = (data) => async (dispatch) => {
-  try {
-    const response = await axios.post(url + "/dailyshayari", data);
-    dispatch({ type: DAILY_CONTENT, payload: response.data });
-  } catch (error) {
-    dispatch({ type: FAILER, payload: error });
-  }
-};
 
 export const getDailycontent = (data) => async (dispatch) => {
   try {

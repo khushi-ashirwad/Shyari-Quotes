@@ -6,9 +6,9 @@ import Getcategory from "../Global/Getcategory";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addDailyquotes,
-  addDailyshayari,
   getDailycontent,
 } from "../../redux/action/QuoteAction";
+import { addDailyshayari } from "../../redux/action/ShayatiAction";
 
 const TodayShayariQuotes = () => {
   const [dailycontent, setDailycontent] = useState({
@@ -41,6 +41,10 @@ const TodayShayariQuotes = () => {
   }, [dispatch]);
 
   const { dailyContent } = useSelector((state) => state.contentReducer);
+  console.log("dailycontent", dailyContent);
+  // const filter = dailyContent
+  //   .filter((value) => value.category.type === "quotes")
+  //   .map((value) => console.log("FILTER", value.content));
   return (
     <>
       <Box sx={{ padding: "2rem 1rem 3rem" }}>
@@ -147,7 +151,7 @@ const TodayShayariQuotes = () => {
         >
           <Typography sx={{ margin: "1.5rem" }}>
             {currentPath === "/Today%20Quotes" ? (
-              dailyContent.lenght > 0 ? (
+             Array.isArray(dailyContent) && dailyContent.length > 0 ? (
                 dailyContent
                   .filter((value) => value.category.type === "quotes")
                   .map((value) => (
@@ -158,7 +162,7 @@ const TodayShayariQuotes = () => {
                   yet today content not added
                 </p>
               )
-            ) : dailyContent.lenght > 0 ? (
+            ) :  Array.isArray(dailyContent) && dailyContent.length > 0 ? (
               dailyContent
                 .filter((value) => value.category.type === "shayari")
                 .map((value) => (

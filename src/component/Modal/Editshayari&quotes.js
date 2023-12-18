@@ -11,6 +11,7 @@ const EditModal = ({
   return (
     <Modal
       show={isOpen}
+      size="lg"
       onHide={onClose}
       aria-labelledby="contained-modal-title-vcenter"
       centered>

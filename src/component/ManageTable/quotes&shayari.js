@@ -36,7 +36,7 @@ const Manage = ({ content }) => {
   const [defaultValues, setDefaultValues] = useState({
     content: "",
     category: "",
-    category_id:""
+    category_id: "",
   });
   const tableCellheadingStyle = {
     border: "1px solid #ccc",
@@ -59,7 +59,7 @@ const Manage = ({ content }) => {
     setDefaultValues({
       content: item.content,
       category: item.category.name,
-      category_id:item.category._id
+      category_id: item.category._id,
     });
     setIsEditModalOpen(true);
   };
@@ -121,37 +121,40 @@ const Manage = ({ content }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {content.map((contantData, index) => (
-              <TableRow
-                key={index}
-                sx={{
-                  backgroundColor: index % 2 === 1 ? "#F8F2FF" : "transparent",
-                }}
-              >
-                <TableCell style={tableCellStyle}>
-                  {contantData.content}
-                </TableCell>
-                <TableCell style={tableCellStyle}>
-                  {contantData.category.name}
-                </TableCell>
-                <TableCell style={tableCellStyle}>
-                  <IconButton
-                    aria-label="edit"
-                    color="primary"
-                    onClick={() => handleEditClick(contantData)}
+            {content
+              ? content.map((contantData, index) => (
+                  <TableRow
+                    key={index}
+                    sx={{
+                      backgroundColor:
+                        index % 2 === 1 ? "#F8F2FF" : "transparent",
+                    }}
                   >
-                    <FiEdit />
-                  </IconButton>
-                  <IconButton
-                    aria-label="delete"
-                    color="error"
-                    onClick={() => handledeleteContent(contantData._id)}
-                  >
-                    <RiDeleteBin6Line />
-                  </IconButton>
-                </TableCell>
-              </TableRow>
-            ))}
+                    <TableCell style={tableCellStyle}>
+                      {contantData.content}
+                    </TableCell>
+                    <TableCell style={tableCellStyle}>
+                      {contantData.category.name}
+                    </TableCell>
+                    <TableCell style={tableCellStyle}>
+                      <IconButton
+                        aria-label="edit"
+                        color="primary"
+                        onClick={() => handleEditClick(contantData)}
+                      >
+                        <FiEdit />
+                      </IconButton>
+                      <IconButton
+                        aria-label="delete"
+                        color="error"
+                        onClick={() => handledeleteContent(contantData._id)}
+                      >
+                        <RiDeleteBin6Line />
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                ))
+              : null}
           </TableBody>
         </Table>
         <ModalContentComponent

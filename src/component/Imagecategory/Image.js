@@ -34,7 +34,6 @@ const Image = () => {
     if (!dataFetched) {
       dispatch(getImage());
       setDataFetched(false);
-      console.log("call imag eapi");
     }
   }, []);
  

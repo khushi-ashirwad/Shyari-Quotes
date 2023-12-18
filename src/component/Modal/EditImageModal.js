@@ -46,7 +46,7 @@ const EditImage = ({
   };
 
   return (
-    <Modal show={isOpen} onHide={onClose}>
+    <Modal show={isOpen} onHide={onClose} size="lg">
       <Modal.Header closeButton>
         <Modal.Title>Edit Image</Modal.Title>
       </Modal.Header>

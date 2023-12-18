@@ -5,6 +5,7 @@ import {
   SHAYARI_ADD,
   SHAYARI_GET,
   UPDATE_SHAYARI,
+  DAILY_CONTENT
 } from "../constants";
 import {
   showDeleteDataAlert,
@@ -57,5 +58,17 @@ export const deleteShayari = (id) => async (dispatch) => {
     );
   } catch (error) {
     dispatch({ type: FAILER, payload: error });
+  }
+};
+
+
+export const addDailyshayari = (data) => async (dispatch) => {
+  try {
+    const response = await axios.post(url + "/dailyshayari", data);
+    dispatch({ type: DAILY_CONTENT, payload: response.data });
+    showRemoveAlert2(response.data.message)
+  } catch (error) {
+    dispatch({ type: FAILER, payload: error });
+    showRemoveAlert2(error)
   }
 };

@@ -24,12 +24,10 @@ const CategoryModal = ({ currentPath }) => {
   const handlecategory = () => {
     const formData = new FormData();
     formData.append("name", Category.name);
-
+    formData.append("file", file);
     if (Category.description) {
       formData.append("description", Category.description);
     }
-
-    formData.append("file", file);
 
     if (currentPath === "/Category") {
       formData.append("type", "quotes");
@@ -39,15 +37,10 @@ const CategoryModal = ({ currentPath }) => {
       formData.append("type", "shayari");
     }
 
-    if (!Category.name || !Category.description || !file) {
-      return;
-    }
-
     dispatch(addCategory(formData))
       .then(() => {
         dispatch(getCategory());
-        setCategory({});
-        
+        setCategory({});      
       })
       .catch((error) => {
         console.error('Error adding category:', error);
@@ -58,6 +51,7 @@ const CategoryModal = ({ currentPath }) => {
     <>
       <Modal
         show={show}
+        size="lg"
         onHide={handleClose}
         aria-labelledby="contained-modal-title-vcenter"
         centered

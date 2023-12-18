@@ -72,6 +72,7 @@ const Addshayariquotes = ({ currentPath }) => {
     <>
       <Modal
         show={show}
+        size="lg"
         onHide={handleClose}
         aria-labelledby="contained-modal-title-vcenter"
         centered

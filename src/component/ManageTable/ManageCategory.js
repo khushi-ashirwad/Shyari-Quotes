@@ -14,19 +14,26 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useDispatch } from "react-redux";
 import ModalComponent from "../Modal/Editshayari&quotes";
-import { deleteCategory, getCategory, updateCategory, } from "../../redux/action/categoryAction";
+import {
+  deleteCategory,
+  getCategory,
+  updateCategory,
+} from "../../redux/action/categoryAction";
 import { getContent } from "../../redux/action/QuoteAction";
 import { BasicContext } from "../../context/BasicProvider";
 import { useContext } from "react";
 import { getImage } from "../../redux/action/ImageAction";
 
-
 const ManageCategory = ({ filterdata }) => {
-  const { isEditModalOpen, setIsEditModalOpen, editedCategory, setEditedCategory } =
-    useContext(BasicContext);
+  const {
+    isEditModalOpen,
+    setIsEditModalOpen,
+    editedCategory,
+    setEditedCategory,
+  } = useContext(BasicContext);
   const [defaultValues, setDefaultValues] = useState({
     name: "",
     description: "",
@@ -53,10 +60,10 @@ const ManageCategory = ({ filterdata }) => {
         });
       })
       .catch((error) => {
-        console.error('Error updating category:', error);
+        console.error("Error updating category:", error);
       });
   };
- const handledeleteCategory = (id) => {
+  const handledeleteCategory = (id) => {
     dispatch(deleteCategory(id)).then(() => {
       dispatch(getCategory()).then(() => {
         dispatch(getContent());
@@ -75,9 +82,9 @@ const ManageCategory = ({ filterdata }) => {
 
   const handleSaveChanges = () => {
     const formData = new FormData();
-    formData.append('name', defaultValues.name);
-    formData.append('description', defaultValues.description);
-    formData.append('file', defaultValues.file);
+    formData.append("name", defaultValues.name);
+    formData.append("description", defaultValues.description);
+    formData.append("file", defaultValues.file);
 
     dispatch(updateCategory(editedCategory._id, formData))
       .then(() => {
@@ -88,7 +95,7 @@ const ManageCategory = ({ filterdata }) => {
         });
       })
       .catch((error) => {
-        console.error('Error updating category:', error);
+        console.error("Error updating category:", error);
       });
   };
   return (
@@ -113,90 +120,98 @@ const ManageCategory = ({ filterdata }) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {filterdata.map((item, index) => (
-                <TableRow key={index}>
-                  <TableCell style={tableCellStyle}>{item.name}</TableCell>
-                  <TableCell style={tableCellStyle}>
-               {item.description ? item.description : "N/A"}
-                  </TableCell>
-                  <TableCell style={tableCellStyle} sx={{ width: "15%", height: "9.5rem" }}>
-                    <img
-                      src={item.file}
-                      alt={item.name}
-                      style={{ width: "100%", height: "160%" }}
-                    />
-                  </TableCell>
+              {filterdata
+                ? filterdata.map((item, index) => (
+                    <TableRow key={index}>
+                      <TableCell style={tableCellStyle}>{item.name}</TableCell>
+                      <TableCell style={tableCellStyle}>
+                        {item.description ? item.description : "N/A"}
+                      </TableCell>
+                      <TableCell
+                        style={tableCellStyle}
+                        sx={{ width: "15%", height: "9.5rem" }}
+                      >
+                        <img
+                          src={item.file}
+                          alt={item.name}
+                          style={{ width: "100%", height: "160%" }}
+                        />
+                      </TableCell>
 
-                  <TableCell
-                    sx={{
-                      border: "2px solid black",
-                      width: "6rem",
-                      padding: "2rem 3rem",
-                    }}
-                  >
-                    <Box
-                      sx={{
-                        flexDirection: "column",
-                        display: "flex",
-                        width: "8rem",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <IconButton
-                        style={{
-                          background: "#AD1D45",
-                          borderRadius: "3rem",
-                          color: "#fff",
-                          marginBottom: "0.5rem",
+                      <TableCell
+                        sx={{
+                          border: "2px solid black",
+                          width: "6rem",
+                          padding: "2rem 3rem",
                         }}
-                        onClick={() => handledeleteCategory(item._id)}
                       >
-                        <DeleteIcon />
-                        <Typography>Delete</Typography>
-                      </IconButton>
-                      <IconButton
-                        style={{
-                          background: "#6643B5",
-                          borderRadius: "3rem",
-                          color: "#fff",
-                          marginBottom: "0.5rem",
-                        }}
-                        onClick={() => handleEditClick(item)}
-                      >
-                        <EditIcon />
-                        <Typography>Edit</Typography>
-                      </IconButton>
-                      {item.isdisable === true ? (
-                        <IconButton
-                          style={{
-                            background: "#005792",
-                            borderRadius: "8rem",
-                            color: "#fff",
+                        <Box
+                          sx={{
+                            flexDirection: "column",
+                            display: "flex",
+                            width: "8rem",
+                            justifyContent: "center",
                           }}
-                          onClick={() => handleupdateCategory(item._id, false)}
                         >
-                          <VisibilityOffIcon />
-                          <Typography>Disable</Typography>
-                        </IconButton>
-                      ) : (
-                        <IconButton
-                          style={{
-                            background: "#005792",
-                            borderRadius: "8rem",
-                            color: "#fff",
-                          }}
-                          onClick={() => handleupdateCategory(item._id, true)}
-                        >
-                          < VisibilityIcon />
-                          <Typography>Enable</Typography>
-                        </IconButton>
-                      )}
-                    </Box>
-                  </TableCell>
-                </TableRow>
-              ))}
+                          <IconButton
+                            style={{
+                              background: "#AD1D45",
+                              borderRadius: "3rem",
+                              color: "#fff",
+                              marginBottom: "0.5rem",
+                            }}
+                            onClick={() => handledeleteCategory(item._id)}
+                          >
+                            <DeleteIcon />
+                            <Typography>Delete</Typography>
+                          </IconButton>
+                          <IconButton
+                            style={{
+                              background: "#6643B5",
+                              borderRadius: "3rem",
+                              color: "#fff",
+                              marginBottom: "0.5rem",
+                            }}
+                            onClick={() => handleEditClick(item)}
+                          >
+                            <EditIcon />
+                            <Typography>Edit</Typography>
+                          </IconButton>
+                          {item.isdisable === true ? (
+                            <IconButton
+                              style={{
+                                background: "#005792",
+                                borderRadius: "8rem",
+                                color: "#fff",
+                              }}
+                              onClick={() =>
+                                handleupdateCategory(item._id, false)
+                              }
+                            >
+                              <VisibilityOffIcon />
+                              <Typography>Disable</Typography>
+                            </IconButton>
+                          ) : (
+                            <IconButton
+                              style={{
+                                background: "#005792",
+                                borderRadius: "8rem",
+                                color: "#fff",
+                              }}
+                              onClick={() =>
+                                handleupdateCategory(item._id, true)
+                              }
+                            >
+                              <VisibilityIcon />
+                              <Typography>Enable</Typography>
+                            </IconButton>
+                          )}
+                        </Box>
+                      </TableCell>
+                    </TableRow>
+                  ))
+                : null}
             </TableBody>
-
           </Table>
         </TableContainer>
       </Box>
