@@ -1,4 +1,4 @@
-import {React,useState} from "react";
+import {React,useContext} from "react";
 import {
   Table,
   TableCell,
@@ -17,9 +17,11 @@ import { useDispatch } from "react-redux";
 import { getContent } from "../../redux/action/QuoteAction";
 import { deleteImage, getImage,updateImage } from "../../redux/action/ImageAction";
 import EditImage from "../../component/Modal/EditImageModal";
+import { BasicContext } from "../../context/BasicProvider";
 const Imagemanage = ({ imageData }) => {
-  const [editModalOpen, setEditModalOpen] = useState(false);
-  const [selectedImageData, setSelectedImageData] = useState(null);
+  const {editModalOpen, setEditModalOpen,selectedImageData, setSelectedImageData } =
+  useContext(BasicContext);
+ 
   const dispatch = useDispatch();
 
   const tableCellStyle = {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Getcategory from "../Global/Getcategory";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -58,7 +58,6 @@ const TodayShayariQuotes = () => {
           <br />
           <input
             type="text"
-            // value={inputValue}
             placeholder=" Developers name"
             style={{
               marginBottom: "1rem",
@@ -68,11 +67,15 @@ const TodayShayariQuotes = () => {
               width: "70rem",
               height: "4rem",
             }}
-            // onChange={handleInputChange}
           />
           <br />
           <Typography variant="h6">Category </Typography>
           <br />
+          <KeyboardArrowDownIcon 
+          sx={{
+            marginLeft:"68rem",
+            marginBottom:"-3.5rem"
+            }}/>
           <select
             style={{
               marginBottom: "1rem",
@@ -88,7 +91,6 @@ const TodayShayariQuotes = () => {
             className="form-control"
             id="paymentMethod"
           >
-            <ExpandMoreIcon />
             <option>Select category</option>
             {currentPath === "/Today%20Quotes"
               ? category
