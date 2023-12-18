@@ -61,6 +61,7 @@ const Manage = ({ content }) => {
       category: item.category.name,
       category_id: item.category._id,
     });
+    console.log("item",item);
     setIsEditModalOpen(true);
   };
 
@@ -69,6 +70,7 @@ const Manage = ({ content }) => {
       content: defaultValues.content,
       category: defaultValues.category_id,
     };
+    console.log("updatedContent",updatedContent);
     if (currentPath === "/Quotes") {
       dispatch(updateContent(editedContent._id, updatedContent)).then(() => {
         dispatch(getContent());

@@ -7,6 +7,7 @@ import { getCategory } from "../../redux/action/categoryAction";
 import Getcategory from "../Global/Getcategory";
 import { addContent, getContent } from "../../redux/action/QuoteAction";
 import { addShayari, getShayari } from "../../redux/action/ShayatiAction";
+import Select from 'react-select';
 
 const Addshayariquotes = ({ currentPath }) => {
   const { show, handleClose, dataFetched, setDataFetched } =
@@ -25,10 +26,10 @@ const Addshayariquotes = ({ currentPath }) => {
     }
   }, [dispatch, dataFetched, setDataFetched]);
 
-  const handlechnagecontent = (e) => {
+  const handlechnagecontent = (selectedOption) => {
     setadddata({
       ...adddata,
-      [e.target.name]: e.target.value,
+      category: selectedOption ? selectedOption.value : "",
     });
   };
 
@@ -61,6 +62,7 @@ const Addshayariquotes = ({ currentPath }) => {
     handlecontent();
     handleClose();
   };
+
   const handleUnsavedChanges = () => {
     if (adddata.content || adddata.category) {
     } else {
@@ -83,38 +85,28 @@ const Addshayariquotes = ({ currentPath }) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <label>select </label>
+          <label>Select </label>
           <br />
-          <select
-            style={{
-              width: "100%",
-              border: " none",
-              background: "#EDEFF5",
-              padding: "0.5rem 0.5rem",
-            }}
-            name="category"
-            value={adddata.category}
+          <Select
+            options={currentvalue
+              .filter(
+                (category) =>
+                  (currentPath === '/Quotes' && category.type === 'quotes' && category.isdisable === true) ||
+                  (currentPath !== '/Quotes' && category.type === 'shayari' && category.isdisable === true)
+              )
+              .map((option) => ({
+                label: option.name,
+                value: option._id,
+              }))}
             onChange={handlechnagecontent}
-          >
-            <option>Select category</option>
-            {currentPath === "/Quotes"
-              ? currentvalue
-                  .filter(
-                    (category) =>
-                      category.type === "quotes" && category.isdisable === true
-                  )
-                  .map((option) => (
-                    <option value={option._id}>{option.name}</option>
-                  ))
-              : currentvalue
-                  .filter(
-                    (category) =>
-                      category.type === "shayari" && category.isdisable === true
-                  )
-                  .map((option) => (
-                    <option value={option._id}>{option.name}</option>
-                  ))}
-          </select>
+            styles={{
+              control: (provided) => ({
+                ...provided,
+                maxHeight: "200px",
+                overflowY: "auto",
+              }),
+            }}
+          />
           <br />
           <br />
           <label>
@@ -124,7 +116,7 @@ const Addshayariquotes = ({ currentPath }) => {
           <textarea
             name="content"
             value={adddata.content}
-            onChange={handlechnagecontent}
+            onChange={(e) => setadddata({ ...adddata, content: e.target.value })}
             style={{ width: "100%", border: "1px solid #7E7E7E" }}
           />
         </Modal.Body>
