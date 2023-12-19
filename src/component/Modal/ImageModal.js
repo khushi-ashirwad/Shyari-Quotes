@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
 import { Modal, Button } from "react-bootstrap";
+import Select from "react-select";
 import { BasicContext } from "../../context/BasicProvider";
 import Getcategory from "../Global/Getcategory";
 import { useDispatch } from "react-redux";
 import { addImage, getImage } from "../../redux/action/ImageAction";
 import { useEffect } from "react";
+
 const ImageModal = () => {
   const {
     show,
@@ -18,20 +20,24 @@ const ImageModal = () => {
   } = useContext(BasicContext);
   const imagecategory = Getcategory();
   const dispatch = useDispatch();
+
   const handlechange = (e) => {
     setImage({
       ...image,
       [e.target.name]: e.target.value,
     });
   };
+
   const handlechnagefile = (e) => {
     setFile(e.target.files[0]);
   };
+
   useEffect(() => {
     if (!dataFetched) {
       dispatch(getImage());
     }
   }, [dispatch, dataFetched, setDataFetched]);
+
   const handleimagesubmit = () => {
     const formdata = new FormData();
     formdata.append("name", image.name);
@@ -40,10 +46,10 @@ const ImageModal = () => {
     }
     formdata.append("category", image.category);
     formdata.append("file", file);
-    if(image.issensitive){
+    if (image.issensitive) {
       formdata.append("issensitive", image.issensitive);
-    }else{
-      formdata.append("issensitive",true)
+    } else {
+      formdata.append("issensitive", true);
     }
     dispatch(addImage(formdata)).then(() => {
       dispatch(getImage());
@@ -66,28 +72,43 @@ const ImageModal = () => {
         <Modal.Body>
           <label>Select Category </label>
           <br />
-          <select
-            style={{
-              width: "100%",
-              border: " none",
-              background: "#EDEFF5",
-              padding: "0.5rem 0.5rem",
+          <Select
+            styles={{
+              menuPortal: (provided) => ({ ...provided, zIndex: 9999 }),
+              menu: (provided) => ({
+                ...provided,
+                maxHeight: "200px",
+                overflowY: "auto",
+              }),
             }}
-            name="category"
-            value={image.category}
-            onChange={handlechange}
-          >
-            {imagecategory
-              ? imagecategory
-                  .filter(
-                    (category) =>
-                      category.type === "image" && category.isdisable === true
-                  )
-                  .map((value) => (
-                    <option value={value._id}>{value.name}</option>
-                  ))
-              : null}
-          </select>
+            menuPortalTarget={document.body}
+            options={
+              imagecategory.length
+                ? imagecategory
+                    .filter(
+                      (category) =>
+                        category.type === "image" && category.isdisable === true
+                    )
+                    .map((value) => ({
+                      value: value._id,
+                      label: value.name,
+                    }))
+                : [{ value: "noCategory", label: "No Category" }]
+            }
+            value={{
+              value: image.category,
+              label:
+                image.category === "noCategory"
+                  ? "No Category"
+                  : imagecategory.find((category) => category._id === image.category)?.name,
+            }}
+            onChange={(selectedOption) => {
+              setImage({
+                ...image,
+                category: selectedOption.value,
+              });
+            }}
+          />
           <br />
           <br />
           <label>Enter Name</label>

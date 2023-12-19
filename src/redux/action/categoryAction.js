@@ -33,11 +33,9 @@ export const getCategory = () => async (dispatch) => {
 export const updateCategory = (id, data) => async (dispatch) => {
   
   try {
-    console.log("value current",id);
     const response = await axios.put(url + "/category/" + id, data);
     dispatch({ type: UPDATE_CATEGORY, payload: response.data });
     showSuccessAlert(response.data.message)
-    console.log("value changed",id);
 
   } catch (error) {
     dispatch({ type: FAILER, payload: error });
