@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import Getcategory from "../Global/Getcategory";
+import Select from "react-select";
 
 const EditImage = ({
   isOpen,
@@ -53,30 +54,47 @@ const EditImage = ({
       <Modal.Body>
         <Form>
           <br />
-          <select
-            style={{
-              width: "100%",
-              border: "none",
-              background: "#EDEFF5",
-              padding: "0.5rem",
+          <Select
+            styles={{
+              control: (provided) => ({
+                ...provided,
+                width: "100%",
+                border: "none",
+                background: "#EDEFF5",
+                padding: "0.5rem",
+              }),
             }}
-            name="category"
-            value={updatedData.category}
-            onChange={(e) => {
-              setUpdatedData({ ...updatedData, category: e.target.value });
-            }}
-          >
-            {currentvalue.lenght > 0
-              ? currentvalue
+            options={
+              currentvalue.length > 0
+                ? currentvalue
                   .filter(
                     (category) =>
                       category.type === "image" && category.isdisable === true
                   )
-                  .map((value) => (
-                    <option value={value._id}>{value.name}</option>
-                  ))
-              : null}
-          </select>
+                  .map((value) => ({
+                    label: value.name,
+                    value: value._id,
+                  }))
+                : []
+            }
+            value={
+              currentvalue.length > 0
+                ? {
+                  label: updatedData.category.name,
+                  value: updatedData.category._id,
+                }
+                : null
+            }
+            onChange={(selectedOption) => {
+              setUpdatedData({
+                ...updatedData,
+                category: {
+                  _id: selectedOption.value,
+                  name: selectedOption.label,
+                },
+              });
+            }}
+          />
 
           <Form.Group controlId="formName">
             <Form.Label>Enter Name:</Form.Label>
