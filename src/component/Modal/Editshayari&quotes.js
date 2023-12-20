@@ -14,17 +14,21 @@ const EditModal = ({
       size="lg"
       onHide={onClose}
       aria-labelledby="contained-modal-title-vcenter"
-      centered>
+      centered
+    >
       <Modal.Header closeButton>
         <Modal.Title>Edit Category</Modal.Title>
       </Modal.Header>
-      <Modal.Body> <br />
-        <label> Enter Name: </label> <br />
-        <input style={{
-          width: "100%",
-          border: "1px solid #7E7E7E",
-          background: "#EDEFF5",
-        }}
+      <Modal.Body>
+        <br />
+        <label>Enter Name:</label>
+        <br />
+        <input
+          style={{
+            width: "100%",
+            border: "1px solid #7E7E7E",
+            background: "#EDEFF5",
+          }}
           type="text"
           value={defaultValues?.name || ""}
           onChange={(e) =>
@@ -33,9 +37,11 @@ const EditModal = ({
               name: e.target.value,
             }))
           }
-        /> <br />
+        />
         <br />
-        <label>Description:</label><br />
+        <br />
+        <label>Description:</label>
+        <br />
         <input
           type="text"
           style={{
@@ -50,34 +56,54 @@ const EditModal = ({
               description: e.target.value,
             }))
           }
-        /> <br />
+        />
         <br />
-        <label>Image:</label><br />
-        <img src={defaultValues?.file || ""} height="100" weight="100" alt={defaultValues.name}/><br/>
+        <br />
+        <label>Image:</label>
+        <br />
+        <img
+          src={defaultValues?.file || ""}
+          height="200"
+          width="200"
+          alt={defaultValues.name}
+        />
+        <br />
         <input
           type="file"
-          onChange={(e) =>
-            setDefaultValues((prevValues) => ({
-              ...prevValues,
-              file: e.target.files[0],
-            }))
-          }
+          onChange={(e) => {
+            const file = e.target.files[0];
+            const reader = new FileReader();
+            reader.onloadend = () => {
+              setDefaultValues((prevValues) => ({
+                ...prevValues,
+                file: reader.result,
+              }));
+            };
+            if (file) {
+              reader.readAsDataURL(file);
+            }
+          }}
         />
-
       </Modal.Body>
       <Modal.Footer>
-        <Button style={{
-          backgroundColor: "#A30D11",
-          border: "none",
-          padding: "0.5rem 2rem",
-        }} onClick={onClose}>
+        <Button
+          style={{
+            backgroundColor: "#A30D11",
+            border: "none",
+            padding: "0.5rem 2rem",
+          }}
+          onClick={onClose}
+        >
           Close
         </Button>
-        <Button style={{
-          backgroundColor: "#59167C",
-          border: "none",
-          padding: "0.5rem 2rem",
-        }} onClick={handleSaveChanges}>
+        <Button
+          style={{
+            backgroundColor: "#59167C",
+            border: "none",
+            padding: "0.5rem 2rem",
+          }}
+          onClick={handleSaveChanges}
+        >
           Save Changes
         </Button>
       </Modal.Footer>
