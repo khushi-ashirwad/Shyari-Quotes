@@ -47,7 +47,7 @@ const Addshayariquotes = ({ currentPath }) => {
         dispatch(getContent());
       });
     } else {
-      dispatch(addShayari(data)).then(()=>{
+      dispatch(addShayari(data)).then(() => {
         setadddata({});
         dispatch(getShayari())
       })
@@ -58,7 +58,6 @@ const Addshayariquotes = ({ currentPath }) => {
     if (!adddata.content || !adddata.category) {
       return;
     }
-
     handlecontent();
     handleClose();
   };
@@ -85,7 +84,7 @@ const Addshayariquotes = ({ currentPath }) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <label>Select </label>
+          <label>Select Category</label>
           <br />
           <Select
             options={currentvalue

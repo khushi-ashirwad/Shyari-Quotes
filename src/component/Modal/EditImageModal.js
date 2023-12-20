@@ -8,6 +8,7 @@ const EditImage = ({
   onClose,
   imageData,
   handleUpdate,
+  setImage
 }) => {
   const [updatedData, setUpdatedData] = useState({
     name: "",
@@ -27,6 +28,7 @@ const EditImage = ({
       file: null,
     });
   }, [imageData]);
+  console.log("update data",imageData);
 
   const handleSaveChanges = () => {
     const formData = new FormData();
@@ -34,17 +36,10 @@ const EditImage = ({
     formData.append("description", updatedData.description);
     formData.append("isSensitive", updatedData.isSensitive);
     formData.append("file", updatedData.file);
-
     handleUpdate(imageData._id, formData);
     onClose();
   };
 
-  const handleFileChange = (e) => {
-    setUpdatedData({
-      ...updatedData,
-      file: e.target.files[0],
-    });
-  };
 
   return (
     <Modal show={isOpen} onHide={onClose} size="lg">
@@ -167,17 +162,31 @@ const EditImage = ({
           </Form.Group>
           <br />
           <Form.Group controlId="formImage">
-            <Form.Label>Thumbnail</Form.Label>
-            <br />
-            <input type="file" onChange={handleFileChange} />
-            {updatedData?.file && (
-              <img
-                src={URL.createObjectURL(updatedData.file)}
-                alt="Preview"
-                style={{ width: "40%", marginTop: "10px" }}
-              />
-            )}
-          </Form.Group>
+        <Form.Label>Thumbnail</Form.Label>
+        <br />
+        <img
+          src={setImage?.file || ""}
+          height="200"
+          width="200"
+          alt={updatedData.name}
+        />
+        <input
+          type="file"
+          onChange={(e) => {
+            const file = e.target.files[0];
+            const reader = new FileReader();
+            reader.onloadend = () => {
+              setUpdatedData((prevValues) => ({
+                ...prevValues,
+                file: reader.result,
+              }));
+            };
+            if (file) {
+              reader.readAsDataURL(file);
+            }
+          }}
+        />
+      </Form.Group>
         </Form>
       </Modal.Body>
       <Modal.Footer
